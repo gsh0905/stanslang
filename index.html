@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>유의어 사전</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --primary: #4f6ef7;
+      --primary-light: #eef0fe;
+      --text: #1a1d2e;
+      --text-muted: #8a90a8;
+      --border: #e4e7f0;
+      --shadow: 0 4px 20px rgba(79, 110, 247, 0.08);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px 80px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+    }
+    header p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* ── 검색창 ── */
+    .search-box {
+      width: 100%;
+      max-width: 520px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 16px 52px 16px 20px;
+      font-size: 1.05rem;
+      font-family: inherit;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      color: var(--text);
+    }
+    .search-box input::placeholder { color: var(--text-muted); }
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.12);
+    }
+    .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+      font-size: 1.1rem;
+    }
+
+    /* ── 인기 검색어 ── */
+    .popular-section {
+      width: 100%;
+      max-width: 520px;
+      margin-bottom: 24px;
+    }
+    .popular-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 10px;
+    }
+    .popular-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .popular-chip {
+      background: var(--surface);
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .popular-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* ── 결과 영역 ── */
+    .result-area {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      animation: fadeIn 0.22s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .category-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+    .cat-감정 { background: #fff0f6; color: #d63384; }
+    .cat-동작 { background: #e8f5e9; color: #2e7d32; }
+    .cat-외모 { background: #fff8e1; color: #f57f17; }
+    .cat-상태 { background: #e3f2fd; color: #1565c0; }
+    .cat-성격 { background: #f3e5f5; color: #7b1fa2; }
+    .cat-생각 { background: #e0f7fa; color: #00695c; }
+    .cat-기타 { background: #fce4ec; color: #ad1457; }
+
+    .result-word {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .result-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+    .synonym-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .synonym-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.93rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      user-select: none;
+    }
+    .synonym-tag:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* ── 찾을 수 없음 ── */
+    .not-found {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 36px 0;
+      animation: fadeIn 0.22s ease;
+    }
+    .not-found .emoji { font-size: 2.4rem; margin-bottom: 10px; }
+    .not-found p { font-size: 0.98rem; font-weight: 500; }
+    .hint { margin-top: 8px; font-size: 0.8rem; color: var(--text-muted); }
+    .available-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+    .available-word-chip {
+      background: var(--border);
+      color: var(--text-muted);
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .available-word-chip:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* ── 초기 안내 ── */
+    .welcome {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 36px 0;
+    }
+    .welcome .emoji { font-size: 2.4rem; margin-bottom: 10px; }
+    .welcome p { font-size: 0.93rem; }
+
+    @media (max-width: 480px) {
+      header h1    { font-size: 1.6rem; }
+      .result-word { font-size: 1.25rem; }
+      .result-card { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>유의어 사전</h1>
+    <p>한국어 단어를 입력하고 유의어를 찾아보세요</p>
+  </header>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="단어를 입력하세요 (예: 기쁘다, 먹다)"
+      autocomplete="off"
+      autofocus
+    />
+    <span class="search-icon">🔍</span>
+  </div>
+
+  <div class="popular-section">
+    <div class="popular-title">인기 검색어</div>
+    <div class="popular-chips" id="popularChips"></div>
+  </div>
+
+  <div class="result-area" id="resultArea">
+    <div class="welcome">
+      <div class="emoji">📖</div>
+      <p>단어를 입력하면 유의어가 나타납니다</p>
+    </div>
+  </div>
+
+  <script>
+    // ── 데이터 ─────────────────────────────────────────────────────────
+    const thesaurus = {
+      // 감정
+      '기쁘다':   { cat: '감정', syn: ['즐겁다', '흐뭇하다', '유쾌하다', '반갑다', '신나다'] },
+      '슬프다':   { cat: '감정', syn: ['서럽다', '애처롭다', '비통하다', '구슬프다', '처량하다'] },
+      '화나다':   { cat: '감정', syn: ['분노하다', '성나다', '노엽다', '격분하다', '발끈하다'] },
+      '무섭다':   { cat: '감정', syn: ['두렵다', '겁나다', '공포스럽다', '섬뜩하다', '소름끼치다'] },
+      '놀랍다':   { cat: '감정', syn: ['경이롭다', '신기하다', '충격적이다', '의외이다', '황당하다'] },
+      '부끄럽다': { cat: '감정', syn: ['창피하다', '수치스럽다', '민망하다', '쑥스럽다', '낯뜨겁다'] },
+      '그립다':   { cat: '감정', syn: ['보고싶다', '애틋하다', '아련하다', '사무치다', '절절하다'] },
+      '외롭다':   { cat: '감정', syn: ['쓸쓸하다', '고독하다', '적적하다', '허전하다', '외따롭다'] },
+      '불안하다': { cat: '감정', syn: ['초조하다', '조마조마하다', '두근거리다', '걱정스럽다', '염려스럽다'] },
+      '행복하다': { cat: '감정', syn: ['즐겁다', '만족스럽다', '복되다', '뿌듯하다', '충만하다'] },
+      '설레다':   { cat: '감정', syn: ['두근거리다', '흥분되다', '떨리다', '들뜨다', '기대되다'] },
+      '지루하다': { cat: '감정', syn: ['따분하다', '심심하다', '무료하다', '단조롭다', '권태롭다'] },
+      '실망하다': { cat: '감정', syn: ['낙담하다', '좌절하다', '허탈하다', '맥빠지다', '기가죽다'] },
+      '부럽다':   { cat: '감정', syn: ['선망스럽다', '탐나다', '시기나다', '질투나다', '갈망스럽다'] },
+      '피곤하다': { cat: '감정', syn: ['지치다', '고달프다', '힘겹다', '녹초가되다', '노곤하다'] },
+      '억울하다': { cat: '감정', syn: ['원통하다', '분하다', '서럽다', '분통이터지다', '억하다'] },
+      '미안하다': { cat: '감정', syn: ['죄송하다', '송구스럽다', '면목없다', '뉘우치다', '후회스럽다'] },
+      '고맙다':   { cat: '감정', syn: ['감사하다', '감사스럽다', '은혜롭다', '감격스럽다', '감동받다'] },
+      '사랑하다': { cat: '감정', syn: ['좋아하다', '아끼다', '연모하다', '흠모하다', '열애하다'] },
+      // 동작
+      '걷다':     { cat: '동작', syn: ['거닐다', '보행하다', '산책하다', '활보하다', '어슬렁거리다'] },
+      '뛰다':     { cat: '동작', syn: ['달리다', '질주하다', '내달리다', '줄달음치다', '전력질주하다'] },
+      '먹다':     { cat: '동작', syn: ['섭취하다', '집어먹다', '씹다', '삼키다', '드시다'] },
+      '마시다':   { cat: '동작', syn: ['들이키다', '홀짝이다', '들이마시다', '음용하다', '축이다'] },
+      '자다':     { cat: '동작', syn: ['잠들다', '수면하다', '눈붙이다', '취침하다', '드러눕다'] },
+      '보다':     { cat: '동작', syn: ['살피다', '응시하다', '바라보다', '관찰하다', '주시하다'] },
+      '듣다':     { cat: '동작', syn: ['경청하다', '귀기울이다', '청취하다', '들어주다', '귀담아듣다'] },
+      '말하다':   { cat: '동작', syn: ['이야기하다', '얘기하다', '전달하다', '표현하다', '발언하다'] },
+      '생각하다': { cat: '동작', syn: ['고민하다', '사고하다', '숙고하다', '헤아리다', '고려하다'] },
+      '기다리다': { cat: '동작', syn: ['대기하다', '고대하다', '인내하다', '기대하다', '학수고대하다'] },
+      '만들다':   { cat: '동작', syn: ['제작하다', '창조하다', '생산하다', '빚다', '조성하다'] },
+      '고치다':   { cat: '동작', syn: ['수리하다', '수선하다', '수정하다', '보완하다', '개선하다'] },
+      '잡다':     { cat: '동작', syn: ['쥐다', '붙들다', '포착하다', '움켜쥐다', '낚아채다'] },
+      '웃다':     { cat: '동작', syn: ['미소짓다', '방긋웃다', '빙긋웃다', '크게웃다', '깔깔거리다'] },
+      '울다':     { cat: '동작', syn: ['눈물흘리다', '흐느끼다', '통곡하다', '울부짖다', '훌쩍이다'] },
+      '가다':     { cat: '동작', syn: ['향하다', '출발하다', '이동하다', '나아가다', '떠나다'] },
+      '오다':     { cat: '동작', syn: ['도착하다', '찾아오다', '들어오다', '당도하다', '나타나다'] },
+      '쓰다':     { cat: '동작', syn: ['기록하다', '작성하다', '적다', '기술하다', '써내려가다'] },
+      '읽다':     { cat: '동작', syn: ['독서하다', '정독하다', '훑어보다', '살펴보다', '탐독하다'] },
+      '주다':     { cat: '동작', syn: ['드리다', '건네다', '전달하다', '제공하다', '내밀다'] },
+      // 외모·형태
+      '예쁘다':   { cat: '외모', syn: ['아름답다', '곱다', '귀엽다', '사랑스럽다', '이쁘다'] },
+      '멋있다':   { cat: '외모', syn: ['멋지다', '근사하다', '세련되다', '풍채있다', '폼나다'] },
+      '날씬하다': { cat: '외모', syn: ['홀쭉하다', '가날프다', '호리호리하다', '날렵하다', '균형잡히다'] },
+      '뚱뚱하다': { cat: '외모', syn: ['살찌다', '통통하다', '비만하다', '풍만하다', '포동포동하다'] },
+      '못생기다': { cat: '외모', syn: ['흉하다', '추하다', '볼품없다', '꼴사납다', '엉성하다'] },
+      '화려하다': { cat: '외모', syn: ['요란하다', '화사하다', '현란하다', '눈부시다', '찬란하다'] },
+      '단정하다': { cat: '외모', syn: ['깔끔하다', '말끔하다', '정갈하다', '정돈되다', '깨끗하다'] },
+      '세련되다': { cat: '외모', syn: ['우아하다', '고급스럽다', '품위있다', '격조있다', '스타일리시하다'] },
+      // 상태·성질
+      '크다':     { cat: '상태', syn: ['거대하다', '방대하다', '웅장하다', '광대하다', '드넓다'] },
+      '작다':     { cat: '상태', syn: ['조그맣다', '아담하다', '소소하다', '앙증맞다', '미소하다'] },
+      '높다':     { cat: '상태', syn: ['드높다', '우뚝하다', '고귀하다', '숭고하다', '우람하다'] },
+      '낮다':     { cat: '상태', syn: ['나지막하다', '저조하다', '얕다', '보잘것없다', '미천하다'] },
+      '깊다':     { cat: '상태', syn: ['심오하다', '오묘하다', '그윽하다', '심층적이다', '깊숙하다'] },
+      '넓다':     { cat: '상태', syn: ['드넓다', '광활하다', '방대하다', '널찍하다', '탁트이다'] },
+      '좁다':     { cat: '상태', syn: ['비좁다', '협소하다', '갑갑하다', '옹색하다', '빡빡하다'] },
+      '빠르다':   { cat: '상태', syn: ['신속하다', '재빠르다', '민첩하다', '날렵하다', '순식간이다'] },
+      '느리다':   { cat: '상태', syn: ['더디다', '굼뜨다', '늦다', '완만하다', '느긋하다'] },
+      '무겁다':   { cat: '상태', syn: ['육중하다', '묵직하다', '중후하다', '둔중하다', '버겁다'] },
+      '가볍다':   { cat: '상태', syn: ['경쾌하다', '날렵하다', '홀가분하다', '가뿐하다', '산뜻하다'] },
+      '밝다':     { cat: '상태', syn: ['환하다', '눈부시다', '화사하다', '찬란하다', '훤하다'] },
+      '어둡다':   { cat: '상태', syn: ['컴컴하다', '캄캄하다', '음침하다', '어스름하다', '침침하다'] },
+      '따뜻하다': { cat: '상태', syn: ['포근하다', '훈훈하다', '따스하다', '온화하다', '아늑하다'] },
+      '차갑다':   { cat: '상태', syn: ['시리다', '냉랭하다', '쌀쌀하다', '싸늘하다', '차디차다'] },
+      '딱딱하다': { cat: '상태', syn: ['굳다', '단단하다', '견고하다', '뻣뻣하다', '완고하다'] },
+      '부드럽다': { cat: '상태', syn: ['유연하다', '매끄럽다', '온화하다', '순하다', '포근하다'] },
+      '조용하다': { cat: '상태', syn: ['고요하다', '잠잠하다', '고즈넉하다', '적막하다', '평온하다'] },
+      '시끄럽다': { cat: '상태', syn: ['떠들썩하다', '소란스럽다', '요란하다', '왁자지껄하다', '시끌벅적하다'] },
+      '깨끗하다': { cat: '상태', syn: ['청결하다', '말끔하다', '정갈하다', '깔끔하다', '청초하다'] },
+      '더럽다':   { cat: '상태', syn: ['불결하다', '지저분하다', '오염되다', '추잡하다', '불쾌하다'] },
+      '새롭다':   { cat: '상태', syn: ['신선하다', '참신하다', '신기하다', '혁신적이다', '생소하다'] },
+      '낡다':     { cat: '상태', syn: ['오래되다', '묵다', '고풍스럽다', '유구하다', '케케묵다'] },
+      '편하다':   { cat: '상태', syn: ['편안하다', '안락하다', '아늑하다', '쾌적하다', '홀가분하다'] },
+      '불편하다': { cat: '상태', syn: ['거북하다', '어색하다', '불쾌하다', '껄끄럽다', '거슬리다'] },
+      // 성격·태도
+      '착하다':   { cat: '성격', syn: ['선량하다', '온순하다', '어질다', '인자하다', '다정하다'] },
+      '나쁘다':   { cat: '성격', syn: ['못되다', '사악하다', '불량하다', '악하다', '고약하다'] },
+      '친절하다': { cat: '성격', syn: ['다정하다', '상냥하다', '자상하다', '인정있다', '살갑다'] },
+      '용감하다': { cat: '성격', syn: ['담대하다', '씩씩하다', '배짱있다', '대담하다', '의젓하다'] },
+      '성실하다': { cat: '성격', syn: ['부지런하다', '근면하다', '꾸준하다', '착실하다', '열성적이다'] },
+      '게으르다': { cat: '성격', syn: ['나태하다', '태만하다', '늘어지다', '빈둥거리다', '해이하다'] },
+      '영리하다': { cat: '성격', syn: ['똑똑하다', '총명하다', '명민하다', '지혜롭다', '슬기롭다'] },
+      '어리석다': { cat: '성격', syn: ['미련하다', '우둔하다', '무지하다', '멍청하다', '어리숙하다'] },
+      '겸손하다': { cat: '성격', syn: ['겸허하다', '수수하다', '낮추다', '사양하다', '덕스럽다'] },
+      '교만하다': { cat: '성격', syn: ['오만하다', '거만하다', '자만하다', '도도하다', '뽐내다'] },
+      // 생각·인지
+      '알다':     { cat: '생각', syn: ['인지하다', '파악하다', '이해하다', '깨닫다', '인식하다'] },
+      '모르다':   { cat: '생각', syn: ['무지하다', '생소하다', '낯설다', '캄캄하다', '어둡다'] },
+      '기억하다': { cat: '생각', syn: ['상기하다', '추억하다', '회상하다', '되새기다', '떠올리다'] },
+      '잊다':     { cat: '생각', syn: ['망각하다', '잊어버리다', '흐릿해지다', '흘려보내다', '까먹다'] },
+      '이해하다': { cat: '생각', syn: ['파악하다', '납득하다', '수긍하다', '깨닫다', '공감하다'] },
+      '믿다':     { cat: '생각', syn: ['신뢰하다', '확신하다', '신용하다', '의지하다', '신임하다'] },
+      '의심하다': { cat: '생각', syn: ['의혹하다', '불신하다', '미심쩍다', '의아해하다', '수상히여기다'] },
+      '선택하다': { cat: '생각', syn: ['고르다', '택하다', '뽑다', '간추리다', '결정하다'] },
+      '포기하다': { cat: '생각', syn: ['단념하다', '체념하다', '그만두다', '내려놓다', '물러서다'] },
+      // 기타·정도
+      '많다':     { cat: '기타', syn: ['풍부하다', '넉넉하다', '가득하다', '충만하다', '풍성하다'] },
+      '적다':     { cat: '기타', syn: ['드물다', '희소하다', '부족하다', '모자라다', '희귀하다'] },
+      '강하다':   { cat: '기타', syn: ['세다', '힘차다', '강력하다', '강인하다', '굳건하다'] },
+      '약하다':   { cat: '기타', syn: ['연약하다', '허약하다', '나약하다', '무력하다', '힘없다'] },
+      '좋다':     { cat: '기타', syn: ['훌륭하다', '뛰어나다', '우수하다', '탁월하다', '우월하다'] },
+      '중요하다': { cat: '기타', syn: ['핵심적이다', '필수적이다', '귀중하다', '소중하다', '중대하다'] },
+      '쉽다':     { cat: '기타', syn: ['간단하다', '수월하다', '용이하다', '손쉽다', '단순하다'] },
+      '어렵다':   { cat: '기타', syn: ['힘들다', '곤란하다', '난해하다', '복잡하다', '까다롭다'] },
+      '아름답다': { cat: '기타', syn: ['수려하다', '빼어나다', '황홀하다', '찬란하다', '눈부시다'] },
+      '향기롭다': { cat: '기타', syn: ['그윽하다', '달콤하다', '은은하다', '향내나다', '감미롭다'] },
+    };
+
+    const POPULAR = [
+      '행복하다', '사랑하다', '예쁘다', '화나다', '웃다',
+      '먹다', '착하다', '빠르다', '알다', '설레다', '좋다', '아름답다'
+    ];
+
+    // ── 인기 검색어 렌더링 ─────────────────────────────
+    const popularChips = document.getElementById('popularChips');
+    POPULAR.forEach(w => {
+      const chip = document.createElement('span');
+      chip.className = 'popular-chip';
+      chip.textContent = w;
+      chip.onclick = () => fillSearch(w);
+      popularChips.appendChild(chip);
+    });
+
+    // ── 검색 ──────────────────────────────────────────
+    const input      = document.getElementById('searchInput');
+    const resultArea = document.getElementById('resultArea');
+    const allWords   = Object.keys(thesaurus);
+
+    function search(query) {
+      const trimmed = query.trim();
+
+      if (!trimmed) {
+        resultArea.innerHTML = `
+          <div class="welcome">
+            <div class="emoji">📖</div>
+            <p>단어를 입력하면 유의어가 나타납니다</p>
+          </div>`;
+        return;
+      }
+
+      const entry = thesaurus[trimmed];
+
+      if (entry) {
+        const tags = entry.syn
+          .map(w => `<span class="synonym-tag" onclick="fillSearch('${w}')">${w}</span>`)
+          .join('');
+        resultArea.innerHTML = `
+          <div class="result-card">
+            <span class="category-badge cat-${entry.cat}">${entry.cat}</span>
+            <div class="result-word">${trimmed}</div>
+            <div class="result-meta">유의어 ${entry.syn.length}개</div>
+            <div class="synonym-list">${tags}</div>
+          </div>`;
+      } else {
+        const chips = allWords
+          .map(w => `<span class="available-word-chip" onclick="fillSearch('${w}')">${w}</span>`)
+          .join('');
+        resultArea.innerHTML = `
+          <div class="not-found">
+            <div class="emoji">🔎</div>
+            <p>해당 단어를 찾을 수 없습니다</p>
+            <div class="hint">현재 등록된 단어 (${allWords.length}개)</div>
+            <div class="available-words">${chips}</div>
+          </div>`;
+      }
+    }
+
+    function fillSearch(word) {
+      input.value = word;
+      search(word);
+      input.focus();
+    }
+
+    input.addEventListener('input', () => search(input.value));
+  </script>
+
+</body>
+</html>
