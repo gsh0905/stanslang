@@ -226,7 +226,7 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 36px;
+      margin-bottom: 12px;
     }
 
     .filter-btn {
@@ -553,6 +553,9 @@
     }
 
     /* ── Suggest Button ─────────────────────────────────── */
+    .suggest-row {
+      margin-bottom: 36px;
+    }
     .suggest-btn {
       display: inline-flex;
       align-items: center;
@@ -840,7 +843,9 @@
     <button class="filter-btn" data-cat="fandom">Fandom 🔥</button>
     <button class="filter-btn" data-cat="vibes">Vibes ✨</button>
     <button class="filter-btn" data-cat="daily">Daily 💬</button>
-    <button class="suggest-btn" onclick="openSuggestModal()" style="margin-left:auto">💜 단어 제안하기</button>
+  </div>
+  <div class="suggest-row">
+    <button class="suggest-btn" onclick="openSuggestModal()">💜 단어 제안하기</button>
   </div>
 
   <!-- Stan of the Day -->
