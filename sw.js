@@ -1,4 +1,4 @@
-const CACHE = 'stan-korean-v1';
+const CACHE = 'stan-korean-v2';
 const PRECACHE = [
   './',
   './index.html',
