@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stan Korean 💜 — Words Every K-pop Stan Should Know</title>
+  <title>Stan Korean &#128156; &#8212; Words Every K-pop Stan Should Know</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#9747FF">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,692 +14,495 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:        #0D0D1A;
-      --bg-card:   #131325;
-      --bg-card2:  #18182e;
-      --purple:    #9747FF;
-      --purple-lt: #C084FC;
-      --purple-dk: #6B46C1;
-      --text:      #F0E6FF;
-      --text-2:    #B794F6;
-      --text-3:    #6B6B8A;
-      --text-4:    #3A3A58;
-      --border:    rgba(151,71,255,0.14);
-      --border-2:  rgba(151,71,255,0.35);
-      --ease:      cubic-bezier(0.4,0,0.2,1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', 'Noto Sans KR', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 15% 5%, rgba(151,71,255,0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 85% 90%, rgba(107,70,193,0.06) 0%, transparent 70%);
-      pointer-events: none; z-index: 0;
-    }
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--purple-dk); border-radius: 2px; }
-
-    /* ── HEADER ── */
-    .app-header {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(13,13,26,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 16px 12px;
-    }
-    .header-top {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 12px;
-    }
-    .logo-gem {
-      width: 36px; height: 36px; flex-shrink: 0;
-      background: linear-gradient(135deg, #9747FF, #6B46C1);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      box-shadow: 0 0 18px rgba(151,71,255,0.5);
-    }
-    .logo-text {
-      font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #D8AFFE 0%, #9747FF 60%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .search-wrap {
-      position: relative;
-    }
-    .search-icon {
-      position: absolute; left: 14px; top: 50%;
-      transform: translateY(-50%);
-      font-size: 15px; opacity: 0.4; pointer-events: none;
-    }
-    .search-input {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid var(--border);
-      border-radius: 100px;
-      padding: 10px 40px 10px 42px;
-      font-size: 14px;
-      font-family: inherit;
-      color: var(--text);
-      outline: none;
-      transition: border-color .22s, box-shadow .22s;
-    }
-    .search-input::placeholder { color: var(--text-3); }
-    .search-input:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(151,71,255,0.12);
-    }
-    .search-clear {
-      position: absolute; right: 12px; top: 50%;
-      transform: translateY(-50%);
-      background: none; border: none; color: var(--text-3);
-      cursor: pointer; font-size: 14px; padding: 4px;
-      display: none;
-    }
-    .search-clear.show { display: block; }
-
-    /* ── FILTERS ── */
-    .filters-wrap {
-      position: sticky; top: 117px; z-index: 40;
-      background: rgba(13,13,26,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--border);
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .filters-wrap::-webkit-scrollbar { display: none; }
-    .filters {
-      display: flex; gap: 8px; width: max-content;
-    }
-    .filter-btn {
-      padding: 7px 18px; border-radius: 100px;
-      font-size: 13px; font-weight: 500;
-      border: 1.5px solid var(--border);
-      background: transparent; color: var(--text-3);
-      font-family: inherit; cursor: pointer; white-space: nowrap;
-      transition: all .2s var(--ease);
-    }
-    .filter-btn:active { transform: scale(0.96); }
-    .filter-btn.active {
-      background: linear-gradient(135deg, #9747FF, #6B46C1);
-      border-color: transparent; color: #fff;
-      box-shadow: 0 0 16px rgba(151,71,255,0.38);
-    }
-
-    /* ── SOTD BANNER ── */
-    .sotd-banner {
-      margin: 16px; border-radius: 20px;
-      background: linear-gradient(135deg, rgba(151,71,255,0.14), rgba(107,70,193,0.08));
-      border: 1.5px solid var(--border-2);
-      overflow: hidden; position: relative;
-      animation: pulseGlow 5s ease-in-out infinite;
-    }
-    .sotd-banner::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(192,132,252,0.6), transparent);
-    }
-    .sotd-inner { padding: 20px 20px 22px; cursor: pointer; }
-    .sotd-tag {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: rgba(151,71,255,0.2);
-      border: 1px solid rgba(151,71,255,0.4);
-      border-radius: 100px; padding: 3px 12px;
-      font-size: 10px; font-weight: 700;
-      letter-spacing: .08em; text-transform: uppercase;
-      color: var(--purple-lt); margin-bottom: 14px;
-    }
-    .sotd-ko {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 44px; font-weight: 700;
-      color: var(--purple-lt); line-height: 1;
-      letter-spacing: -1px; margin-bottom: 4px;
-    }
-    .sotd-roman {
-      font-size: 13px; color: var(--text-3);
-      font-style: italic; margin-bottom: 6px;
-    }
-    .sotd-en {
-      font-size: 20px; font-weight: 700;
-      color: var(--text); margin-bottom: 12px;
-    }
-    .sotd-vibe {
-      font-size: 13px; color: var(--text-3);
-      line-height: 1.6; font-style: italic;
-      border-left: 2px solid rgba(151,71,255,0.4);
-      padding-left: 12px;
-    }
-    .sotd-tap-hint {
-      margin-top: 14px;
-      font-size: 11px; color: var(--text-4);
-      letter-spacing: .05em;
-    }
-
-    /* ── FEED ── */
-    .feed {
-      position: relative; z-index: 1;
-      padding: 0 0 100px;
-    }
-    .feed-label {
-      padding: 16px 16px 10px;
-      font-size: 10px; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--text-4);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .feed-label::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
-    }
-    .results-count {
-      padding: 0 16px 10px;
-      font-size: 12px; color: var(--text-3);
-    }
-    .results-count em { font-style: normal; color: var(--purple-lt); font-weight: 600; }
-
-    /* ── FEED CARD ── */
-    .feed-card {
-      margin: 0 16px 14px;
-      background: var(--bg-card);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color .22s, box-shadow .22s, transform .22s;
-      animation: fadeUp .3s var(--ease) both;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .feed-card:active { transform: scale(0.985); }
-    .feed-card:hover {
-      border-color: var(--border-2);
-      box-shadow: 0 0 24px rgba(151,71,255,0.18);
-    }
-    .card-top {
-      padding: 20px 20px 0;
-      display: flex; justify-content: space-between; align-items: flex-start;
-    }
-    .card-ko {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 36px; font-weight: 700;
-      color: var(--purple-lt); line-height: 1;
-      letter-spacing: -0.5px;
-    }
-    .cat-badge {
-      font-size: 10px; font-weight: 700;
-      padding: 4px 11px; border-radius: 100px;
-      letter-spacing: .04em; white-space: nowrap; flex-shrink: 0;
-    }
-    .cat-lyrics { background: rgba(139,92,246,.14); color: #C084FC; border: 1px solid rgba(139,92,246,.28); }
-    .cat-fandom { background: rgba(239,68,68,.1);   color: #F87171; border: 1px solid rgba(239,68,68,.22); }
-    .cat-vibes  { background: rgba(16,185,129,.1);  color: #34D399; border: 1px solid rgba(16,185,129,.22); }
-    .cat-daily  { background: rgba(251,191,36,.1);  color: #FCD34D; border: 1px solid rgba(251,191,36,.22); }
-
-    .card-body { padding: 8px 20px 20px; }
-    .card-roman { font-size: 12px; color: var(--text-3); font-style: italic; margin-bottom: 4px; }
-    .card-en { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-    .card-pos {
-      display: inline-block; font-size: 10px; color: var(--text-4);
-      background: rgba(255,255,255,.04); border-radius: 4px;
-      padding: 2px 7px; font-style: italic; margin-bottom: 12px;
-    }
-    .card-divider { height: 1px; background: var(--border); margin-bottom: 12px; }
-    .vibe-label {
-      font-size: 9px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--purple); margin-bottom: 4px;
-    }
-    .vibe-text {
-      font-size: 13px; color: var(--text-3);
-      line-height: 1.55; font-style: italic;
-    }
-    .card-tap-hint {
-      margin-top: 14px;
-      display: flex; align-items: center; gap: 5px;
-      font-size: 11px; color: var(--text-4);
-    }
-
-    /* ── FULLSCREEN CARD ── */
-    .card-detail {
-      position: fixed; inset: 0; z-index: 100;
-      background: var(--bg);
-      overflow-y: auto;
-      transform: translateY(100%);
-      transition: transform .35s var(--ease);
-    }
-    .card-detail.open { transform: translateY(0); }
-    .detail-header {
-      position: sticky; top: 0;
-      background: rgba(13,13,26,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding: 16px 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid var(--border); z-index: 10;
-    }
-    .detail-back {
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--border);
-      color: var(--text-3); border-radius: 10px;
-      padding: 8px 16px; font-size: 14px;
-      font-family: inherit; cursor: pointer;
-      transition: all .2s;
-    }
-    .detail-back:hover { color: var(--text); }
-    .detail-cat { /* cat badge shown in header */ }
-    .detail-body { padding: 32px 20px 60px; max-width: 600px; margin: 0 auto; }
-    .detail-ko {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 72px; font-weight: 700;
-      color: var(--purple-lt); line-height: 1;
-      letter-spacing: -2px; margin-bottom: 8px;
-    }
-    .detail-roman { font-size: 16px; color: var(--text-3); font-style: italic; margin-bottom: 8px; }
-    .detail-en { font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .detail-pos {
-      display: inline-block; font-size: 12px; color: var(--text-4);
-      background: rgba(255,255,255,.04); border-radius: 5px;
-      padding: 3px 10px; font-style: italic; margin-bottom: 28px;
-    }
-    .detail-section-label {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--purple); margin-bottom: 10px;
-    }
-    .detail-vibe {
-      font-size: 16px; color: var(--text-2);
-      line-height: 1.7; font-style: italic;
-      border-left: 3px solid rgba(151,71,255,0.45);
-      padding-left: 16px; margin-bottom: 28px;
-    }
-    .detail-example {
-      background: rgba(151,71,255,0.07);
-      border: 1px solid var(--border);
-      border-radius: 14px; padding: 18px 20px;
-    }
-    .detail-ex-ko {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: 16px; color: var(--text);
-      line-height: 1.6; margin-bottom: 8px;
-    }
-    .detail-ex-en { font-size: 14px; color: var(--text-3); line-height: 1.6; }
-
-    /* ── EMPTY ── */
-    .empty {
-      text-align: center; padding: 64px 20px;
-    }
-    .empty span { font-size: 48px; display: block; margin-bottom: 16px; }
-    .empty h3 { font-size: 17px; color: var(--text-2); margin-bottom: 8px; }
-    .empty p  { font-size: 13px; color: var(--text-3); }
-
-    /* ── FLOATING BTN ── */
-    .float-btn {
-      position: fixed; bottom: 24px; right: 20px; z-index: 90;
-      background: linear-gradient(135deg, #9747FF, #6B46C1);
-      color: #fff; border: none; border-radius: 100px;
-      padding: 14px 22px; font-size: 15px; font-weight: 700;
-      font-family: inherit; cursor: pointer;
-      box-shadow: 0 4px 20px rgba(151,71,255,0.5);
-      display: flex; align-items: center; gap: 8px;
-      transition: all .22s; -webkit-tap-highlight-color: transparent;
-    }
-    .float-btn:active { transform: scale(0.95); }
-
-    /* ── SUGGEST MODAL ── */
-    .modal-backdrop {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      z-index: 200;
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px;
-      opacity: 0; pointer-events: none;
-      transition: opacity .25s var(--ease);
-    }
-    .modal-backdrop.open { opacity: 1; pointer-events: all; }
-    .modal {
-      background: var(--bg-card);
-      border: 1.5px solid rgba(151,71,255,0.32);
-      border-radius: 24px;
-      width: 100%; max-width: 520px; max-height: 88vh;
-      overflow-y: auto;
-      padding: 28px 24px 24px;
-      position: relative;
-      box-shadow: 0 0 60px rgba(151,71,255,0.2);
-      transform: translateY(24px);
-      transition: transform .3s var(--ease);
-    }
-    .modal::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(192,132,252,0.6), transparent);
-      border-radius: 24px 24px 0 0;
-    }
-    .modal-backdrop.open .modal { transform: translateY(0); }
-    .modal-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
-    .modal-title { font-size: 19px; font-weight: 700; color: var(--text); }
-    .modal-subtitle { font-size: 12px; color: var(--text-3); margin-top: 4px; }
-    .modal-close {
-      background: rgba(255,255,255,.06); border: 1px solid var(--border);
-      color: var(--text-3); cursor: pointer;
-      padding: 6px 11px; border-radius: 8px; font-size: 14px;
-      font-family: inherit; margin-left: 12px; flex-shrink: 0;
-      transition: all .2s;
-    }
-    .modal-close:hover { color: var(--text); }
-    .form-group { margin-bottom: 14px; }
-    .form-label {
-      display: block; font-size: 10px; font-weight: 700;
-      letter-spacing: .07em; text-transform: uppercase;
-      color: var(--text-2); margin-bottom: 5px;
-    }
-    .form-label .req { color: var(--purple); margin-left: 2px; }
-    .form-input, .form-select, .form-textarea {
-      width: 100%;
-      background: rgba(255,255,255,.04);
-      border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 10px 13px;
-      font-size: 14px; font-family: inherit;
-      color: var(--text); outline: none;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-4); }
-    .form-input:focus, .form-select:focus, .form-textarea:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(151,71,255,0.12);
-    }
-    .form-select {
-      appearance: none; -webkit-appearance: none; cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236B6B8A' d='M5 7L0 2h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 13px center;
-      background-color: rgba(255,255,255,.04); padding-right: 34px;
-    }
-    .form-select option { background: #131325; color: var(--text); }
-    .form-textarea { resize: vertical; min-height: 72px; line-height: 1.55; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .form-divider { height: 1px; background: var(--border); margin: 16px 0 12px; }
-    .form-section-label {
-      font-size: 10px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--text-4); margin-bottom: 12px;
-    }
-    .form-submit {
-      width: 100%; margin-top: 18px; padding: 13px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #9747FF, #6B46C1);
-      border: none; color: #fff; font-size: 14px; font-weight: 600;
-      font-family: inherit; cursor: pointer;
-      box-shadow: 0 4px 18px rgba(151,71,255,0.35);
-      transition: all .22s;
-    }
-    .form-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(151,71,255,0.5); }
-    .form-submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-    .form-error { margin-top: 10px; font-size: 13px; color: #F87171; text-align: center; display: none; }
-    .form-success { text-align: center; padding: 24px 20px 8px; display: none; }
-    .success-emoji { font-size: 52px; display: block; margin-bottom: 16px; }
-    .success-msg { font-size: 21px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .success-sub { font-size: 14px; color: var(--text-3); line-height: 1.65; }
-    .success-close-btn {
-      margin-top: 24px; padding: 10px 28px; border-radius: 100px;
-      background: rgba(151,71,255,.15); border: 1.5px solid rgba(151,71,255,.35);
-      color: var(--purple-lt); font-size: 14px; font-weight: 600;
-      font-family: inherit; cursor: pointer; transition: all .2s;
-    }
-    .success-close-btn:hover { background: rgba(151,71,255,.28); color: #fff; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulseGlow {
-      0%,100% { box-shadow: 0 0 20px rgba(151,71,255,0.12); }
-      50%      { box-shadow: 0 0 38px rgba(151,71,255,0.28); }
-    }
+    :root{--bg:#0D0D1A;--bg-card:#131325;--bg-card2:#18182e;--purple:#9747FF;--purple-lt:#C084FC;--purple-dk:#6B46C1;--text:#F0E6FF;--text-2:#B794F6;--text-3:#6B6B8A;--text-4:#3A3A58;--border:rgba(151,71,255,0.14);--border-2:rgba(151,71,255,0.35);--ease:cubic-bezier(0.4,0,0.2,1);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 15% 5%,rgba(151,71,255,0.08) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 85% 90%,rgba(107,70,193,0.06) 0%,transparent 70%);pointer-events:none;z-index:0;}
+    ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--purple-dk);border-radius:2px;}
+    .app-header{position:sticky;top:0;z-index:50;background:rgba(13,13,26,0.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 16px 12px;}
+    .header-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+    .logo-gem{width:36px;height:36px;flex-shrink:0;background:linear-gradient(135deg,#9747FF,#6B46C1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(151,71,255,0.5);}
+    .logo-text{font-size:20px;font-weight:700;letter-spacing:-0.5px;background:linear-gradient(135deg,#D8AFFE 0%,#9747FF 60%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .search-wrap{position:relative;}
+    .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;opacity:0.4;pointer-events:none;}
+    .search-input{width:100%;background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:100px;padding:10px 40px 10px 42px;font-size:14px;font-family:inherit;color:var(--text);outline:none;transition:border-color .22s,box-shadow .22s;}
+    .search-input::placeholder{color:var(--text-3);}
+    .search-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(151,71,255,0.12);}
+    .search-clear{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-3);cursor:pointer;font-size:14px;padding:4px;display:none;}
+    .search-clear.show{display:block;}
+    .filters-wrap{position:sticky;top:117px;z-index:40;background:rgba(13,13,26,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:10px 16px;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+    .filters-wrap::-webkit-scrollbar{display:none;}
+    .filters{display:flex;gap:8px;width:max-content;}
+    .filter-btn{padding:7px 18px;border-radius:100px;font-size:13px;font-weight:500;border:1.5px solid var(--border);background:transparent;color:var(--text-3);font-family:inherit;cursor:pointer;white-space:nowrap;transition:all .2s var(--ease);}
+    .filter-btn:active{transform:scale(0.96);}
+    .filter-btn.active{background:linear-gradient(135deg,#9747FF,#6B46C1);border-color:transparent;color:#fff;box-shadow:0 0 16px rgba(151,71,255,0.38);}
+    .sotd-banner{margin:16px;border-radius:20px;background:linear-gradient(135deg,rgba(151,71,255,0.14),rgba(107,70,193,0.08));border:1.5px solid var(--border-2);overflow:hidden;position:relative;animation:pulseGlow 5s ease-in-out infinite;}
+    .sotd-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(192,132,252,0.6),transparent);}
+    .sotd-inner{padding:20px 20px 22px;cursor:pointer;}
+    .sotd-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(151,71,255,0.2);border:1px solid rgba(151,71,255,0.4);border-radius:100px;padding:3px 12px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:14px;}
+    .sotd-ko{font-family:'Noto Sans KR',sans-serif;font-size:44px;font-weight:700;color:var(--purple-lt);line-height:1;letter-spacing:-1px;margin-bottom:4px;}
+    .sotd-roman{font-size:13px;color:var(--text-3);font-style:italic;margin-bottom:6px;}
+    .sotd-en{font-size:20px;font-weight:700;color:var(--text);margin-bottom:12px;}
+    .sotd-vibe{font-size:13px;color:var(--text-3);line-height:1.6;font-style:italic;border-left:2px solid rgba(151,71,255,0.4);padding-left:12px;}
+    .sotd-tap-hint{margin-top:14px;font-size:11px;color:var(--text-4);letter-spacing:.05em;}
+    .feed{position:relative;z-index:1;padding:0 0 100px;}
+    .feed-label{padding:16px 16px 10px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-4);display:flex;align-items:center;gap:10px;}
+    .feed-label::after{content:'';flex:1;height:1px;background:var(--border);}
+    .results-count{padding:0 16px 10px;font-size:12px;color:var(--text-3);}
+    .results-count em{font-style:normal;color:var(--purple-lt);font-weight:600;}
+    .feed-card{margin:0 16px 14px;background:var(--bg-card);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;transition:border-color .22s,box-shadow .22s,transform .22s;animation:fadeUp .3s var(--ease) both;-webkit-tap-highlight-color:transparent;}
+    .feed-card:active{transform:scale(0.985);}
+    .feed-card:hover{border-color:var(--border-2);box-shadow:0 0 24px rgba(151,71,255,0.18);}
+    .card-top{padding:20px 20px 0;display:flex;justify-content:space-between;align-items:flex-start;}
+    .card-ko{font-family:'Noto Sans KR',sans-serif;font-size:36px;font-weight:700;color:var(--purple-lt);line-height:1;letter-spacing:-0.5px;}
+    .cat-badge{font-size:10px;font-weight:700;padding:4px 11px;border-radius:100px;letter-spacing:.04em;white-space:nowrap;flex-shrink:0;}
+    .cat-lyrics{background:rgba(139,92,246,.14);color:#C084FC;border:1px solid rgba(139,92,246,.28);}
+    .cat-fandom{background:rgba(239,68,68,.1);color:#F87171;border:1px solid rgba(239,68,68,.22);}
+    .cat-vibes{background:rgba(16,185,129,.1);color:#34D399;border:1px solid rgba(16,185,129,.22);}
+    .cat-daily{background:rgba(251,191,36,.1);color:#FCD34D;border:1px solid rgba(251,191,36,.22);}
+    .card-body{padding:8px 20px 20px;}
+    .card-roman{font-size:12px;color:var(--text-3);font-style:italic;margin-bottom:4px;}
+    .card-en{font-size:18px;font-weight:600;color:var(--text);margin-bottom:4px;}
+    .card-pos{display:inline-block;font-size:10px;color:var(--text-4);background:rgba(255,255,255,.04);border-radius:4px;padding:2px 7px;font-style:italic;margin-bottom:12px;}
+    .card-divider{height:1px;background:var(--border);margin-bottom:12px;}
+    .vibe-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:4px;}
+    .vibe-text{font-size:13px;color:var(--text-3);line-height:1.55;font-style:italic;}
+    .card-tap-hint{margin-top:14px;font-size:11px;color:var(--text-4);}
+    .card-detail{position:fixed;inset:0;z-index:100;background:var(--bg);overflow-y:auto;transform:translateY(100%);transition:transform .35s var(--ease);}
+    .card-detail.open{transform:translateY(0);}
+    .detail-header{position:sticky;top:0;background:rgba(13,13,26,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);z-index:10;}
+    .detail-back{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text-3);border-radius:10px;padding:8px 16px;font-size:14px;font-family:inherit;cursor:pointer;transition:all .2s;}
+    .detail-back:hover{color:var(--text);}
+    .detail-body{padding:32px 20px 60px;max-width:600px;margin:0 auto;}
+    .detail-ko{font-family:'Noto Sans KR',sans-serif;font-size:72px;font-weight:700;color:var(--purple-lt);line-height:1;letter-spacing:-2px;margin-bottom:8px;}
+    .detail-roman{font-size:16px;color:var(--text-3);font-style:italic;margin-bottom:8px;}
+    .detail-en{font-size:28px;font-weight:700;color:var(--text);margin-bottom:6px;}
+    .detail-pos{display:inline-block;font-size:12px;color:var(--text-4);background:rgba(255,255,255,.04);border-radius:5px;padding:3px 10px;font-style:italic;margin-bottom:28px;}
+    .detail-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+    .detail-vibe{font-size:16px;color:var(--text-2);line-height:1.7;font-style:italic;border-left:3px solid rgba(151,71,255,0.45);padding-left:16px;margin-bottom:28px;}
+    .detail-example{background:rgba(151,71,255,0.07);border:1px solid var(--border);border-radius:14px;padding:18px 20px;}
+    .detail-ex-ko{font-family:'Noto Sans KR',sans-serif;font-size:16px;color:var(--text);line-height:1.6;margin-bottom:8px;}
+    .detail-ex-en{font-size:14px;color:var(--text-3);line-height:1.6;}
+    .empty{text-align:center;padding:64px 20px;}
+    .empty span{font-size:48px;display:block;margin-bottom:16px;}
+    .empty h3{font-size:17px;color:var(--text-2);margin-bottom:8px;}
+    .empty p{font-size:13px;color:var(--text-3);}
+    .float-btn{position:fixed;bottom:24px;right:20px;z-index:90;background:linear-gradient(135deg,#9747FF,#6B46C1);color:#fff;border:none;border-radius:100px;padding:14px 22px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 4px 20px rgba(151,71,255,0.5);display:flex;align-items:center;gap:8px;transition:all .22s;-webkit-tap-highlight-color:transparent;}
+    .float-btn:active{transform:scale(0.95);}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s var(--ease);}
+    .modal-backdrop.open{opacity:1;pointer-events:all;}
+    .modal{background:var(--bg-card);border:1.5px solid rgba(151,71,255,0.32);border-radius:24px;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;padding:28px 24px 24px;position:relative;box-shadow:0 0 60px rgba(151,71,255,0.2);transform:translateY(24px);transition:transform .3s var(--ease);}
+    .modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(192,132,252,0.6),transparent);border-radius:24px 24px 0 0;}
+    .modal-backdrop.open .modal{transform:translateY(0);}
+    .modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;}
+    .modal-title{font-size:19px;font-weight:700;color:var(--text);}
+    .modal-subtitle{font-size:12px;color:var(--text-3);margin-top:4px;}
+    .modal-close{background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--text-3);cursor:pointer;padding:6px 11px;border-radius:8px;font-size:14px;font-family:inherit;margin-left:12px;flex-shrink:0;transition:all .2s;}
+    .modal-close:hover{color:var(--text);}
+    .form-group{margin-bottom:14px;}
+    .form-label{display:block;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text-2);margin-bottom:5px;}
+    .form-label .req{color:var(--purple);margin-left:2px;}
+    .form-input,.form-select,.form-textarea{width:100%;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:12px;padding:10px 13px;font-size:14px;font-family:inherit;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;}
+    .form-input::placeholder,.form-textarea::placeholder{color:var(--text-4);}
+    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(151,71,255,0.12);}
+    .form-select{appearance:none;-webkit-appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236B6B8A' d='M5 7L0 2h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-color:rgba(255,255,255,.04);padding-right:34px;}
+    .form-select option{background:#131325;color:var(--text);}
+    .form-textarea{resize:vertical;min-height:72px;line-height:1.55;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .form-divider{height:1px;background:var(--border);margin:16px 0 12px;}
+    .form-section-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-4);margin-bottom:12px;}
+    .form-submit{width:100%;margin-top:18px;padding:13px;border-radius:14px;background:linear-gradient(135deg,#9747FF,#6B46C1);border:none;color:#fff;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:0 4px 18px rgba(151,71,255,0.35);transition:all .22s;}
+    .form-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 26px rgba(151,71,255,0.5);}
+    .form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+    .form-error{margin-top:10px;font-size:13px;color:#F87171;text-align:center;display:none;}
+    .form-success{text-align:center;padding:24px 20px 8px;display:none;}
+    .success-emoji{font-size:52px;display:block;margin-bottom:16px;}
+    .success-msg{font-size:21px;font-weight:700;color:var(--text);margin-bottom:8px;}
+    .success-sub{font-size:14px;color:var(--text-3);line-height:1.65;}
+    .success-close-btn{margin-top:24px;padding:10px 28px;border-radius:100px;background:rgba(151,71,255,.15);border:1.5px solid rgba(151,71,255,.35);color:var(--purple-lt);font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;}
+    .success-close-btn:hover{background:rgba(151,71,255,.28);color:#fff;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(151,71,255,0.12);}50%{box-shadow:0 0 38px rgba(151,71,255,0.28);}}
   </style>
 </head>
 <body>
-
-<!-- ── STICKY HEADER ── -->
 <header class="app-header">
   <div class="header-top">
-    <div class="logo-gem">💜</div>
+    <div class="logo-gem">&#128156;</div>
     <span class="logo-text">Stan Korean</span>
   </div>
   <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input id="searchInput" class="search-input" type="text"
-      placeholder="Search any word... 한국어 or English"
-      autocomplete="off" spellcheck="false" />
-    <button id="searchClear" class="search-clear">✕</button>
+    <span class="search-icon">&#128269;</span>
+    <input id="searchInput" class="search-input" type="text" placeholder="Search any word... &#54620;&#44397;&#50612; or English" autocomplete="off" spellcheck="false"/>
+    <button id="searchClear" class="search-clear">&#10005;</button>
   </div>
 </header>
-
-<!-- ── FILTERS ── -->
 <div class="filters-wrap">
   <div class="filters" id="filtersRow">
     <button class="filter-btn active" data-cat="all">All</button>
-    <button class="filter-btn" data-cat="lyrics">Lyrics 💜</button>
-    <button class="filter-btn" data-cat="fandom">Fandom 🔥</button>
-    <button class="filter-btn" data-cat="vibes">Vibes ✨</button>
-    <button class="filter-btn" data-cat="daily">Daily 💬</button>
+    <button class="filter-btn" data-cat="lyrics">Lyrics &#128156;</button>
+    <button class="filter-btn" data-cat="fandom">Fandom &#128293;</button>
+    <button class="filter-btn" data-cat="vibes">Vibes &#10024;</button>
+    <button class="filter-btn" data-cat="daily">Daily &#128172;</button>
   </div>
 </div>
-
-<!-- ── FEED ── -->
 <div class="feed" id="feed">
-  <!-- SOTD banner injected here -->
   <div id="sotdSection"></div>
-  <!-- Word cards injected here -->
   <div id="feedLabel" class="feed-label">Words</div>
   <div class="results-count" id="resultsCount"></div>
   <div id="cardsContainer"></div>
 </div>
-
-<!-- ── FULLSCREEN CARD DETAIL ── -->
 <div class="card-detail" id="cardDetail">
   <div class="detail-header">
-    <button class="detail-back" onclick="closeDetail()">← Back</button>
+    <button class="detail-back" onclick="closeDetail()">&#8592; Back</button>
     <span id="detailCatBadge"></span>
   </div>
   <div class="detail-body" id="detailBody"></div>
 </div>
-
-<!-- ── FLOATING SUGGEST BTN ── -->
-<button class="float-btn" onclick="openSuggestModal()">✏️ 단어 제안하기</button>
-
-<!-- ── SUGGEST MODAL ── -->
+<button class="float-btn" onclick="openSuggestModal()">&#9999;&#65039; &#45800;&#50612; &#51228;&#50504;&#54616;&#44592;</button>
 <div class="modal-backdrop" id="suggestBackdrop" onclick="closeSuggestModal(event)" role="dialog" aria-modal="true">
   <div class="modal">
     <div class="modal-head">
       <div>
-        <div class="modal-title">💜 단어 제안하기</div>
-        <div class="modal-subtitle">알고 있는 스탄 용어를 공유해주세요</div>
+        <div class="modal-title">&#128156; &#45800;&#50612; &#51228;&#50504;&#54616;&#44592;</div>
+        <div class="modal-subtitle">&#50508;&#44256; &#51080;&#45716; &#49828;&#53364; &#50857;&#50612;&#47484; &#44277;&#50976;&#54644;&#51452;&#49464;&#50836;</div>
       </div>
-      <button class="modal-close" onclick="closeSuggestModal()">✕</button>
+      <button class="modal-close" onclick="closeSuggestModal()">&#10005;</button>
     </div>
     <div id="suggestFormWrap">
       <form id="suggestForm" novalidate>
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="f-korean">한국어 단어<span class="req">*</span></label>
-            <input class="form-input" id="f-korean" name="한국어 단어" type="text" placeholder="예: 설렘" required autocomplete="off">
+            <label class="form-label" for="f-korean">&#54620;&#44397;&#50612; &#45800;&#50612;<span class="req">*</span></label>
+            <input class="form-input" id="f-korean" name="&#54620;&#44397;&#50612; &#45800;&#50612;" type="text" placeholder="&#50696;: &#49444;&#47140;" required autocomplete="off">
           </div>
           <div class="form-group">
-            <label class="form-label" for="f-roman">로마자 발음</label>
-            <input class="form-input" id="f-roman" name="로마자 발음" type="text" placeholder="예: seol-lem" autocomplete="off">
+            <label class="form-label" for="f-roman">&#47196;&#47560;&#51088; &#bc1c;&#51020;</label>
+            <input class="form-input" id="f-roman" name="&#47196;&#47560;&#51088; &#bc1c;&#51020;" type="text" placeholder="&#50696;: seol-lem" autocomplete="off">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="f-english">영어 뜻<span class="req">*</span></label>
-            <input class="form-input" id="f-english" name="영어 뜻" type="text" placeholder="예: Flutter" required autocomplete="off">
+            <label class="form-label" for="f-english">&#50689;&#50612; &#46441;<span class="req">*</span></label>
+            <input class="form-input" id="f-english" name="&#50689;&#50612; &#46441;" type="text" placeholder="&#50696;: Flutter" required autocomplete="off">
           </div>
           <div class="form-group">
-            <label class="form-label" for="f-category">카테고리</label>
-            <select class="form-select" id="f-category" name="카테고리">
-              <option value="">선택하세요</option>
-              <option value="Lyrics">💜 Lyrics</option>
-              <option value="Fandom">🔥 Fandom</option>
-              <option value="Vibes">✨ Vibes</option>
-              <option value="Daily">💬 Daily</option>
+            <label class="form-label" for="f-category">&#ce74;&#53580;&#44256;&#47532;</label>
+            <select class="form-select" id="f-category" name="&#ce74;&#53580;&#44256;&#47532;">
+              <option value="">&#49440;&#53469;&#54616;&#49464;&#50836;</option>
+              <option value="Lyrics">&#128156; Lyrics</option>
+              <option value="Fandom">&#128293; Fandom</option>
+              <option value="Vibes">&#10024; Vibes</option>
+              <option value="Daily">&#128172; Daily</option>
             </select>
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label" for="f-vibe">Vibe Check 설명</label>
-          <textarea class="form-textarea" id="f-vibe" name="Vibe Check" placeholder="이 단어의 뉘앙스나 스탄 문화에서의 의미를 설명해주세요..."></textarea>
+          <label class="form-label" for="f-vibe">Vibe Check &#49444;&#47749;</label>
+          <textarea class="form-textarea" id="f-vibe" name="Vibe Check" placeholder="&#51060; &#45800;&#50612;&#51032; &#45212;&#50521;&#49828;&#45208; &#49828;&#53364; &#bb38;&#54868;&#50640;&#49436;&#51032; &#51032;&#48120;&#47484; &#49444;&#47749;&#54644;&#51452;&#49464;&#50836;..."></textarea>
         </div>
         <div class="form-divider"></div>
-        <div class="form-section-label">예문 (선택)</div>
+        <div class="form-section-label">&#50696;&#47928; (&#49440;&#53469;)</div>
         <div class="form-group">
-          <label class="form-label" for="f-ex-ko">예문 한국어</label>
-          <input class="form-input" id="f-ex-ko" name="예문 한국어" type="text" placeholder="한국어 예문을 입력해주세요" autocomplete="off">
+          <label class="form-label" for="f-ex-ko">&#50696;&#47928; &#54620;&#44397;&#50612;</label>
+          <input class="form-input" id="f-ex-ko" name="&#50696;&#47928; &#54620;&#44397;&#50612;" type="text" placeholder="&#54620;&#44397;&#50612; &#50696;&#47928;&#51012; &#51077;&#47141;&#54644;&#51452;&#49464;&#50836;" autocomplete="off">
         </div>
         <div class="form-group">
-          <label class="form-label" for="f-ex-en">예문 영어</label>
-          <input class="form-input" id="f-ex-en" name="예문 영어" type="text" placeholder="English translation of the example" autocomplete="off">
+          <label class="form-label" for="f-ex-en">&#50696;&#47928; &#50689;&#50612;</label>
+          <input class="form-input" id="f-ex-en" name="&#50696;&#47928; &#50689;&#50612;" type="text" placeholder="English translation of the example" autocomplete="off">
         </div>
-        <div class="form-error" id="formError">제출 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.</div>
-        <button type="submit" class="form-submit" id="submitBtn">제안 보내기 💜</button>
+        <div class="form-error" id="formError"></div>
+        <button type="submit" class="form-submit" id="submitBtn">&#51228;&#50504; &#48372;&#45236;&#44592; &#128156;</button>
       </form>
     </div>
     <div class="form-success" id="formSuccess">
-      <span class="success-emoji">💜</span>
-      <div class="success-msg">고마워요!</div>
-      <div class="success-sub">검토 후 등재할게요 💜<br>소중한 단어 제안 감사합니다!</div>
-      <button class="success-close-btn" onclick="closeSuggestModal()">닫기</button>
+      <span class="success-emoji">&#128156;</span>
+      <div class="success-msg">&#44256;&#47560;&#50892;&#50836;!</div>
+      <div class="success-sub">&#44160;&#53664; &#54980; &#46321;&#51116;&#54624;&#44172;&#50836; &#128156;<br>&#49548;&#51473;&#54620; &#45800;&#50612; &#51228;&#50504; &#44048;&#49324;&#54633;&#45768;&#45796;!</div>
+      <button class="success-close-btn" onclick="closeSuggestModal()">&#45803;&#44592;</button>
     </div>
   </div>
 </div>
-
 <script>
+
 const words = [
-    {id:1,korean:"사랑",romanization:"sa-rang",english:"Love",pos:"noun",category:"lyrics",vibe:"The word powering at least 90% of all K-pop songs ever recorded. Overused? Never.",exampleKo:"너를 사랑해, 이 마음이 진심이야.",exampleEn:"I love you — this feeling is completely real."},
-    {id:2,korean:"그리움",romanization:"geu-ri-um",english:"Longing / Yearning",pos:"noun",category:"lyrics",vibe:"That beautiful, aching feeling when someone is gone but never truly forgotten.",exampleKo:"네가 떠난 후, 그리움만 남았어.",exampleEn:"After you left, only longing remained."},
-    {id:3,korean:"설렘",romanization:"seol-lem",english:"Flutter / Excitement",pos:"noun",category:"lyrics",vibe:"The butterflies in your chest — from a crush, a comeback teaser, or honestly both.",exampleKo:"이 노래를 들을 때마다 설렘이 느껴져.",exampleEn:"Every time I hear this song, I feel that flutter."},
-    {id:4,korean:"영원",romanization:"yeong-won",english:"Eternity / Forever",pos:"noun",category:"lyrics",vibe:"The solemn promise made in every ballad bridge. Deep, romantic, infinite.",exampleKo:"우리의 인연이 영원하길 바라.",exampleEn:"I hope our bond lasts forever."},
-    {id:5,korean:"청춘",romanization:"cheong-chun",english:"Youth",pos:"noun",category:"lyrics",vibe:"Not just being young — it's the burning, golden era that's quietly slipping away.",exampleKo:"이 순간이 우리의 청춘이야, 잊지 마.",exampleEn:"This moment is our youth — don't forget it."},
-    {id:6,korean:"최애",romanization:"choe-ae",english:"Ultimate Bias",pos:"noun",category:"fandom",vibe:"Your number one. The one who owns your entire heart without even trying.",exampleKo:"내 최애는 항상 내 기분을 좋게 해줘.",exampleEn:"My ultimate bias always makes me feel better, no matter what."},
-    {id:7,korean:"입덕",romanization:"ip-deok",english:"Falling into a fandom",pos:"noun / verb",category:"fandom",vibe:"The point of no return. One video, one performance — and suddenly you're in forever.",exampleKo:"그 뮤직비디오 보고 바로 입덕해버렸어.",exampleEn:"I watched that one video and immediately fell deep into the fandom."},
-    {id:8,korean:"덕질",romanization:"deok-jil",english:"Stan activities / Fanning",pos:"noun",category:"fandom",vibe:"The official word for everything you're doing right now. Streaming counts.",exampleKo:"요즘 덕질이 너무 바빠서 잠도 못 자.",exampleEn:"I've been so busy with stan activities I can barely sleep."},
-    {id:9,korean:"포카",romanization:"po-ka",english:"Photocard",pos:"noun",category:"fandom",vibe:"Tiny rectangles that technically cost almost nothing but somehow empty your wallet.",exampleKo:"이번 앨범 포카 다 모으려면 얼마나 걸릴까?",exampleEn:"How long will it take to collect all the photocards from this album?"},
-    {id:10,korean:"컴백",romanization:"keom-baek",english:"Comeback",pos:"noun",category:"fandom",vibe:"New music + new era + new concept. The moment the fandom comes fully alive.",exampleKo:"컴백 D-day, 온 팬덤이 들썩거렸어.",exampleEn:"On comeback day, the entire fandom was absolutely buzzing."},
-    {id:11,korean:"정",romanization:"jeong",english:"Deep emotional bond",pos:"noun",category:"vibes",vibe:"Untranslatable warmth. More than love, deeper than friendship. Built slowly, lost reluctantly.",exampleKo:"오래 볼수록 정이 드는 것 같아.",exampleEn:"The more time we spend together, the more 정 I feel."},
-    {id:12,korean:"한",romanization:"han",english:"Deep collective sorrow",pos:"noun",category:"vibes",vibe:"Korea's most complex emotion — grief, longing, and beauty tangled into one feeling.",exampleKo:"이 발라드에는 한국의 한이 담겨 있어.",exampleEn:"This ballad carries Korea's 한 within every single note."},
-    {id:13,korean:"애교",romanization:"ae-gyo",english:"Cute / Aegyo",pos:"noun",category:"vibes",vibe:"Acting adorably to win hearts. An art form. A weapon. Use it wisely.",exampleKo:"애교 부리면 다 용서가 돼.",exampleEn:"When they do aegyo, everything is automatically forgiven."},
-    {id:14,korean:"눈치",romanization:"nun-chi",english:"Reading the room",pos:"noun",category:"vibes",vibe:"Social awareness taken to an Olympic level. Sensing vibes before a single word is said.",exampleKo:"눈치 빠른 사람은 말 안 해도 다 알아.",exampleEn:"Someone with good 눈치 understands everything without a single word."},
-    {id:15,korean:"인연",romanization:"in-yeon",english:"Fated connection",pos:"noun",category:"vibes",vibe:"A bond written before you were born. Used for soulmates — and for finding your bias.",exampleKo:"우리가 만난 건 인연이야, 분명히.",exampleEn:"Our meeting was definitely fated."},
-    {id:16,korean:"대박",romanization:"dae-bak",english:"Amazing / Jackpot",pos:"exclamation",category:"daily",vibe:"All-purpose hype word. Means 'wow,' 'no way,' and 'this is the best thing ever.'",exampleKo:"이 노래 진짜 대박이다, 미쳤어!",exampleEn:"This song is seriously amazing — I can't even."},
-    {id:17,korean:"화이팅",romanization:"hwa-i-ting",english:"You got this / Fighting",pos:"exclamation",category:"daily",vibe:"Korea's ultimate cheer. Deploy before exams, concerts, and anything terrifying.",exampleKo:"오늘 공연 잘 될 거야, 화이팅!",exampleEn:"Tonight's show will go great — you got this!"},
-    {id:18,korean:"진짜",romanization:"jin-jja",english:"Really / Seriously",pos:"adverb",category:"daily",vibe:"The ultimate emphasis amplifier. Stack it twice — '진짜 진짜' — for maximum effect.",exampleKo:"이거 진짜 맛있어? 진짜 진짜로?",exampleEn:"Is this really that good? Like, really really?"},
-    {id:19,korean:"헐",romanization:"heol",english:"OMG / No way",pos:"exclamation",category:"daily",vibe:"Dropped when something is so surprising your brain can't form full words anymore.",exampleKo:"헐, 이게 실화야? 말이 안 돼.",exampleEn:"OMG, is this actually real? I cannot believe it."},
-    {id:20,korean:"짱",romanization:"jjang",english:"The absolute best",pos:"adjective / exclamation",category:"daily",vibe:"Peak superlative. When something is so good it sits at the very top of the universe.",exampleKo:"오늘 공연 짱이었어, 역대급!",exampleEn:"Tonight's show was THE BEST — literally of all time."},
-    {id:21,korean:"별",romanization:"byeol",english:"Star",pos:"noun",category:"lyrics",vibe:"Celestial and quietly melancholy. The night sky's anchor — poets, artists, and heartbroken fans all reach for it. ⭐",exampleKo:"어두운 밤하늘에 별 하나가 빛났어.",exampleEn:"One star shone bright in the dark night sky."},
-    {id:22,korean:"달",romanization:"dal",english:"Moon",pos:"noun",category:"lyrics",vibe:"Soft, distant, and achingly beautiful. The moon watches over you even when no one else does. 🌙",exampleKo:"창문 너머로 달이 떠올랐을 때 네 생각이 났어.",exampleEn:"When the moon rose beyond my window, I thought of you."},
-    {id:23,korean:"봄날",romanization:"bom-nal",english:"Spring day",pos:"noun",category:"lyrics",vibe:"Warmth returning after endless cold. A season that means hope, reunion, and the gentle end of longing. 🌸",exampleKo:"이 긴 겨울이 지나면 봄날이 올 거야.",exampleEn:"When this long winter passes, a spring day will come."},
-    {id:24,korean:"운명",romanization:"un-myeong",english:"Fate / Destiny",pos:"noun",category:"lyrics",vibe:"The invisible thread pulling two people together. K-pop leans on it heavily — and honestly, it never gets old.",exampleKo:"이건 우연이 아니야, 운명이 우리를 이어준 거야.",exampleEn:"This isn't coincidence — fate is what connected us."},
-    {id:25,korean:"약속",romanization:"yak-sok",english:"Promise",pos:"noun",category:"lyrics",vibe:"Heavier than it sounds. In K-pop, a promise between an artist and fans is considered sacred.",exampleKo:"꼭 돌아올게, 약속해.",exampleEn:"I'll definitely come back — I promise."},
-    {id:26,korean:"기다림",romanization:"gi-da-rim",english:"Waiting / Anticipation",pos:"noun",category:"lyrics",vibe:"The slow ache of counting down to a comeback, a return, or a reunion.",exampleKo:"오랜 기다림 끝에 마침내 만나게 됐어.",exampleEn:"After such a long wait, we finally get to meet."},
-    {id:27,korean:"추억",romanization:"chu-eok",english:"Memory / Nostalgia",pos:"noun",category:"lyrics",vibe:"More than just memories — it's the golden warmth you feel looking back at something you loved and lost.",exampleKo:"그 콘서트는 평생 잊지 못할 추억이 됐어.",exampleEn:"That concert became a memory I'll treasure for the rest of my life."},
-    {id:28,korean:"빛",romanization:"bit",english:"Light",pos:"noun",category:"lyrics",vibe:"Literal brightness, always carrying metaphor — hope in darkness, someone who lights up your entire world.",exampleKo:"네가 내 어두운 세상에 빛을 가져다줬어.",exampleEn:"You brought light into my dark world."},
-    {id:29,korean:"꽃",romanization:"kkot",english:"Flower",pos:"noun",category:"lyrics",vibe:"Beauty and transience wrapped in a single syllable. Blooms fast, fades fast — that's exactly the point.",exampleKo:"봄에 핀 꽃처럼 네 미소가 세상을 밝혀.",exampleEn:"Like flowers blooming in spring, your smile lights up the whole world."},
-    {id:30,korean:"바다",romanization:"ba-da",english:"Sea / Ocean",pos:"noun",category:"lyrics",vibe:"Vast, endless, and emotionally overwhelming — much like your feelings for your bias at 2am.",exampleKo:"눈을 감으면 끝없는 바다가 보여.",exampleEn:"When I close my eyes, I see an endless sea."},
-    {id:31,korean:"하늘",romanization:"ha-neul",english:"Sky",pos:"noun",category:"lyrics",vibe:"Open, free, and always watching. The sky in K-pop lyrics is rarely just weather — it's pure emotion.",exampleKo:"맑은 하늘 아래서 네 이름을 불러봤어.",exampleEn:"Under the clear sky, I called out your name."},
-    {id:32,korean:"새벽",romanization:"sae-byeok",english:"Dawn / Before sunrise",pos:"noun",category:"lyrics",vibe:"That liminal 3–5am hour when everything feels fragile and infinite at once.",exampleKo:"새벽에 혼자 이 노래를 들으면 눈물이 나.",exampleEn:"Listening to this song alone at dawn, the tears just come."},
-    {id:33,korean:"응원봉",romanization:"eung-won-bong",english:"Lightstick",pos:"noun",category:"fandom",vibe:"More than a glow stick — it's a fandom's identity, a sea of light, and proof you're officially in.",exampleKo:"응원봉을 들고 콘서트장에 들어가면 진짜 느낌이 달라.",exampleEn:"Holding a lightstick as you enter the concert venue just hits differently."},
-    {id:34,korean:"콘서트",romanization:"kon-seo-teu",english:"Concert",pos:"noun",category:"fandom",vibe:"The pinnacle of stan life. Months of waiting, seconds of seeing them, memories that last a decade.",exampleKo:"첫 콘서트 티켓 구했을 때 손이 떨렸어.",exampleEn:"When I got my first concert ticket, my hands were literally shaking."},
-    {id:35,korean:"팬미팅",romanization:"paen-mi-ting",english:"Fan meeting",pos:"noun",category:"fandom",vibe:"Closer than a concert, more intimate than a dream. The event where you might actually make eye contact.",exampleKo:"팬미팅에서 눈이 마주쳤을 때 심장이 멈추는 줄 알았어.",exampleEn:"When we made eye contact at the fan meeting, I thought my heart had stopped."},
-    {id:36,korean:"굿즈",romanization:"gut-jeu",english:"Merchandise / Goods",pos:"noun",category:"fandom",vibe:"Physical proof of your love. Officially bankrupting stans worldwide, one limited edition item at a time.",exampleKo:"이번 굿즈 리스트 봤어? 지갑이 울고 있어.",exampleEn:"Did you see the new merch list? My wallet is literally crying."},
-    {id:37,korean:"앨범",romanization:"ael-beom",english:"Album",pos:"noun",category:"fandom",vibe:"Not just music — it's a universe, an era, and a reason for chaos at midnight on release day.",exampleKo:"새 앨범 발매일에 바로 들을 수 있게 미리 예약했어.",exampleEn:"I pre-ordered so I could listen the moment the new album drops."},
-    {id:38,korean:"뮤비",romanization:"myu-bi",english:"Music Video (MV)",pos:"noun",category:"fandom",vibe:"A visual universe you'll analyze frame by frame for hidden theories at 2am.",exampleKo:"뮤비 처음 봤을 때 너무 충격받아서 다섯 번 연속으로 봤어.",exampleEn:"The first time I watched the MV, I was so shocked I watched it five times in a row."},
-    {id:39,korean:"안무",romanization:"an-mu",english:"Choreography",pos:"noun",category:"fandom",vibe:"The language of idols — every finger placement intentional, every formation a conversation.",exampleKo:"이 노래 안무가 너무 세서 보는 것만으로도 지쳐.",exampleEn:"The choreography for this song is so intense it's exhausting just to watch."},
-    {id:40,korean:"직캠",romanization:"jik-kaem",english:"Fancam",pos:"noun",category:"fandom",vibe:"One member. One camera. One performance that lives forever on the internet.",exampleKo:"그 무대 직캠 조회수가 하루 만에 백만을 넘었어.",exampleEn:"The fancam from that stage hit a million views in just one day."},
-    {id:41,korean:"비주얼",romanization:"bi-ju-eol",english:"Visual (member)",pos:"noun",category:"fandom",vibe:"The member designated most likely to make you forget how to breathe. A title, not just a compliment.",exampleKo:"그룹 비주얼이라더니, 진짜 눈부시게 예뻐.",exampleEn:"They said they were the group's visual — honestly, absolutely radiant."},
-    {id:42,korean:"데뷔",romanization:"de-byu",english:"Debut",pos:"noun",category:"fandom",vibe:"The first step into an idol's public life. Preceded by years of hard training you'll never fully know about.",exampleKo:"데뷔 무대 영상 보면 지금이랑 너무 다르다.",exampleEn:"Watching the debut stage video, they look so different from now."},
-    {id:43,korean:"센터",romanization:"sen-teo",english:"Center (position)",pos:"noun",category:"fandom",vibe:"Front and middle. The focal point. The one your eyes are always drawn to, even when you try watching others.",exampleKo:"센터에 서면 카메라가 자연스럽게 따라가.",exampleEn:"When they stand in the center, the cameras naturally follow."},
-    {id:44,korean:"막내",romanization:"mak-nae",english:"Youngest member",pos:"noun",category:"fandom",vibe:"Officially the youngest, but somehow the most chaotic energy in the group.",exampleKo:"막내인데 왜 제일 무서운 거야, 진짜.",exampleEn:"They're the youngest, but somehow the most intimidating — for real."},
-    {id:45,korean:"우리",romanization:"u-ri",english:"We / Our / Us",pos:"pronoun",category:"vibes",vibe:"In Korean, 'our' is used even for personal things — '우리 엄마' means 'our mom.' Warmly collective by nature.",exampleKo:"우리 같이 이 여정을 함께 걸어가자.",exampleEn:"Let's walk this journey together, all of us."},
-    {id:46,korean:"흥",romanization:"heung",english:"Groove / Enthusiasm",pos:"noun",category:"vibes",vibe:"The irresistible urge to move when good music plays. Untranslatable joy that starts deep in the chest.",exampleKo:"이 노래 들으면 흥이 절로 나서 가만히 있을 수가 없어.",exampleEn:"When I hear this song, the groove hits instantly — I can't stay still."},
-    {id:47,korean:"두근두근",romanization:"du-geun-du-geun",english:"Heart-pounding / Thump-thump",pos:"onomatopoeia",category:"vibes",vibe:"The sound your heart makes when your bias walks in. Onomatopoeia for pure, electric excitement.",exampleKo:"그 사람 보기만 해도 심장이 두근두근거려.",exampleEn:"Just looking at them makes my heart go thump-thump."},
-    {id:48,korean:"가슴",romanization:"ga-seum",english:"Heart / Chest",pos:"noun",category:"vibes",vibe:"Used poetically for the emotional heart — where love, longing, and 흥 all coexist at full volume.",exampleKo:"이 노래를 들으면 가슴이 먹먹해져.",exampleEn:"Listening to this song makes my chest feel heavy with emotion."},
-    {id:49,korean:"마음",romanization:"ma-eum",english:"Heart / Mind / Feelings",pos:"noun",category:"vibes",vibe:"The emotional core of a person — where sincerity lives. More about the soul than the actual organ.",exampleKo:"마음을 담아 쓴 편지야, 읽어줘.",exampleEn:"This is a letter written with my whole heart — please read it."},
-    {id:50,korean:"진심",romanization:"jin-sim",english:"Sincerity / Real feelings",pos:"noun",category:"vibes",vibe:"No performance, no filter. When someone says '진심이야,' they mean every single word.",exampleKo:"이건 장난이 아니야, 진심이야.",exampleEn:"I'm not joking around — this is completely sincere."},
-    {id:51,korean:"인사",romanization:"in-sa",english:"Greeting / Bow",pos:"noun",category:"vibes",vibe:"More than hello — it's respect made physical. A deep bow carries more warmth than most handshakes ever could.",exampleKo:"무대 끝나고 깊은 인사를 할 때 늘 감동받아.",exampleEn:"I'm always moved when they bow deeply at the end of a performance."},
-    {id:52,korean:"오빠",romanization:"op-pa",english:"Older brother / Admired older guy",pos:"noun",category:"vibes",vibe:"Used by women toward older males. In K-pop, the word that launched a thousand parasocial feelings.",exampleKo:"오빠 목소리 들으면 왜 이렇게 마음이 편해지는 건지.",exampleEn:"Why is it that hearing his voice just makes everything feel calm?"},
-    {id:53,korean:"언니",romanization:"eon-ni",english:"Older sister / Admired older woman",pos:"noun",category:"vibes",vibe:"Used by women toward older females. Overflowing with warmth, admiration, and a quietly envious edge.",exampleKo:"저 분 완전 언니 스타일이야, 너무 멋있어.",exampleEn:"She's such an 언니 vibe — seriously so cool."},
-    {id:54,korean:"가족",romanization:"ga-jok",english:"Family",pos:"noun",category:"vibes",vibe:"Blood or chosen. In fan culture, fandom members often call each other 가족 — and they genuinely mean it.",exampleKo:"이 팬덤은 진짜 가족 같은 느낌이야.",exampleEn:"This fandom genuinely feels like family."},
-    {id:55,korean:"친구",romanization:"chin-gu",english:"Friend",pos:"noun",category:"vibes",vibe:"Simple word, profound meaning. In K-pop bonds, 친구 can mean the one who's been there through every single era.",exampleKo:"오랜 친구처럼 편하게 얘기할 수 있어서 좋아.",exampleEn:"It's nice to be able to talk like we're old friends."},
-    {id:56,korean:"어른",romanization:"eo-reun",english:"Adult / Grown-up",pos:"noun",category:"vibes",vibe:"A marker of responsibility and maturity — often used with a hint of 'we're getting older, aren't we.'",exampleKo:"이제 어른이 됐는데도 이 노래 들으면 어릴 때 생각나.",exampleEn:"Even now that I'm an adult, this song takes me right back to childhood."},
-    {id:57,korean:"사랑해",romanization:"sa-rang-hae",english:"I love you",pos:"phrase",category:"daily",vibe:"Three syllables carrying the weight of the universe. Casual enough for daily use, heavy enough to change everything.",exampleKo:"사랑해, 진심으로, 말이 부족할 정도로.",exampleEn:"I love you — sincerely, more than words can say."},
-    {id:58,korean:"고마워",romanization:"go-ma-wo",english:"Thank you (casual)",pos:"phrase",category:"daily",vibe:"Warm, casual, and genuine. The everyday version of gratitude.",exampleKo:"항상 내 곁에 있어줘서 고마워.",exampleEn:"Thank you for always being by my side."},
-    {id:59,korean:"미안해",romanization:"mi-an-hae",english:"I'm sorry (casual)",pos:"phrase",category:"daily",vibe:"Heartfelt apology between people who know each other well. Not cold politeness — real, quiet remorse.",exampleKo:"내가 너한테 상처 줬다면 진짜 미안해.",exampleEn:"If I hurt you, I'm truly sorry."},
-    {id:60,korean:"괜찮아",romanization:"gwaen-cha-na",english:"It's okay / I'm fine",pos:"phrase",category:"daily",vibe:"The Swiss army knife of Korean reassurance. Sometimes 'I'm great,' sometimes 'I'm quietly not fine at all.'",exampleKo:"걱정하지 마, 나 괜찮아, 진짜로.",exampleEn:"Don't worry about me — I'm okay, I really am."},
-    {id:61,korean:"안녕",romanization:"an-nyeong",english:"Hello / Goodbye",pos:"greeting",category:"daily",vibe:"Does double duty as both greeting and farewell. Simple, warm, and somehow never loses its charm.",exampleKo:"안녕, 오늘도 좋은 하루 보내.",exampleEn:"Hi — have a good day today too."},
-    {id:62,korean:"잘가",romanization:"jal-ga",english:"Take care / Bye (informal)",pos:"phrase",category:"daily",vibe:"A warm send-off between friends. Literally 'go well' — wishing safe passage even on the shortest trips.",exampleKo:"다음에 또 보자, 잘가!",exampleEn:"See you next time — take care!"},
-    {id:63,korean:"잘자",romanization:"jal-ja",english:"Good night / Sleep well",pos:"phrase",category:"daily",vibe:"The last words before dreamland. From a fan account sign-off to a whisper between people who care.",exampleKo:"오늘도 수고했어, 잘자.",exampleEn:"You worked hard today — sleep well."},
-    {id:64,korean:"좋아",romanization:"jo-a",english:"I like it / Good / Sure",pos:"phrase",category:"daily",vibe:"Light and cheerful. Can mean 'I like it,' 'sounds good,' or 'sure, let's go.'",exampleKo:"그 아이디어 진짜 좋아, 바로 해보자.",exampleEn:"I really like that idea — let's do it right now."},
-    {id:65,korean:"싫어",romanization:"si-reo",english:"I don't like it / No way",pos:"phrase",category:"daily",vibe:"Blunt and unmistakable. In K-pop variety shows, the dramatic '싫어!' is practically its own character arc.",exampleKo:"그건 싫어, 다른 방법 없어?",exampleEn:"I don't want that — is there any other way?"},
-    {id:66,korean:"너무",romanization:"neo-mu",english:"So very / Too much (intensifier)",pos:"adverb",category:"daily",vibe:"Originally meant 'too much' (negative), now the ultimate enthusiastic intensifier.",exampleKo:"이 노래 너무 좋아서 하루 종일 들었어.",exampleEn:"I love this song so much I listened to it all day long."},
-    {id:67,korean:"완전",romanization:"wan-jeon",english:"Completely / Totally (slang)",pos:"adverb",category:"daily",vibe:"The turbo boost of emphasis. Slap it in front of anything to make it 100% more intense.",exampleKo:"그 무대 완전 대박이었어, 눈 못 떼겠더라.",exampleEn:"That stage was totally incredible — I literally couldn't look away."},
-    {id:68,korean:"솔직히",romanization:"sol-jik-i",english:"Honestly / To be frank",pos:"adverb",category:"daily",vibe:"The word that turns a casual observation into a confession.",exampleKo:"솔직히 말하면, 이 노래 처음엔 별로였는데 지금은 최애야.",exampleEn:"Honestly, I didn't like this song at first — but now it's my absolute favorite."},
-    {id:69,korean:"일단",romanization:"il-dan",english:"First / For now / Let me just",pos:"adverb",category:"daily",vibe:"Buys thinking time while sounding decisive.",exampleKo:"일단 앉아서 얘기하자, 천천히.",exampleEn:"Let's just sit down first and talk it through slowly."},
-    {id:70,korean:"왜",romanization:"wae",english:"Why",pos:"interrogative",category:"daily",vibe:"One syllable, infinite depth. Can be curious, frustrated, heartbroken, or just dramatically confused.",exampleKo:"왜 이 노래를 들으면 항상 눈물이 나는 걸까.",exampleEn:"Why is it that every time I hear this song, the tears just come?"},
-    {id:71,korean:"너",romanization:"neo",english:"You",pos:"pronoun",category:"lyrics",vibe:"The most loaded single syllable in K-pop. Every song's protagonist, every lyric's final destination.",exampleKo:"온 세상이 흔들려도 내 눈엔 너밖에 안 보여.",exampleEn:"Even as the whole world shakes, all I can see is you."},
-    {id:72,korean:"너의",romanization:"neo-ui",english:"Your / Of you",pos:"determiner",category:"lyrics",vibe:"More intimate than 'your' in English — '너의' lingers, like they own a piece of every lyric they touch.",exampleKo:"너의 목소리가 내 하루를 가득 채워줘.",exampleEn:"Your voice fills my entire day."},
-    {id:73,korean:"노을",romanization:"no-eul",english:"Sunset glow / Evening sky",pos:"noun",category:"lyrics",vibe:"That golden-orange blur right before night falls. Bittersweet, brief, and impossibly cinematic.",exampleKo:"저녁 노을처럼 아름다운 순간이었어.",exampleEn:"It was a moment as beautiful as the evening glow."},
-    {id:74,korean:"영혼",romanization:"yeong-hon",english:"Soul / Spirit",pos:"noun",category:"lyrics",vibe:"The deepest layer of a person. Used for performers who give not just their skill, but everything underneath.",exampleKo:"이 무대에 영혼까지 담아서 불렀어.",exampleEn:"They poured their very soul into that performance."},
-    {id:75,korean:"떠나다",romanization:"tteo-na-da",english:"To leave / To depart",pos:"verb",category:"lyrics",vibe:"The departure that haunts every ballad outro. It's never just leaving — it's the beginning of longing.",exampleKo:"네가 떠난 자리에 아직도 네 향기가 남아 있어.",exampleEn:"Where you once stood, your scent still lingers."},
-    {id:76,korean:"잊다",romanization:"it-da",english:"To forget",pos:"verb",category:"lyrics",vibe:"The act that's impossible yet constantly promised in sad songs. Spoiler: they never actually forget.",exampleKo:"잊으려 할수록 더 선명하게 떠올라.",exampleEn:"The more I try to forget, the more clearly you appear."},
-    {id:77,korean:"팬싸",romanization:"paen-ssa",english:"Fan sign event",pos:"noun",category:"fandom",vibe:"An intimate event where fans get a signature — and roughly three seconds of eye contact that fuel them for a year.",exampleKo:"팬싸에서 받은 사인이 내 인생 최고의 선물이야.",exampleEn:"The autograph I got at the fan sign is the greatest gift of my life."},
-    {id:78,korean:"영업",romanization:"yeong-eop",english:"Stan recruiting / Hyping to others",pos:"noun / verb",category:"fandom",vibe:"When you love someone so much you become their unofficial marketing team.",exampleKo:"친구한테 하루 종일 영업했더니 드디어 팬됐어!",exampleEn:"I hyped them to my friend all day long and they finally became a fan!"},
-    {id:79,korean:"메인보컬",romanization:"me-in-bo-kael",english:"Main vocal",pos:"noun",category:"fandom",vibe:"The member whose voice does the heavy lifting — high notes, runs, the climax bridge.",exampleKo:"메인보컬 라이브 보고 진짜 소름 돋았어.",exampleEn:"Watching the main vocal perform live literally gave me goosebumps."},
-    {id:80,korean:"리더",romanization:"ri-deo",english:"Leader",pos:"noun",category:"fandom",vibe:"The one who holds everything together — on stage and off.",exampleKo:"리더가 인터뷰에서 멤버들 챙기는 거 보면 괜히 뭉클해.",exampleEn:"Seeing the leader look after everyone in interviews always gets me unexpectedly emotional."},
-    {id:81,korean:"멤버",romanization:"mem-beo",english:"Member",pos:"noun",category:"fandom",vibe:"In K-pop group culture, each 멤버 is a world — and somehow fans find themselves deeply loyal to all of them.",exampleKo:"모든 멤버가 다 좋은 팀은 정말 찾기 드물어.",exampleEn:"A group where you genuinely love every single member is truly rare."},
-    {id:82,korean:"짤",romanization:"jjal",english:"Meme / Reaction image",pos:"noun",category:"fandom",vibe:"The currency of fan Twitter: the perfect still frame, the accidental expression, the screenshot that says everything.",exampleKo:"이 짤 하나로 온 팬덤이 웃겼어.",exampleEn:"This one meme had the entire fandom in tears from laughing."},
-    {id:83,korean:"입덕영상",romanization:"ip-deok-yeong-sang",english:"Gateway video / Rabbit hole video",pos:"noun",category:"fandom",vibe:"The video that started it all. One click and your Tuesday evening became a three-year obsession.",exampleKo:"내 입덕영상 보여줄게, 이거 보면 이해할 거야.",exampleEn:"Let me show you my gateway video — once you see this, you'll understand everything."},
-    {id:84,korean:"떨림",romanization:"tteol-lim",english:"Trembling / Shiver of excitement",pos:"noun",category:"vibes",vibe:"The physical proof that something has moved you beyond words. Goosebumps' quieter, more poetic cousin.",exampleKo:"무대에 처음 올랐을 때의 떨림은 절대 잊을 수 없어.",exampleEn:"The trembling I felt stepping on stage for the first time — I'll never forget it."},
-    {id:85,korean:"효도",romanization:"hyo-do",english:"Filial piety / Making parents proud",pos:"noun",category:"vibes",vibe:"Deep-rooted love made into action. In K-pop, artists often dedicate their hardest wins to the family who waited.",exampleKo:"이렇게 무대에 설 수 있게 해준 부모님께 효도하고 싶어.",exampleEn:"I want to repay my parents properly for letting me stand on this stage."},
-    {id:86,korean:"아이고",romanization:"a-i-go",english:"Oh my / Goodness / Oof",pos:"exclamation",category:"daily",vibe:"Korea's most versatile sigh. Works for relief, surprise, exhaustion, and gentle complaint — often all at once.",exampleKo:"아이고, 이렇게 많은 굿즈를 다 어떻게 해.",exampleEn:"Oh my goodness, what am I going to do with all this merch."},
-    {id:87,korean:"정말",romanization:"jeong-mal",english:"Really / Truly (sincere)",pos:"adverb",category:"daily",vibe:"More heartfelt than '진짜' — when you mean it from the bottom of your chest, not just the top of your head.",exampleKo:"정말 수고했어, 오늘 무대 진심으로 감동받았어.",exampleEn:"You truly worked so hard — tonight's performance genuinely moved me."},
-    {id:88,korean:"좋다",romanization:"jo-ta",english:"It's good / How nice",pos:"adjective",category:"daily",vibe:"A warm declaration of satisfaction. Where '좋아' leans personal, '좋다' steps back and quietly marvels.",exampleKo:"오늘 날씨 너무 좋다, 산책하고 싶어.",exampleEn:"The weather today is just so good — I want to take a walk."},
-    {id:89,korean:"싫다",romanization:"sil-ta",english:"It's bad / I dislike it",pos:"adjective",category:"daily",vibe:"The declarative form of dislike — more resigned than reactive. Said with a slow exhale, not a shout.",exampleKo:"이런 작별인사 정말 싫다, 매번 마음이 무거워.",exampleEn:"I really hate goodbyes like this — my heart feels heavy every single time."},
-    {id:90,korean:"맞아",romanization:"ma-ja",english:"That's right / Exactly",pos:"expression",category:"daily",vibe:"The satisfying click of agreement. In K-pop fan convos, the word that validates your 3am theory.",exampleKo:"맞아, 내가 딱 그 부분에서 제일 감동받았어.",exampleEn:"Exactly — that's the precise moment that got me the most."},
-    {id:91,korean:"아니야",romanization:"a-ni-ya",english:"No / That's not it",pos:"expression",category:"daily",vibe:"Soft but firm denial. Less aggressive than a flat 'no' — more like pushing back with both hands up.",exampleKo:"아니야, 그 사람 나쁜 게 아니라 그냥 서툰 거야.",exampleEn:"No, it's not that they're bad — they're just inexperienced."},
-    {id:92,korean:"어떡해",romanization:"eo-tteok-hae",english:"What do I do / Oh no",pos:"expression",category:"daily",vibe:"The panicked murmur of someone who just saw their bias look directly into the camera.",exampleKo:"어떡해, 이거 너무 귀여워서 심장이 못 버티겠어.",exampleEn:"Oh no, this is too cute — my heart literally cannot take it."},
-    {id:93,korean:"어렵다",romanization:"eo-ryeop-da",english:"It's difficult / It's hard",pos:"adjective",category:"daily",vibe:"Honest admission of struggle — not giving up, just pausing to acknowledge the hill is steep.",exampleKo:"한국어 어렵다고 생각했는데, 좋아하면 다 돼.",exampleEn:"I thought Korean was so difficult — but when you love it, everything becomes possible."},
-    {id:94,korean:"운명적이다",romanization:"un-myeong-jeok-i-da",english:"It's fateful / Destined",pos:"adjective",category:"lyrics",vibe:"Not just fate — the dramatic realization that the universe arranged this moment specifically, just for you.",exampleKo:"이렇게 만난 게 운명적이다는 걸 처음부터 알았어.",exampleEn:"I knew from the very start that meeting like this was fated."},
-    {id:95,korean:"영원히",romanization:"yeong-won-hi",english:"Forever / Eternally",pos:"adverb",category:"lyrics",vibe:"영원 as a noun is beautiful — 영원히 turns it into a vow. Every K-pop promise ends here, in this word.",exampleKo:"어떤 일이 있어도 영원히 네 곁에 있을게.",exampleEn:"No matter what happens, I'll be by your side forever."},
-    {id:96,korean:"추억하다",romanization:"chu-eok-ha-da",english:"To reminisce / To look back fondly",pos:"verb",category:"lyrics",vibe:"Turning memories into a verb — the active, bittersweet act of revisiting golden moments you can't return to.",exampleKo:"가끔 우리가 함께했던 시간을 추억하곤 해.",exampleEn:"Sometimes I find myself reminiscing about the time we spent together."},
-    {id:97,korean:"그립다",romanization:"geu-rip-da",english:"To miss / To long for",pos:"adjective",category:"lyrics",vibe:"Deeper than 'miss' in English — it's the ache of absence, the warmth of a memory that's no longer here.",exampleKo:"네가 떠난 지 오래됐는데 아직도 그립다.",exampleEn:"It's been so long since you left, and I still miss you."},
-    {id:98,korean:"보고싶다",romanization:"bo-go-sip-da",english:"I miss you / I want to see you",pos:"expression",category:"lyrics",vibe:"The most frequently used phrase in fan-to-artist communication. Three syllables carrying a universe of longing.",exampleKo:"멀리 있어도 매일 보고싶다.",exampleEn:"Even from so far away, I want to see you every single day."},
-    {id:99,korean:"좋아하다",romanization:"jo-a-ha-da",english:"To like / To have feelings for",pos:"verb",category:"lyrics",vibe:"The gateway confession — lighter than 사랑해, but no less dangerous. Where every K-drama romance quietly begins.",exampleKo:"용기 내서 말했어, 나 너 좋아하다고.",exampleEn:"I finally worked up the courage to say it — I like you."},
-    {id:100,korean:"떡밥",romanization:"tteok-bap",english:"Teaser / Bait / Clue",pos:"noun",category:"fandom",vibe:"Hints, cryptic posts, strategic blurs — literally 'rice cake bait,' unofficially the thing keeping stans awake.",exampleKo:"오늘 올라온 사진 완전 떡밥이잖아, 컴백 예고인 거지?",exampleEn:"That photo they just posted is total bait — it's a comeback hint, right?"},
-    {id:101,korean:"흑역사",romanization:"heung-nyeok-sa",english:"Dark history / Embarrassing past",pos:"noun",category:"fandom",vibe:"The cringe-worthy content they'd rather forget. Fans protect it fiercely.",exampleKo:"흑역사 영상 꺼내면 안 돼, 그냥 묻어두자.",exampleEn:"Don't dig up the dark history video — just let it stay buried."},
-    {id:102,korean:"짤줍",romanization:"jjal-jup",english:"Collecting memes and reaction clips",pos:"noun / verb",category:"fandom",vibe:"The noble fan pastime of hunting the perfect reaction image. A skill. An art form. A full-time unpaid hobby.",exampleKo:"오늘 라이브에서 짤줍 대성공, 표정이 미쳤어.",exampleEn:"Total meme-hunting success from today's live — those expressions were something else."},
-    {id:103,korean:"일코",romanization:"il-ko",english:"Hiding your stan life",pos:"noun",category:"fandom",vibe:"Short for 일반인 코스프레 — performing normality while secretly spending three hours rewatching fancams.",exampleKo:"직장에서 일코 중인데 동료가 같은 팬인 거 몰랐어.",exampleEn:"I've been hiding my stan life at work, and I had no idea my coworker was a fan too."},
-    {id:104,korean:"덕메",romanization:"deok-me",english:"Stan friend / Fellow fan buddy",pos:"noun",category:"fandom",vibe:"Short for 덕후 메이트. The one who texts you at 2am when the MV drops.",exampleKo:"덕메 없이 어떻게 살았지, 같이 울어줄 사람이 필요해.",exampleEn:"I don't know how I survived without my stan friend — I need someone to cry with."},
-    {id:105,korean:"입덕부정기",romanization:"ip-deok-bu-jeong-gi",english:"Denial phase before falling into a fandom",pos:"noun",category:"fandom",vibe:"'I'm not a fan, I just think they're talented.' The stage every stan has been through and still lies about.",exampleKo:"입덕부정기 딱 사흘이었어, 그리고 결국 무너졌지.",exampleEn:"My denial phase lasted exactly three days — and then I completely caved."},
-    {id:106,korean:"차애",romanization:"cha-ae",english:"Second bias",pos:"noun",category:"fandom",vibe:"Your heart says one name, but 차애 got there first and never truly left. Second place is still precious.",exampleKo:"차애인데 왜 자꾸 최애 자리를 위협하는 거야.",exampleEn:"They're my second bias, so why do they keep threatening to take the top spot?"},
-    {id:107,korean:"탈덕",romanization:"tal-deok",english:"Leaving a fandom / Destanning",pos:"noun / verb",category:"fandom",vibe:"The exit everyone announces dramatically and half of them quietly reverse.",exampleKo:"탈덕 선언했는데 신보 듣고 다시 돌아왔어, 어쩔 수 없어.",exampleEn:"I announced I was leaving the fandom — then the new album dropped and I was back."},
-    {id:108,korean:"우정",romanization:"u-jeong",english:"Friendship",pos:"noun",category:"vibes",vibe:"Not just having friends — the bond forged through shared music, late concert nights, and mutual understanding.",exampleKo:"이 팬덤 안에서 진짜 우정을 찾았어.",exampleEn:"I found real, lasting friendship inside this fandom."},
-    {id:109,korean:"감동",romanization:"gam-dong",english:"Being deeply moved / Touched",pos:"noun",category:"vibes",vibe:"That wave hitting your chest when a performance transcends skill and becomes something you can't quite explain.",exampleKo:"무대 끝나고 감동받아서 한동안 말을 못 했어.",exampleEn:"After the show ended I was so moved I couldn't speak for a while."},
-    {id:110,korean:"인생",romanization:"in-saeng",english:"Life / One's life journey",pos:"noun",category:"vibes",vibe:"인생 앨범, 인생 무대, 인생 곡 — the one that defines everything. Used when something is genuinely peak.",exampleKo:"이 앨범은 진짜 내 인생 앨범이야, 완전히 바꿔놨어.",exampleEn:"This album is genuinely my life album — it completely changed everything."},
-    {id:111,korean:"외로움",romanization:"oe-ro-um",english:"Loneliness / Solitude",pos:"noun",category:"vibes",vibe:"The honest emotion K-pop ballads fully embrace. Not weakness — vulnerability worn with quiet elegance.",exampleKo:"이 노래 들으면 내 외로움이 위로받는 느낌이야.",exampleEn:"Listening to this song, I feel like my loneliness is somehow being consoled."},
-    {id:112,korean:"따뜻하다",romanization:"tta-tteu-ta-da",english:"To be warm / Heartwarming",pos:"adjective",category:"vibes",vibe:"Physical warmth extended into emotion. The word for when a gesture, a song, or a voice gently holds you.",exampleKo:"그 목소리를 들으면 따뜻하다는 느낌이 들어.",exampleEn:"Hearing that voice, I feel a warmth I can't quite explain."},
-    {id:113,korean:"기억",romanization:"gi-eok",english:"Memory / Recollection",pos:"noun",category:"vibes",vibe:"Where 추억 is nostalgic warmth, 기억 is the sharp clarity of something you can't — and won't — let fade away.",exampleKo:"그 날의 기억이 아직도 선명하게 남아 있어.",exampleEn:"The memory of that day still remains vivid and utterly clear."},
-    {id:114,korean:"어머",romanization:"eo-meo",english:"Oh my / My goodness",pos:"exclamation",category:"daily",vibe:"A gasp dressed as a word. Signals surprise. The sound of someone who just saw something unbelievable.",exampleKo:"어머, 이거 진짜야? 말이 안 나와.",exampleEn:"Oh my, is this real? I'm completely speechless."},
-    {id:115,korean:"미쳤다",romanization:"mi-chyeot-da",english:"Crazy / This is insane / Wild",pos:"expression",category:"daily",vibe:"Technically 'went crazy,' functionally the highest compliment. When something is so good it breaks your brain.",exampleKo:"이 무대 미쳤다, 어떻게 이런 걸 만들어내?",exampleEn:"This stage is absolutely insane — how do they even create something like this?"},
-    {id:116,korean:"사실",romanization:"sa-sil",english:"Actually / In fact",pos:"adverb",category:"daily",vibe:"The word that precedes revelations. When someone says 사실, brace yourself — what follows is the real story.",exampleKo:"사실, 처음부터 이 노래가 제일 좋았어.",exampleEn:"Actually, this was my favorite song from the very beginning."},
-    {id:117,korean:"당연하지",romanization:"dang-yeon-ha-ji",english:"Of course / Obviously",pos:"expression",category:"daily",vibe:"'Did you just question that?' The confident affirmation you drop when something is completely self-evident.",exampleKo:"
+  {id:1,korean:"사랑",romanization:"sa-rang",english:"Love",pos:"noun",category:"lyrics",vibe:"The word powering at least 90% of all K-pop songs ever recorded. Overused? Never.",exampleKo:"너를 사랑해, 이 마음이 진심이야.",exampleEn:"I love you — this feeling is completely real."},
+  {id:2,korean:"그리움",romanization:"geu-ri-um",english:"Longing / Yearning",pos:"noun",category:"lyrics",vibe:"That beautiful, aching feeling when someone is gone but never truly forgotten.",exampleKo:"네가 떠난 후, 그리움만 남았어.",exampleEn:"After you left, only longing remained."},
+  {id:3,korean:"설렘",romanization:"seol-lem",english:"Flutter / Excitement",pos:"noun",category:"lyrics",vibe:"The butterflies in your chest — from a crush, a comeback teaser, or honestly both.",exampleKo:"이 노래를 들을 때마다 설렘이 느껴져.",exampleEn:"Every time I hear this song, I feel that flutter."},
+  {id:4,korean:"영원",romanization:"yeong-won",english:"Eternity / Forever",pos:"noun",category:"lyrics",vibe:"The solemn promise made in every ballad bridge. Deep, romantic, infinite.",exampleKo:"우리의 인연이 영원하길 바라.",exampleEn:"I hope our bond lasts forever."},
+  {id:5,korean:"청춘",romanization:"cheong-chun",english:"Youth",pos:"noun",category:"lyrics",vibe:"Not just being young — it's the burning, golden era that's quietly slipping away.",exampleKo:"이 순간이 우리의 청춘이야, 잊지 마.",exampleEn:"This moment is our youth — don't forget it."},
+  {id:6,korean:"최애",romanization:"choe-ae",english:"Ultimate Bias",pos:"noun",category:"fandom",vibe:"Your number one. The one who owns your entire heart without even trying.",exampleKo:"내 최애는 항상 내 기분을 좋게 해줘.",exampleEn:"My ultimate bias always makes me feel better, no matter what."},
+  {id:7,korean:"입덕",romanization:"ip-deok",english:"Falling into a fandom",pos:"noun / verb",category:"fandom",vibe:"The point of no return. One video, one performance — and suddenly you're in forever.",exampleKo:"그 뮤직비디오 보고 바로 입덕해버렸어.",exampleEn:"I watched that one video and immediately fell deep into the fandom."},
+  {id:8,korean:"덕질",romanization:"deok-jil",english:"Stan activities / Fanning",pos:"noun",category:"fandom",vibe:"The official word for everything you're doing right now. Streaming counts.",exampleKo:"요즘 덕질이 너무 바빠서 잠도 못 자.",exampleEn:"I've been so busy with stan activities I can barely sleep."},
+  {id:9,korean:"포카",romanization:"po-ka",english:"Photocard",pos:"noun",category:"fandom",vibe:"Tiny rectangles that technically cost almost nothing but somehow empty your wallet.",exampleKo:"이번 앨범 포카 다 모으려면 얼마나 걸릴까?",exampleEn:"How long will it take to collect all the photocards from this album?"},
+  {id:10,korean:"컴백",romanization:"keom-baek",english:"Comeback",pos:"noun",category:"fandom",vibe:"New music + new era + new concept. The moment the fandom comes fully alive.",exampleKo:"컴백 D-day, 온 팬덤이 들썩거렸어.",exampleEn:"On comeback day, the entire fandom was absolutely buzzing."},
+  {id:11,korean:"정",romanization:"jeong",english:"Deep emotional bond",pos:"noun",category:"vibes",vibe:"Untranslatable warmth. More than love, deeper than friendship. Built slowly, lost reluctantly.",exampleKo:"오래 볼수록 정이 드는 것 같아.",exampleEn:"The more time we spend together, the more 정 I feel."},
+  {id:12,korean:"한",romanization:"han",english:"Deep collective sorrow",pos:"noun",category:"vibes",vibe:"Korea's most complex emotion — grief, longing, and beauty tangled into one feeling.",exampleKo:"이 발라드에는 한국의 한이 담겨 있어.",exampleEn:"This ballad carries Korea's 한 within every single note."},
+  {id:13,korean:"애교",romanization:"ae-gyo",english:"Cute / Aegyo",pos:"noun",category:"vibes",vibe:"Acting adorably to win hearts. An art form. A weapon. Use it wisely.",exampleKo:"애교 부리면 다 용서가 돼.",exampleEn:"When they do aegyo, everything is automatically forgiven."},
+  {id:14,korean:"눈치",romanization:"nun-chi",english:"Reading the room",pos:"noun",category:"vibes",vibe:"Social awareness taken to an Olympic level. Sensing vibes before a single word is said.",exampleKo:"눈치 빠른 사람은 말 안 해도 다 알아.",exampleEn:"Someone with good 눈치 understands everything without a single word."},
+  {id:15,korean:"인연",romanization:"in-yeon",english:"Fated connection",pos:"noun",category:"vibes",vibe:"A bond written before you were born. Used for soulmates — and for finding your bias.",exampleKo:"우리가 만난 건 인연이야, 분명히.",exampleEn:"Our meeting was definitely fated."},
+  {id:16,korean:"대박",romanization:"dae-bak",english:"Amazing / Jackpot",pos:"exclamation",category:"daily",vibe:"All-purpose hype word. Means wow, no way, and this is the best thing ever.",exampleKo:"이 노래 진짜 대박이다, 미쳤어!",exampleEn:"This song is seriously amazing — I can't even."},
+  {id:17,korean:"화이팅",romanization:"hwa-i-ting",english:"You got this / Fighting",pos:"exclamation",category:"daily",vibe:"Korea's ultimate cheer. Deploy before exams, concerts, and anything terrifying.",exampleKo:"오늘 공연 잘 될 거야, 화이팅!",exampleEn:"Tonight's show will go great — you got this!"},
+  {id:18,korean:"진짜",romanization:"jin-jja",english:"Really / Seriously",pos:"adverb",category:"daily",vibe:"The ultimate emphasis amplifier. Stack it twice for maximum effect.",exampleKo:"이거 진짜 맛있어? 진짜 진짜로?",exampleEn:"Is this really that good? Like, really really?"},
+  {id:19,korean:"헐",romanization:"heol",english:"OMG / No way",pos:"exclamation",category:"daily",vibe:"Dropped when something is so surprising your brain can't form full words anymore.",exampleKo:"헐, 이게 실화야? 말이 안 돼.",exampleEn:"OMG, is this actually real? I cannot believe it."},
+  {id:20,korean:"짱",romanization:"jjang",english:"The absolute best",pos:"adjective / exclamation",category:"daily",vibe:"Peak superlative. When something is so good it sits at the very top of the universe.",exampleKo:"오늘 공연 짱이었어, 역대급!",exampleEn:"Tonight's show was THE BEST — literally of all time."},
+  {id:21,korean:"별",romanization:"byeol",english:"Star",pos:"noun",category:"lyrics",vibe:"Celestial and quietly melancholy. The night sky's anchor.",exampleKo:"어두운 밤하늘에 별 하나가 빛났어.",exampleEn:"One star shone bright in the dark night sky."},
+  {id:22,korean:"달",romanization:"dal",english:"Moon",pos:"noun",category:"lyrics",vibe:"Soft, distant, and achingly beautiful. The moon watches over you even when no one else does.",exampleKo:"창문 너머로 달이 떠올랐을 때 네 생각이 났어.",exampleEn:"When the moon rose beyond my window, I thought of you."},
+  {id:23,korean:"봄날",romanization:"bom-nal",english:"Spring day",pos:"noun",category:"lyrics",vibe:"Warmth returning after endless cold. Hope, reunion, and the gentle end of longing.",exampleKo:"이 긴 겨울이 지나면 봄날이 올 거야.",exampleEn:"When this long winter passes, a spring day will come."},
+  {id:24,korean:"운명",romanization:"un-myeong",english:"Fate / Destiny",pos:"noun",category:"lyrics",vibe:"The invisible thread pulling two people together. K-pop leans on it heavily.",exampleKo:"이건 우연이 아니야, 운명이 우리를 이어준 거야.",exampleEn:"This isn't coincidence — fate is what connected us."},
+  {id:25,korean:"약속",romanization:"yak-sok",english:"Promise",pos:"noun",category:"lyrics",vibe:"Heavier than it sounds. In K-pop, a promise between an artist and fans is considered sacred.",exampleKo:"꼭 돌아올게, 약속해.",exampleEn:"I'll definitely come back — I promise."},
+  {id:26,korean:"기다림",romanization:"gi-da-rim",english:"Waiting / Anticipation",pos:"noun",category:"lyrics",vibe:"The slow ache of counting down to a comeback, a return, or a reunion.",exampleKo:"오랜 기다림 끝에 마침내 만나게 됐어.",exampleEn:"After such a long wait, we finally get to meet."},
+  {id:27,korean:"추억",romanization:"chu-eok",english:"Memory / Nostalgia",pos:"noun",category:"lyrics",vibe:"More than just memories — it's the golden warmth you feel looking back at something you loved and lost.",exampleKo:"그 콘서트는 평생 잊지 못할 추억이 됐어.",exampleEn:"That concert became a memory I'll treasure for the rest of my life."},
+  {id:28,korean:"빛",romanization:"bit",english:"Light",pos:"noun",category:"lyrics",vibe:"Literal brightness, always carrying metaphor — hope in darkness, someone who lights up your world.",exampleKo:"네가 내 어두운 세상에 빛을 가져다줬어.",exampleEn:"You brought light into my dark world."},
+  {id:29,korean:"꽃",romanization:"kkot",english:"Flower",pos:"noun",category:"lyrics",vibe:"Beauty and transience wrapped in a single syllable. Blooms fast, fades fast.",exampleKo:"봄에 핀 꽃처럼 네 미소가 세상을 밝혀.",exampleEn:"Like flowers blooming in spring, your smile lights up the whole world."},
+  {id:30,korean:"바다",romanization:"ba-da",english:"Sea / Ocean",pos:"noun",category:"lyrics",vibe:"Vast, endless, and emotionally overwhelming — much like your feelings for your bias at 2am.",exampleKo:"눈을 감으면 끝없는 바다가 보여.",exampleEn:"When I close my eyes, I see an endless sea."},
+  {id:31,korean:"하늘",romanization:"ha-neul",english:"Sky",pos:"noun",category:"lyrics",vibe:"Open, free, and always watching. The sky in K-pop lyrics is rarely just weather — it's pure emotion.",exampleKo:"맑은 하늘 아래서 네 이름을 불러봤어.",exampleEn:"Under the clear sky, I called out your name."},
+  {id:32,korean:"새벽",romanization:"sae-byeok",english:"Dawn / Before sunrise",pos:"noun",category:"lyrics",vibe:"That liminal 3-5am hour when everything feels fragile and infinite at once.",exampleKo:"새벽에 혼자 이 노래를 들으면 눈물이 나.",exampleEn:"Listening to this song alone at dawn, the tears just come."},
+  {id:33,korean:"응원봉",romanization:"eung-won-bong",english:"Lightstick",pos:"noun",category:"fandom",vibe:"More than a glow stick — it's a fandom's identity, a sea of light, and proof you're officially in.",exampleKo:"응원봉을 들고 콘서트장에 들어가면 진짜 느낌이 달라.",exampleEn:"Holding a lightstick as you enter the concert venue just hits differently."},
+  {id:34,korean:"콘서트",romanization:"kon-seo-teu",english:"Concert",pos:"noun",category:"fandom",vibe:"The pinnacle of stan life. Months of waiting, seconds of seeing them, memories that last a decade.",exampleKo:"첫 콘서트 티켓 구했을 때 손이 떨렸어.",exampleEn:"When I got my first concert ticket, my hands were literally shaking."},
+  {id:35,korean:"팬미팅",romanization:"paen-mi-ting",english:"Fan meeting",pos:"noun",category:"fandom",vibe:"Closer than a concert, more intimate than a dream. The event where you might actually make eye contact.",exampleKo:"팬미팅에서 눈이 마주쳤을 때 심장이 멈추는 줄 알았어.",exampleEn:"When we made eye contact at the fan meeting, I thought my heart had stopped."},
+  {id:36,korean:"굿즈",romanization:"gut-jeu",english:"Merchandise / Goods",pos:"noun",category:"fandom",vibe:"Physical proof of your love. Officially bankrupting stans worldwide.",exampleKo:"이번 굿즈 리스트 봤어? 지갑이 울고 있어.",exampleEn:"Did you see the new merch list? My wallet is literally crying."},
+  {id:37,korean:"앨범",romanization:"ael-beom",english:"Album",pos:"noun",category:"fandom",vibe:"Not just music — it's a universe, an era, and a reason for chaos at midnight on release day.",exampleKo:"새 앨범 발매일에 바로 들을 수 있게 미리 예약했어.",exampleEn:"I pre-ordered so I could listen the moment the new album drops."},
+  {id:38,korean:"뮤비",romanization:"myu-bi",english:"Music Video (MV)",pos:"noun",category:"fandom",vibe:"A visual universe you'll analyze frame by frame for hidden theories at 2am.",exampleKo:"뮤비 처음 봤을 때 너무 충격받아서 다섯 번 연속으로 봤어.",exampleEn:"The first time I watched the MV, I was so shocked I watched it five times in a row."},
+  {id:39,korean:"안무",romanization:"an-mu",english:"Choreography",pos:"noun",category:"fandom",vibe:"The language of idols — every finger placement intentional, every formation a conversation.",exampleKo:"이 노래 안무가 너무 세서 보는 것만으로도 지쳐.",exampleEn:"The choreography for this song is so intense it's exhausting just to watch."},
+  {id:40,korean:"직캠",romanization:"jik-kaem",english:"Fancam",pos:"noun",category:"fandom",vibe:"One member. One camera. One performance that lives forever on the internet.",exampleKo:"그 무대 직캠 조회수가 하루 만에 백만을 넘었어.",exampleEn:"The fancam from that stage hit a million views in just one day."},
+  {id:41,korean:"비주얼",romanization:"bi-ju-eol",english:"Visual (member)",pos:"noun",category:"fandom",vibe:"The member designated most likely to make you forget how to breathe.",exampleKo:"그룹 비주얼이라더니, 진짜 눈부시게 예뻐.",exampleEn:"They said they were the group's visual — honestly, absolutely radiant."},
+  {id:42,korean:"데뷔",romanization:"de-byu",english:"Debut",pos:"noun",category:"fandom",vibe:"The first step into an idol's public life. Preceded by years of hard training.",exampleKo:"데뷔 무대 영상 보면 지금이랑 너무 다르다.",exampleEn:"Watching the debut stage video, they look so different from now."},
+  {id:43,korean:"센터",romanization:"sen-teo",english:"Center (position)",pos:"noun",category:"fandom",vibe:"Front and middle. The focal point. The one your eyes are always drawn to.",exampleKo:"센터에 서면 카메라가 자연스럽게 따라가.",exampleEn:"When they stand in the center, the cameras naturally follow."},
+  {id:44,korean:"막내",romanization:"mak-nae",english:"Youngest member",pos:"noun",category:"fandom",vibe:"Officially the youngest, but somehow the most chaotic energy in the group.",exampleKo:"막내인데 왜 제일 무서운 거야, 진짜.",exampleEn:"They're the youngest, but somehow the most intimidating — for real."},
+  {id:45,korean:"우리",romanization:"u-ri",english:"We / Our / Us",pos:"pronoun",category:"vibes",vibe:"In Korean, our is used even for personal things. Warmly collective by nature.",exampleKo:"우리 같이 이 여정을 함께 걸어가자.",exampleEn:"Let's walk this journey together, all of us."},
+  {id:46,korean:"흥",romanization:"heung",english:"Groove / Enthusiasm",pos:"noun",category:"vibes",vibe:"The irresistible urge to move when good music plays. Untranslatable joy that starts deep in the chest.",exampleKo:"이 노래 들으면 흥이 절로 나서 가만히 있을 수가 없어.",exampleEn:"When I hear this song, the groove hits instantly — I can't stay still."},
+  {id:47,korean:"두근두근",romanization:"du-geun-du-geun",english:"Heart-pounding / Thump-thump",pos:"onomatopoeia",category:"vibes",vibe:"The sound your heart makes when your bias walks in.",exampleKo:"그 사람 보기만 해도 심장이 두근두근거려.",exampleEn:"Just looking at them makes my heart go thump-thump."},
+  {id:48,korean:"가슴",romanization:"ga-seum",english:"Heart / Chest",pos:"noun",category:"vibes",vibe:"Used poetically for the emotional heart — where love and longing coexist at full volume.",exampleKo:"이 노래를 들으면 가슴이 먹먹해져.",exampleEn:"Listening to this song makes my chest feel heavy with emotion."},
+  {id:49,korean:"마음",romanization:"ma-eum",english:"Heart / Mind / Feelings",pos:"noun",category:"vibes",vibe:"The emotional core of a person — where sincerity lives.",exampleKo:"마음을 담아 쓴 편지야, 읽어줘.",exampleEn:"This is a letter written with my whole heart — please read it."},
+  {id:50,korean:"진심",romanization:"jin-sim",english:"Sincerity / Real feelings",pos:"noun",category:"vibes",vibe:"No performance, no filter. When someone says 진심이야, they mean every single word.",exampleKo:"이건 장난이 아니야, 진심이야.",exampleEn:"I'm not joking around — this is completely sincere."},
+  {id:51,korean:"인사",romanization:"in-sa",english:"Greeting / Bow",pos:"noun",category:"vibes",vibe:"More than hello — it's respect made physical.",exampleKo:"무대 끝나고 깊은 인사를 할 때 늘 감동받아.",exampleEn:"I'm always moved when they bow deeply at the end of a performance."},
+  {id:52,korean:"오빠",romanization:"op-pa",english:"Older brother / Admired older guy",pos:"noun",category:"vibes",vibe:"Used by women toward older males. In K-pop, the word that launched a thousand parasocial feelings.",exampleKo:"오빠 목소리 들으면 왜 이렇게 마음이 편해지는 건지.",exampleEn:"Why is it that hearing his voice just makes everything feel calm?"},
+  {id:53,korean:"언니",romanization:"eon-ni",english:"Older sister / Admired older woman",pos:"noun",category:"vibes",vibe:"Used by women toward older females. Overflowing with warmth and admiration.",exampleKo:"저 분 완전 언니 스타일이야, 너무 멋있어.",exampleEn:"She's such an 언니 vibe — seriously so cool."},
+  {id:54,korean:"가족",romanization:"ga-jok",english:"Family",pos:"noun",category:"vibes",vibe:"Blood or chosen. In fan culture, fandom members often call each other 가족 — and mean it.",exampleKo:"이 팬덤은 진짜 가족 같은 느낌이야.",exampleEn:"This fandom genuinely feels like family."},
+  {id:55,korean:"친구",romanization:"chin-gu",english:"Friend",pos:"noun",category:"vibes",vibe:"Simple word, profound meaning. 친구 who's been there through every single era.",exampleKo:"오랜 친구처럼 편하게 얘기할 수 있어서 좋아.",exampleEn:"It's nice to be able to talk like we're old friends."},
+  {id:56,korean:"어른",romanization:"eo-reun",english:"Adult / Grown-up",pos:"noun",category:"vibes",vibe:"A marker of maturity — often used with a hint of we're getting older, aren't we.",exampleKo:"이제 어른이 됐는데도 이 노래 들으면 어릴 때 생각나.",exampleEn:"Even now that I'm an adult, this song takes me right back to childhood."},
+  {id:57,korean:"사랑해",romanization:"sa-rang-hae",english:"I love you",pos:"phrase",category:"daily",vibe:"Three syllables carrying the weight of the universe.",exampleKo:"사랑해, 진심으로, 말이 부족할 정도로.",exampleEn:"I love you — sincerely, more than words can say."},
+  {id:58,korean:"고마워",romanization:"go-ma-wo",english:"Thank you (casual)",pos:"phrase",category:"daily",vibe:"Warm, casual, and genuine. The everyday version of gratitude.",exampleKo:"항상 내 곁에 있어줘서 고마워.",exampleEn:"Thank you for always being by my side."},
+  {id:59,korean:"미안해",romanization:"mi-an-hae",english:"I'm sorry (casual)",pos:"phrase",category:"daily",vibe:"Heartfelt apology between people who know each other well.",exampleKo:"내가 너한테 상처 줬다면 진짜 미안해.",exampleEn:"If I hurt you, I'm truly sorry."},
+  {id:60,korean:"괜찮아",romanization:"gwaen-cha-na",english:"It's okay / I'm fine",pos:"phrase",category:"daily",vibe:"The Swiss army knife of Korean reassurance.",exampleKo:"걱정하지 마, 나 괜찮아, 진짜로.",exampleEn:"Don't worry about me — I'm okay, I really am."},
+  {id:61,korean:"안녕",romanization:"an-nyeong",english:"Hello / Goodbye",pos:"greeting",category:"daily",vibe:"Does double duty as both greeting and farewell. Simple, warm, never loses its charm.",exampleKo:"안녕, 오늘도 좋은 하루 보내.",exampleEn:"Hi — have a good day today too."},
+  {id:62,korean:"잘가",romanization:"jal-ga",english:"Take care / Bye (informal)",pos:"phrase",category:"daily",vibe:"A warm send-off between friends. Literally go well.",exampleKo:"다음에 또 보자, 잘가!",exampleEn:"See you next time — take care!"},
+  {id:63,korean:"잘자",romanization:"jal-ja",english:"Good night / Sleep well",pos:"phrase",category:"daily",vibe:"The last words before dreamland.",exampleKo:"오늘도 수고했어, 잘자.",exampleEn:"You worked hard today — sleep well."},
+  {id:64,korean:"좋아",romanization:"jo-a",english:"I like it / Good / Sure",pos:"phrase",category:"daily",vibe:"Light and cheerful. Can mean I like it, sounds good, or sure let's go.",exampleKo:"그 아이디어 진짜 좋아, 바로 해보자.",exampleEn:"I really like that idea — let's do it right now."},
+  {id:65,korean:"싫어",romanization:"si-reo",english:"I don't like it / No way",pos:"phrase",category:"daily",vibe:"Blunt and unmistakable. The dramatic 싫어! is practically its own character arc.",exampleKo:"그건 싫어, 다른 방법 없어?",exampleEn:"I don't want that — is there any other way?"},
+  {id:66,korean:"너무",romanization:"neo-mu",english:"So very / Too much (intensifier)",pos:"adverb",category:"daily",vibe:"The ultimate enthusiastic intensifier. 너무 좋아 means I love it SO much.",exampleKo:"이 노래 너무 좋아서 하루 종일 들었어.",exampleEn:"I love this song so much I listened to it all day long."},
+  {id:67,korean:"완전",romanization:"wan-jeon",english:"Completely / Totally (slang)",pos:"adverb",category:"daily",vibe:"The turbo boost of emphasis. Slap it in front of anything to make it 100% more intense.",exampleKo:"그 무대 완전 대박이었어, 눈 못 떼겠더라.",exampleEn:"That stage was totally incredible — I literally couldn't look away."},
+  {id:68,korean:"솔직히",romanization:"sol-jik-i",english:"Honestly / To be frank",pos:"adverb",category:"daily",vibe:"The word that turns a casual observation into a confession.",exampleKo:"솔직히 말하면, 이 노래 처음엔 별로였는데 지금은 최애야.",exampleEn:"Honestly, I didn't like this song at first — but now it's my absolute favorite."},
+  {id:69,korean:"일단",romanization:"il-dan",english:"First / For now / Let me just",pos:"adverb",category:"daily",vibe:"Buys thinking time while sounding decisive.",exampleKo:"일단 앉아서 얘기하자, 천천히.",exampleEn:"Let's just sit down first and talk it through slowly."},
+  {id:70,korean:"왜",romanization:"wae",english:"Why",pos:"interrogative",category:"daily",vibe:"One syllable, infinite depth. Can be curious, frustrated, heartbroken, or just confused.",exampleKo:"왜 이 노래를 들으면 항상 눈물이 나는 걸까.",exampleEn:"Why is it that every time I hear this song, the tears just come?"},
+  {id:71,korean:"너",romanization:"neo",english:"You",pos:"pronoun",category:"lyrics",vibe:"The most loaded single syllable in K-pop. Every song's protagonist, every lyric's final destination.",exampleKo:"온 세상이 흔들려도 내 눈엔 너밖에 안 보여.",exampleEn:"Even as the whole world shakes, all I can see is you."},
+  {id:72,korean:"너의",romanization:"neo-ui",english:"Your / Of you",pos:"determiner",category:"lyrics",vibe:"More intimate than your in English — 너의 lingers.",exampleKo:"너의 목소리가 내 하루를 가득 채워줘.",exampleEn:"Your voice fills my entire day."},
+  {id:73,korean:"노을",romanization:"no-eul",english:"Sunset glow / Evening sky",pos:"noun",category:"lyrics",vibe:"That golden-orange blur right before night falls. Bittersweet, brief, and impossibly cinematic.",exampleKo:"저녁 노을처럼 아름다운 순간이었어.",exampleEn:"It was a moment as beautiful as the evening glow."},
+  {id:74,korean:"영혼",romanization:"yeong-hon",english:"Soul / Spirit",pos:"noun",category:"lyrics",vibe:"The deepest layer of a person. Used for performers who give not just their skill, but everything underneath.",exampleKo:"이 무대에 영혼까지 담아서 불렀어.",exampleEn:"They poured their very soul into that performance."},
+  {id:75,korean:"떠나다",romanization:"tteo-na-da",english:"To leave / To depart",pos:"verb",category:"lyrics",vibe:"The departure that haunts every ballad outro. It's never just leaving.",exampleKo:"네가 떠난 자리에 아직도 네 향기가 남아 있어.",exampleEn:"Where you once stood, your scent still lingers."},
+  {id:76,korean:"잊다",romanization:"it-da",english:"To forget",pos:"verb",category:"lyrics",vibe:"The act that's impossible yet constantly promised in sad songs. Spoiler: they never actually forget.",exampleKo:"잊으려 할수록 더 선명하게 떠올라.",exampleEn:"The more I try to forget, the more clearly you appear."},
+  {id:77,korean:"팬싸",romanization:"paen-ssa",english:"Fan sign event",pos:"noun",category:"fandom",vibe:"An intimate event where fans get a signature — and three seconds of eye contact that fuel them for a year.",exampleKo:"팬싸에서 받은 사인이 내 인생 최고의 선물이야.",exampleEn:"The autograph I got at the fan sign is the greatest gift of my life."},
+  {id:78,korean:"영업",romanization:"yeong-eop",english:"Stan recruiting / Hyping to others",pos:"noun / verb",category:"fandom",vibe:"When you love someone so much you become their unofficial marketing team.",exampleKo:"친구한테 하루 종일 영업했더니 드디어 팬됐어!",exampleEn:"I hyped them to my friend all day long and they finally became a fan!"},
+  {id:79,korean:"메인보컬",romanization:"me-in-bo-kael",english:"Main vocal",pos:"noun",category:"fandom",vibe:"The member whose voice does the heavy lifting — high notes, runs, the climax bridge.",exampleKo:"메인보컬 라이브 보고 진짜 소름 돋았어.",exampleEn:"Watching the main vocal perform live literally gave me goosebumps."},
+  {id:80,korean:"리더",romanization:"ri-deo",english:"Leader",pos:"noun",category:"fandom",vibe:"The one who holds everything together — on stage and off.",exampleKo:"리더가 인터뷰에서 멤버들 챙기는 거 보면 괜히 뭉클해.",exampleEn:"Seeing the leader look after everyone in interviews always gets me unexpectedly emotional."},
+  {id:81,korean:"멤버",romanization:"mem-beo",english:"Member",pos:"noun",category:"fandom",vibe:"In K-pop group culture, each 멤버 is a world — fans find themselves loyal to all of them.",exampleKo:"모든 멤버가 다 좋은 팀은 정말 찾기 드물어.",exampleEn:"A group where you genuinely love every single member is truly rare."},
+  {id:82,korean:"짤",romanization:"jjal",english:"Meme / Reaction image",pos:"noun",category:"fandom",vibe:"The currency of fan Twitter: the perfect still frame, the accidental expression.",exampleKo:"이 짤 하나로 온 팬덤이 웃겼어.",exampleEn:"This one meme had the entire fandom in tears from laughing."},
+  {id:83,korean:"입덕영상",romanization:"ip-deok-yeong-sang",english:"Gateway video / Rabbit hole video",pos:"noun",category:"fandom",vibe:"The video that started it all. One click and your Tuesday became a three-year obsession.",exampleKo:"내 입덕영상 보여줄게, 이거 보면 이해할 거야.",exampleEn:"Let me show you my gateway video — once you see this, you'll understand everything."},
+  {id:84,korean:"떨림",romanization:"tteol-lim",english:"Trembling / Shiver of excitement",pos:"noun",category:"vibes",vibe:"The physical proof that something has moved you beyond words.",exampleKo:"무대에 처음 올랐을 때의 떨림은 절대 잊을 수 없어.",exampleEn:"The trembling I felt stepping on stage for the first time — I'll never forget it."},
+  {id:85,korean:"효도",romanization:"hyo-do",english:"Filial piety / Making parents proud",pos:"noun",category:"vibes",vibe:"Deep-rooted love made into action. Artists often dedicate their hardest wins to family.",exampleKo:"이렇게 무대에 설 수 있게 해준 부모님께 효도하고 싶어.",exampleEn:"I want to repay my parents properly for letting me stand on this stage."},
+  {id:86,korean:"아이고",romanization:"a-i-go",english:"Oh my / Goodness / Oof",pos:"exclamation",category:"daily",vibe:"Korea's most versatile sigh. Works for relief, surprise, exhaustion, and gentle complaint.",exampleKo:"아이고, 이렇게 많은 굿즈를 다 어떻게 해.",exampleEn:"Oh my goodness, what am I going to do with all this merch."},
+  {id:87,korean:"정말",romanization:"jeong-mal",english:"Really / Truly (sincere)",pos:"adverb",category:"daily",vibe:"More heartfelt than 진짜 — when you mean it from the bottom of your chest.",exampleKo:"정말 수고했어, 오늘 무대 진심으로 감동받았어.",exampleEn:"You truly worked so hard — tonight's performance genuinely moved me."},
+  {id:88,korean:"좋다",romanization:"jo-ta",english:"It's good / How nice",pos:"adjective",category:"daily",vibe:"A warm declaration of satisfaction.",exampleKo:"오늘 날씨 너무 좋다, 산책하고 싶어.",exampleEn:"The weather today is just so good — I want to take a walk."},
+  {id:89,korean:"싫다",romanization:"sil-ta",english:"It's bad / I dislike it",pos:"adjective",category:"daily",vibe:"The declarative form of dislike — more resigned than reactive.",exampleKo:"이런 작별인사 정말 싫다, 매번 마음이 무거워.",exampleEn:"I really hate goodbyes like this — my heart feels heavy every single time."},
+  {id:90,korean:"맞아",romanization:"ma-ja",english:"That's right / Exactly",pos:"expression",category:"daily",vibe:"The satisfying click of agreement.",exampleKo:"맞아, 내가 딱 그 부분에서 제일 감동받았어.",exampleEn:"Exactly — that's the precise moment that got me the most."},
+  {id:91,korean:"아니야",romanization:"a-ni-ya",english:"No / That's not it",pos:"expression",category:"daily",vibe:"Soft but firm denial.",exampleKo:"아니야, 그 사람 나쁜 게 아니라 그냥 서툰 거야.",exampleEn:"No, it's not that they're bad — they're just inexperienced."},
+  {id:92,korean:"어떡해",romanization:"eo-tteok-hae",english:"What do I do / Oh no",pos:"expression",category:"daily",vibe:"The panicked murmur of someone who just saw their bias look directly into the camera.",exampleKo:"어떡해, 이거 너무 귀여워서 심장이 못 버티겠어.",exampleEn:"Oh no, this is too cute — my heart literally cannot take it."},
+  {id:93,korean:"어렵다",romanization:"eo-ryeop-da",english:"It's difficult / It's hard",pos:"adjective",category:"daily",vibe:"Honest admission of struggle.",exampleKo:"한국어 어렵다고 생각했는데, 좋아하면 다 돼.",exampleEn:"I thought Korean was so difficult — but when you love it, everything becomes possible."},
+  {id:94,korean:"운명적이다",romanization:"un-myeong-jeok-i-da",english:"It's fateful / Destined",pos:"adjective",category:"lyrics",vibe:"Not just fate — the dramatic realization that the universe arranged this moment specifically.",exampleKo:"이렇게 만난 게 운명적이다는 걸 처음부터 알았어.",exampleEn:"I knew from the very start that meeting like this was fated."},
+  {id:95,korean:"영원히",romanization:"yeong-won-hi",english:"Forever / Eternally",pos:"adverb",category:"lyrics",vibe:"영원 as a noun is beautiful — 영원히 turns it into a vow.",exampleKo:"어떤 일이 있어도 영원히 네 곁에 있을게.",exampleEn:"No matter what happens, I'll be by your side forever."},
+  {id:96,korean:"추억하다",romanization:"chu-eok-ha-da",english:"To reminisce / To look back fondly",pos:"verb",category:"lyrics",vibe:"Turning memories into a verb — the active, bittersweet act of revisiting golden moments.",exampleKo:"가끔 우리가 함께했던 시간을 추억하곤 해.",exampleEn:"Sometimes I find myself reminiscing about the time we spent together."},
+  {id:97,korean:"그립다",romanization:"geu-rip-da",english:"To miss / To long for",pos:"adjective",category:"lyrics",vibe:"Deeper than miss in English — it's the ache of absence.",exampleKo:"네가 떠난 지 오래됐는데 아직도 그립다.",exampleEn:"It's been so long since you left, and I still miss you."},
+  {id:98,korean:"보고싶다",romanization:"bo-go-sip-da",english:"I miss you / I want to see you",pos:"expression",category:"lyrics",vibe:"The most frequently used phrase in fan-to-artist communication.",exampleKo:"멀리 있어도 매일 보고싶다.",exampleEn:"Even from so far away, I want to see you every single day."},
+  {id:99,korean:"좋아하다",romanization:"jo-a-ha-da",english:"To like / To have feelings for",pos:"verb",category:"lyrics",vibe:"The gateway confession — lighter than 사랑해, but no less dangerous.",exampleKo:"용기 내서 말했어, 나 너 좋아하다고.",exampleEn:"I finally worked up the courage to say it — I like you."},
+  {id:100,korean:"떡밥",romanization:"tteok-bap",english:"Teaser / Bait / Clue",pos:"noun",category:"fandom",vibe:"Hints, cryptic posts, strategic blurs — literally rice cake bait, unofficially the thing keeping stans awake.",exampleKo:"오늘 올라온 사진 완전 떡밥이잖아, 컴백 예고인 거지?",exampleEn:"That photo they just posted is total bait — it's a comeback hint, right?"},
+  {id:101,korean:"흑역사",romanization:"heung-nyeok-sa",english:"Dark history / Embarrassing past",pos:"noun",category:"fandom",vibe:"The cringe-worthy content they'd rather forget. Fans protect it fiercely.",exampleKo:"흑역사 영상 꺼내면 안 돼, 그냥 묻어두자.",exampleEn:"Don't dig up the dark history video — just let it stay buried."},
+  {id:102,korean:"짤줍",romanization:"jjal-jup",english:"Collecting memes and reaction clips",pos:"noun / verb",category:"fandom",vibe:"The noble fan pastime of hunting the perfect reaction image.",exampleKo:"오늘 라이브에서 짤줍 대성공, 표정이 미쳤어.",exampleEn:"Total meme-hunting success from today's live — those expressions were something else."},
+  {id:103,korean:"일코",romanization:"il-ko",english:"Hiding your stan life",pos:"noun",category:"fandom",vibe:"Short for 일반인 코스프레 — performing normality while secretly rewatching fancams.",exampleKo:"직장에서 일코 중인데 동료가 같은 팬인 거 몰랐어.",exampleEn:"I've been hiding my stan life at work, and I had no idea my coworker was a fan too."},
+  {id:104,korean:"덕메",romanization:"deok-me",english:"Stan friend / Fellow fan buddy",pos:"noun",category:"fandom",vibe:"Short for 덕후 메이트. The one who texts you at 2am when the MV drops.",exampleKo:"덕메 없이 어떻게 살았지, 같이 울어줄 사람이 필요해.",exampleEn:"I don't know how I survived without my stan friend — I need someone to cry with."},
+  {id:105,korean:"입덕부정기",romanization:"ip-deok-bu-jeong-gi",english:"Denial phase before falling into a fandom",pos:"noun",category:"fandom",vibe:"I'm not a fan, I just think they're talented. The stage every stan has been through.",exampleKo:"입덕부정기 딱 사흘이었어, 그리고 결국 무너졌지.",exampleEn:"My denial phase lasted exactly three days — and then I completely caved."},
+  {id:106,korean:"차애",romanization:"cha-ae",english:"Second bias",pos:"noun",category:"fandom",vibe:"Your heart says one name, but 차애 got there first and never truly left.",exampleKo:"차애인데 왜 자꾸 최애 자리를 위협하는 거야.",exampleEn:"They're my second bias, so why do they keep threatening to take the top spot?"},
+  {id:107,korean:"탈덕",romanization:"tal-deok",english:"Leaving a fandom / Destanning",pos:"noun / verb",category:"fandom",vibe:"The exit everyone announces dramatically and half of them quietly reverse.",exampleKo:"탈덕 선언했는데 신보 듣고 다시 돌아왔어, 어쩔 수 없어.",exampleEn:"I announced I was leaving the fandom — then the new album dropped and I was back."},
+  {id:108,korean:"우정",romanization:"u-jeong",english:"Friendship",pos:"noun",category:"vibes",vibe:"The bond forged through shared music, late concert nights, and mutual understanding.",exampleKo:"이 팬덤 안에서 진짜 우정을 찾았어.",exampleEn:"I found real, lasting friendship inside this fandom."},
+  {id:109,korean:"감동",romanization:"gam-dong",english:"Being deeply moved / Touched",pos:"noun",category:"vibes",vibe:"That wave hitting your chest when a performance transcends skill.",exampleKo:"무대 끝나고 감동받아서 한동안 말을 못 했어.",exampleEn:"After the show ended I was so moved I couldn't speak for a while."},
+  {id:110,korean:"인생",romanization:"in-saeng",english:"Life / One's life journey",pos:"noun",category:"vibes",vibe:"인생 앨범, 인생 무대, 인생 곡 — the one that defines everything.",exampleKo:"이 앨범은 진짜 내 인생 앨범이야, 완전히 바꿔놨어.",exampleEn:"This album is genuinely my life album — it completely changed everything."},
+  {id:111,korean:"외로움",romanization:"oe-ro-um",english:"Loneliness / Solitude",pos:"noun",category:"vibes",vibe:"The honest emotion K-pop ballads fully embrace. Vulnerability worn with quiet elegance.",exampleKo:"이 노래 들으면 내 외로움이 위로받는 느낌이야.",exampleEn:"Listening to this song, I feel like my loneliness is somehow being consoled."},
+  {id:112,korean:"따뜻하다",romanization:"tta-tteu-ta-da",english:"To be warm / Heartwarming",pos:"adjective",category:"vibes",vibe:"Physical warmth extended into emotion. The word for when a voice gently holds you.",exampleKo:"그 목소리를 들으면 따뜻하다는 느낌이 들어.",exampleEn:"Hearing that voice, I feel a warmth I can't quite explain."},
+  {id:113,korean:"기억",romanization:"gi-eok",english:"Memory / Recollection",pos:"noun",category:"vibes",vibe:"The sharp clarity of something you can't and won't let fade away.",exampleKo:"그 날의 기억이 아직도 선명하게 남아 있어.",exampleEn:"The memory of that day still remains vivid and utterly clear."},
+  {id:114,korean:"어머",romanization:"eo-meo",english:"Oh my / My goodness",pos:"exclamation",category:"daily",vibe:"A gasp dressed as a word. The sound of someone who just saw something unbelievable.",exampleKo:"어머, 이거 진짜야? 말이 안 나와.",exampleEn:"Oh my, is this real? I'm completely speechless."},
+  {id:115,korean:"미쳤다",romanization:"mi-chyeot-da",english:"Crazy / This is insane / Wild",pos:"expression",category:"daily",vibe:"Technically went crazy, functionally the highest compliment.",exampleKo:"이 무대 미쳤다, 어떻게 이런 걸 만들어내?",exampleEn:"This stage is absolutely insane — how do they even create something like this?"},
+  {id:116,korean:"사실",romanization:"sa-sil",english:"Actually / In fact",pos:"adverb",category:"daily",vibe:"The word that precedes revelations. When someone says 사실, brace yourself.",exampleKo:"사실, 처음부터 이 노래가 제일 좋았어.",exampleEn:"Actually, this was my favorite song from the very beginning."},
+  {id:117,korean:"당연하지",romanization:"dang-yeon-ha-ji",english:"Of course / Obviously",pos:"expression",category:"daily",vibe:"The confident affirmation you drop when something is completely self-evident.",exampleKo:"라이브 실력이 녹음보다 낫다고? 당연하지!",exampleEn:"Their live is better than the recording? Well, obviously!"},
+  {id:118,korean:"너무너무",romanization:"neo-mu-neo-mu",english:"So so much / Way too much",pos:"adverb",category:"daily",vibe:"너무 doubled for when once simply isn't enough.",exampleKo:"이 노래 너무너무 좋아서 오늘만 스무 번 들었어.",exampleEn:"I love this song so so much I listened to it twenty times today."},
+  {id:119,korean:"엄청",romanization:"eom-cheong",english:"Extremely / Enormously",pos:"adverb",category:"daily",vibe:"Conveys massive scale with a casual shrug.",exampleKo:"오늘 콘서트 엄청 잘됐어, 에너지가 장난 아니었어.",exampleEn:"Tonight's concert went incredibly well — the energy was absolutely off the charts."},
+  {id:120,korean:"그러게",romanization:"geu-reo-ge",english:"I know, right / That's what I said",pos:"expression",category:"daily",vibe:"The sound of two fans realizing they had the exact same 3am thought.",exampleKo:"그러게, 그 무대 진짜 최고였어. 우리 다 알고 있었잖아.",exampleEn:"I know, right — that performance was genuinely the best. We both knew it all along."}
+];
+
+const catEmoji={lyrics:'💜',fandom:'🔥',vibes:'✨',daily:'💬'};
+const catName={lyrics:'Lyrics',fandom:'Fandom',vibes:'Vibes',daily:'Daily'};
+let currentCat='all',query='';
+
+function renderSotd(){
+  const idx=(new Date().getDate()-1)%words.length;
+  const w=words[idx];
+  const date=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  document.getElementById('sotdSection').innerHTML=`
+    <div class="sotd-banner">
+      <div class="sotd-inner" onclick="openDetail(${w.id})">
+        <div class="sotd-tag">⭐ Stan of the Day · ${date}</div>
+        <div class="sotd-ko">${w.korean}</div>
+        <div class="sotd-roman">${w.romanization}</div>
+        <div class="sotd-en">${w.english}</div>
+        <div class="sotd-vibe">"${w.vibe}"</div>
+        <div class="sotd-tap-hint">Tap to read more →</div>
+      </div>
+    </div>`;
+}
+
+function filtered(){
+  const q=query.toLowerCase().trim();
+  return words.filter(w=>{
+    const catOk=currentCat==='all'||w.category===currentCat;
+    const qOk=!q||w.korean.includes(q)||w.romanization.toLowerCase().includes(q)||w.english.toLowerCase().includes(q)||w.vibe.toLowerCase().includes(q);
+    return catOk&&qOk;
+  });
+}
+
+function renderFeed(){
+  const list=filtered();
+  const n=list.length;
+  const hasSearch=query.trim().length>0;
+  document.getElementById('sotdSection').style.display=hasSearch?'none':'block';
+  document.getElementById('feedLabel').textContent=hasSearch?'Search Results':'All Words';
+  document.getElementById('resultsCount').innerHTML=`<em>${n}</em> word${n!==1?'s':''}`;
+  if(n===0){
+    document.getElementById('cardsContainer').innerHTML='<div class="empty"><span>💜</span><h3>No words found</h3><p>Try Korean, English, or romanization.</p></div>';
+    return;
+  }
+  document.getElementById('cardsContainer').innerHTML=list.map((w,i)=>`
+    <div class="feed-card" style="animation-delay:${i*0.04}s" onclick="openDetail(${w.id})">
+      <div class="card-top">
+        <div class="card-ko">${w.korean}</div>
+        <span class="cat-badge cat-${w.category}">${catEmoji[w.category]} ${catName[w.category]}</span>
+      </div>
+      <div class="card-body">
+        <div class="card-roman">${w.romanization}</div>
+        <div class="card-en">${w.english}</div>
+        <span class="card-pos">${w.pos}</span>
+        <div class="card-divider"></div>
+        <div class="vibe-label">Vibe Check</div>
+        <div class="vibe-text">"${w.vibe}"</div>
+        <div class="card-tap-hint">💜 Tap for full story</div>
+      </div>
+    </div>`).join('');
+}
+
+function openDetail(id){
+  const w=words.find(x=>x.id===id);
+  if(!w)return;
+  document.getElementById('detailCatBadge').innerHTML=`<span class="cat-badge cat-${w.category}">${catEmoji[w.category]} ${catName[w.category]}</span>`;
+  document.getElementById('detailBody').innerHTML=`
+    <div class="detail-ko">${w.korean}</div>
+    <div class="detail-roman">${w.romanization}</div>
+    <div class="detail-en">${w.english}</div>
+    <span class="detail-pos">${w.pos}</span>
+    <div class="detail-section-label">Vibe Check</div>
+    <div class="detail-vibe">"${w.vibe}"</div>
+    ${w.exampleKo?`<div class="detail-section-label">Example</div><div class="detail-example"><div class="detail-ex-ko">${w.exampleKo}</div><div class="detail-ex-en">${w.exampleEn}</div></div>`:''}`;
+  document.getElementById('cardDetail').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeDetail(){
+  document.getElementById('cardDetail').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('searchInput').addEventListener('input',e=>{
+  query=e.target.value;
+  document.getElementById('searchClear').classList.toggle('show',query.trim().length>0);
+  renderFeed();
+});
+document.getElementById('searchClear').addEventListener('click',()=>{
+  document.getElementById('searchInput').value='';
+  query='';
+  document.getElementById('searchClear').classList.remove('show');
+  renderFeed();
+});
+document.getElementById('filtersRow').addEventListener('click',e=>{
+  const btn=e.target.closest('.filter-btn');
+  if(!btn)return;
+  currentCat=btn.dataset.cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFeed();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(document.getElementById('cardDetail').classList.contains('open'))closeDetail();
+    else if(document.getElementById('suggestBackdrop').classList.contains('open'))closeSuggestModal();
+  }
+});
+
+function openSuggestModal(){
+  document.getElementById('suggestBackdrop').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeSuggestModal(e){
+  if(e&&e.target!==e.currentTarget)return;
+  document.getElementById('suggestBackdrop').classList.remove('open');
+  document.body.style.overflow='';
+  setTimeout(()=>{
+    document.getElementById('suggestFormWrap').style.display='';
+    document.getElementById('formSuccess').style.display='none';
+    document.getElementById('suggestForm').reset();
+    const btn=document.getElementById('submitBtn');
+    btn.disabled=false;btn.textContent='제안 보내기 💜';
+    document.getElementById('formError').style.display='none';
+  },280);
+}
+
+document.getElementById('suggestForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const form=e.target;
+  const btn=document.getElementById('submitBtn');
+  const errMsg=document.getElementById('formError');
+  const korean=form['한국어 단어'].value.trim();
+  const english=form['영어 뜻'].value.trim();
+  if(!korean||!english){errMsg.textContent='한국어 단어와 영어 뜻은 필수 항목이에요.';errMsg.style.display='block';return;}
+  btn.disabled=true;btn.textContent='전송 중...';errMsg.style.display='none';
+  const payload={'한국어 단어':korean,'로마자 발음':form['로마자 발음'].value.trim(),'영어 뜻':english,'카테고리':form['카테고리'].value,'Vibe Check':form['Vibe Check'].value.trim(),'예문 한국어':form['예문 한국어'].value.trim(),'예문 영어':form['예문 영어'].value.trim()};
+  try{
+    const res=await fetch('https://formspree.io/f/xkoezopy',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+    if(!res.ok)throw new Error('server');
+    document.getElementById('suggestFormWrap').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  }catch{
+    errMsg.textContent='제출 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.';
+    errMsg.style.display='block';
+    btn.disabled=false;btn.textContent='제안 보내기 💜';
+  }
+});
+
+renderSotd();
+renderFeed();
+
+</script>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{});});
+}
+</script>
+</body>
+</html>
