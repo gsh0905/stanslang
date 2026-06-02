@@ -171,6 +171,65 @@
     .quiz-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg-card);border:1.5px solid var(--border-2);color:var(--text);padding:13px 22px;border-radius:100px;font-size:14px;font-weight:600;opacity:0;transition:all .3s var(--ease);z-index:300;pointer-events:none;}
     .quiz-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+  
+    /* ===== LEVEL / MISSIONS / CHALLENGE ===== */
+    .level-badge{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:100px;background:var(--bg-card);border:1px solid var(--border);cursor:pointer;flex-shrink:0;}
+    .lvl-emoji{font-size:15px;line-height:1;}
+    .lvl-name{font-size:11px;font-weight:700;color:var(--purple-lt);white-space:nowrap;}
+    .lvl-bar{width:40px;height:4px;border-radius:100px;background:var(--bg);overflow:hidden;margin-top:2px;}
+    .lvl-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#9747FF,#C084FC);transition:width .4s var(--ease);}
+    .missions-fab{position:fixed;bottom:80px;left:16px;z-index:60;display:flex;align-items:center;gap:7px;padding:12px 18px;border-radius:100px;border:1.5px solid var(--border-2);font-family:inherit;font-size:14px;font-weight:700;color:var(--purple-lt);background:var(--bg-card);box-shadow:0 4px 18px rgba(0,0,0,0.4);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .18s var(--ease);}
+    .missions-fab:active{transform:scale(0.94);}
+    .missions-panel{position:fixed;inset:0;z-index:150;pointer-events:none;}
+    .missions-panel.open{pointer-events:all;}
+    .missions-panel-bg{position:absolute;inset:0;background:rgba(0,0,0,0.6);opacity:0;transition:opacity .3s;backdrop-filter:blur(4px);}
+    .missions-panel.open .missions-panel-bg{opacity:1;}
+    .missions-panel-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--bg-card);border-radius:24px 24px 0 0;padding:0 0 40px;transform:translateY(100%);transition:transform .35s var(--ease);max-height:85vh;overflow-y:auto;}
+    .missions-panel.open .missions-panel-sheet{transform:translateY(0);}
+    .missions-panel-top{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 0;}
+    .missions-title{font-size:18px;font-weight:800;color:var(--text);}
+    .missions-close{background:var(--bg);border:none;color:var(--text-3);font-size:18px;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+    .m-level-card{margin:16px;padding:16px;border-radius:16px;background:var(--bg);border:1.5px solid var(--border-2);}
+    .m-level-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+    .m-level-emoji{font-size:36px;line-height:1;}
+    .m-level-name{font-size:17px;font-weight:800;color:var(--text);}
+    .m-level-xp{font-size:12px;color:var(--text-3);margin-top:2px;}
+    .m-xpbar{height:8px;border-radius:100px;background:var(--bg-card);overflow:hidden;margin-bottom:8px;}
+    .m-xpfill{height:100%;border-radius:100px;background:linear-gradient(90deg,#9747FF,#C084FC);transition:width .5s var(--ease);}
+    .m-streak{font-size:13px;font-weight:700;color:#F97316;}
+    .m-section-title{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text-4);padding:12px 20px 4px;}
+    .m-mission{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--border);}
+    .m-mission.done{opacity:0.55;}
+    .m-mission-icon{font-size:24px;flex-shrink:0;width:36px;text-align:center;}
+    .m-mission-info{flex:1;}
+    .m-mission-text{font-size:15px;font-weight:600;color:var(--text);}
+    .m-mission-reward{font-size:12px;color:var(--purple-lt);margin-top:2px;}
+    .m-mission-bar{height:4px;border-radius:100px;background:var(--bg);overflow:hidden;margin-top:6px;}
+    .m-mission-fill{height:100%;border-radius:100px;background:var(--purple);transition:width .3s;}
+    .m-mission-count{font-size:13px;font-weight:700;color:var(--text-3);flex-shrink:0;}
+    /* level up overlay */
+    .lvlup-overlay{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s;}
+    .lvlup-overlay.show{opacity:1;pointer-events:all;}
+    .lvlup-box{background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:24px;padding:36px 28px;text-align:center;width:85%;max-width:340px;animation:fadeUp .4s var(--ease) both;}
+    .lvlup-emoji{font-size:72px;animation:pulse 1s ease-in-out 3;}
+    .lvlup-title{font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-lt);margin:8px 0 4px;}
+    .lvlup-name{font-size:28px;font-weight:800;color:var(--text);}
+    /* pro modal */
+    .pro-modal-bg{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s;padding:24px;}
+    .pro-modal-bg.open{opacity:1;pointer-events:all;}
+    .pro-modal-box{background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:24px;padding:32px 24px;width:100%;max-width:360px;position:relative;animation:fadeUp .35s var(--ease) both;}
+    .pro-modal-close{position:absolute;top:14px;right:14px;background:var(--bg);border:none;color:var(--text-3);font-size:18px;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .pro-emoji{font-size:56px;text-align:center;margin-bottom:8px;}
+    .pro-title{font-size:26px;font-weight:800;color:var(--text);text-align:center;margin-bottom:6px;}
+    .pro-reason{font-size:14px;color:var(--text-3);text-align:center;margin-bottom:16px;line-height:1.5;}
+    .pro-features{background:var(--bg);border-radius:14px;padding:14px 16px;margin-bottom:20px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--text-2);}
+    /* challenge banner */
+    .challenge-banner{position:fixed;top:0;left:0;right:0;z-index:90;display:none;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;background:linear-gradient(135deg,#9747FF,#6B46C1);color:#fff;font-size:14px;font-weight:600;}
+    .challenge-banner button{padding:8px 16px;border-radius:100px;border:2px solid rgba(255,255,255,0.8);background:transparent;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;}
+    /* xp gain float */
+    .xp-gain{position:fixed;bottom:140px;left:50%;transform:translateX(-50%) translateY(0);background:linear-gradient(135deg,#9747FF,#6B46C1);color:#fff;padding:8px 18px;border-radius:100px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;z-index:500;transition:opacity .3s,transform .3s;}
+    .xp-gain.show{opacity:1;transform:translateX(-50%) translateY(-12px);}
+
   </style>
 </head>
 <body>
@@ -178,6 +237,7 @@
   <div class="header-top">
     <div class="logo-gem">&#128156;</div>
     <span class="logo-text">Stan Slang</span>
+    <div id="levelBadge" class="level-badge" onclick="openMissions()"></div>
   </div>
   <div class="search-wrap">
     <span class="search-icon">&#128269;</span>
@@ -200,6 +260,36 @@
   <div class="results-count" id="resultsCount"></div>
   <div id="cardsContainer"></div>
 </div>
+<div id="challengeBanner" class="challenge-banner"></div>
+<button class="missions-fab" onclick="openMissions()">&#127919; Missions</button>
+<div class="missions-panel" id="missionsPanel">
+  <div class="missions-panel-bg" onclick="closeMissions()"></div>
+  <div class="missions-panel-sheet">
+    <div class="missions-panel-top">
+      <span class="missions-title">Daily Missions</span>
+      <button class="missions-close" onclick="closeMissions()">&#10005;</button>
+    </div>
+    <div id="missionsContent"></div>
+  </div>
+</div>
+<div class="lvlup-overlay" id="levelUpOverlay"></div>
+<div class="pro-modal-bg" id="proModal">
+  <div class="pro-modal-box">
+    <button class="pro-modal-close" onclick="closeProModal()">&#10005;</button>
+    <div class="pro-emoji">&#128156;</div>
+    <div class="pro-title">Stan Slang Pro</div>
+    <div id="proModalReason" class="pro-reason"></div>
+    <div class="pro-features">
+      <div>&#9989; Unlimited daily challenges</div>
+      <div>&#9989; Levels beyond K-pop Legend</div>
+      <div>&#9989; Streak shields</div>
+      <div>&#9989; More features coming soon</div>
+    </div>
+    <button class="quiz-btn-primary" onclick="closeProModal();quizToast('Pro waitlist opening soon! &#128156;')">Join the waitlist &#128156;</button>
+    <button class="quiz-btn-ghost" style="margin-top:10px;width:100%" onclick="closeProModal()">Maybe later</button>
+  </div>
+</div>
+
 <button class="quiz-fab" onclick="startQuiz()">&#127918; Quiz</button>
 <div class="quiz-screen" id="quizScreen">
   <div class="quiz-top">
@@ -1124,6 +1214,183 @@ function quizToast(msg){
 
 renderSotd();
 renderFeed();
+
+/* ===== LEVEL / MISSIONS / CHALLENGE SYSTEM ===== */
+const LS={get:k=>{try{return JSON.parse(localStorage.getItem('ss_'+k));}catch(e){return null;}},set:(k,v)=>{try{localStorage.setItem('ss_'+k,JSON.stringify(v));}catch(e){}}};
+const LEVELS=[
+  {min:0,   name:'Baby Stan',      emoji:'\uD83D\uDC23'},
+  {min:100, name:'Rookie Fan',     emoji:'\uD83C\uDF31'},
+  {min:300, name:'Rising Stan',    emoji:'\uD83D\uDD25'},
+  {min:600, name:'Certified Stan', emoji:'\uD83D\uDC9C'},
+  {min:1000,name:'Elite Stan',     emoji:'\u2B50'},
+  {min:1500,name:'K-pop Legend',   emoji:'\uD83D\uDC51'},
+];
+const MISSIONS_DEF=[
+  {id:'quiz', icon:'\uD83C\uDFAE',text:'Complete a quiz',          goal:1,xp:50},
+  {id:'score',icon:'\u2B50',      text:'Score 7+ correct in quiz', goal:1,xp:75},
+  {id:'words',icon:'\uD83D\uDD0D',text:'View 5 word detail cards', goal:5,xp:30},
+];
+
+function todayStr(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function prevDay(s){const d=new Date(s);d.setDate(d.getDate()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function getXPLevel(xp){let l=0;for(let i=LEVELS.length-1;i>=0;i--){if(xp>=LEVELS[i].min){l=i;break;}}return l;}
+function getXPPct(xp){const l=getXPLevel(xp);if(l>=LEVELS.length-1)return 100;return Math.round(((xp-LEVELS[l].min)/(LEVELS[l+1].min-LEVELS[l].min))*100);}
+function getProfile(){return LS.get('profile')||{xp:0,streak:0,lastPlay:null,challDay:null,challCount:0};}
+function saveProfile(p){LS.set('profile',p);}
+function getMissions(){const t=todayStr(),s=LS.get('missions');if(s&&s.date===t)return s;const f={date:t,prog:{quiz:0,score:0,words:0},done:{quiz:false,score:false,words:false}};LS.set('missions',f);return f;}
+function saveMissions(m){LS.set('missions',m);}
+
+function awardXP(amount,reason){
+  const p=getProfile(),oldL=getXPLevel(p.xp);
+  p.xp+=amount;
+  const newL=getXPLevel(p.xp);
+  saveProfile(p);
+  updateLevelBadge();
+  showXPFloat(amount);
+  if(newL>oldL){
+    if(newL>=LEVELS.length){showProModal('You\u2019ve reached the top tier! Unlock Stan Slang Pro to keep leveling up. \uD83D\uDC51');}
+    else{setTimeout(()=>showLevelUp(newL),700);}
+  }
+}
+
+function onQuizComplete(correct){
+  const today=todayStr(),p=getProfile();
+  if(p.lastPlay===today){}
+  else if(p.lastPlay===prevDay(today)){p.streak=(p.streak||0)+1;}
+  else{p.streak=1;}
+  p.lastPlay=today;
+  saveProfile(p);
+  const baseXP=10+correct*5;
+  awardXP(baseXP,`Quiz: ${correct}/10`);
+  const m=getMissions();
+  if(!m.done.quiz){m.prog.quiz=1;m.done.quiz=true;setTimeout(()=>awardXP(50,'Mission: Complete a quiz'),900);}
+  if(!m.done.score&&correct>=7){m.prog.score=1;m.done.score=true;setTimeout(()=>awardXP(75,'Mission: Score 7+'),1200);}
+  saveMissions(m);
+}
+
+function trackWordView(){
+  const m=getMissions();
+  if(m.done.words)return;
+  m.prog.words=Math.min((m.prog.words||0)+1,5);
+  if(m.prog.words>=5){m.done.words=true;setTimeout(()=>awardXP(30,'Mission: View 5 words'),400);}
+  saveMissions(m);
+}
+
+function updateLevelBadge(){
+  const p=getProfile(),l=getXPLevel(p.xp),L=LEVELS[l],pct=getXPPct(p.xp);
+  const el=document.getElementById('levelBadge');
+  if(!el)return;
+  el.innerHTML=`<span class="lvl-emoji">${L.emoji}</span><div><div class="lvl-name">${L.name}</div><div class="lvl-bar"><div class="lvl-fill" style="width:${pct}%"></div></div></div>`;
+}
+
+function openMissions(){document.getElementById('missionsPanel').classList.add('open');document.body.style.overflow='hidden';refreshMissionsUI();}
+function closeMissions(){document.getElementById('missionsPanel').classList.remove('open');document.body.style.overflow='';}
+
+function refreshMissionsUI(){
+  const m=getMissions(),p=getProfile(),l=getXPLevel(p.xp),L=LEVELS[l],nL=LEVELS[l+1],pct=getXPPct(p.xp);
+  const el=document.getElementById('missionsContent');if(!el)return;
+  const xpInfo=nL?`${p.xp} XP \u00B7 ${nL.min-p.xp} to ${nL.name}`:`${p.xp} XP \u00B7 MAX LEVEL`;
+  const streakHtml=p.streak>0?`<div class="m-streak">\uD83D\uDD25 ${p.streak}-day streak</div>`:'';
+  const levelHtml=`<div class="m-level-card"><div class="m-level-top"><span class="m-level-emoji">${L.emoji}</span><div><div class="m-level-name">${L.name}</div><div class="m-level-xp">${xpInfo}</div></div></div><div class="m-xpbar"><div class="m-xpfill" style="width:${pct}%"></div></div>${streakHtml}</div>`;
+  const missHtml=MISSIONS_DEF.map(ms=>{
+    const done=m.done[ms.id],prog=m.prog[ms.id]||0,pct2=Math.round((prog/ms.goal)*100);
+    return `<div class="m-mission ${done?'done':''}"><div class="m-mission-icon">${done?'\u2705':ms.icon}</div><div class="m-mission-info"><div class="m-mission-text">${ms.text}</div><div class="m-mission-reward">+${ms.xp} XP${done?' \u00B7 Claimed!':''}</div>${!done?`<div class="m-mission-bar"><div class="m-mission-fill" style="width:${pct2}%"></div></div>`:''}</div>${!done?`<div class="m-mission-count">${prog}/${ms.goal}</div>`:''}</div>`;
+  }).join('');
+  el.innerHTML=levelHtml+'<div class="m-section-title">TODAY\'S MISSIONS</div>'+missHtml;
+}
+
+function showXPFloat(amount){
+  const el=document.createElement('div');
+  el.className='xp-gain';el.textContent=`+${amount} XP`;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>el.classList.add('show'));
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);},1400);
+}
+
+function showLevelUp(idx){
+  const L=LEVELS[idx],el=document.getElementById('levelUpOverlay');
+  el.innerHTML=`<div class="lvlup-box"><div class="lvlup-emoji">${L.emoji}</div><div class="lvlup-title">LEVEL UP!</div><div class="lvlup-name">${L.name}</div><button class="quiz-btn-primary" style="margin-top:20px;width:100%" onclick="document.getElementById('levelUpOverlay').classList.remove('show')">Let\u2019s go! \uD83C\uDF89</button></div>`;
+  el.classList.add('show');
+}
+
+function showProModal(reason){
+  document.getElementById('proModalReason').textContent=reason||'Unlock unlimited features with Stan Slang Pro!';
+  document.getElementById('proModal').classList.add('open');
+}
+function closeProModal(){document.getElementById('proModal').classList.remove('open');}
+
+/* Challenge */
+function createChallenge(correct){
+  const p=getProfile(),today=todayStr();
+  if(p.challDay!==today){p.challCount=0;p.challDay=today;}
+  if(p.challCount>=1){showProModal('Create unlimited challenges with Stan Slang Pro! \uD83D\uDC9C');return;}
+  p.challCount++;saveProfile(p);
+  const ids=qQuestions.map(q=>q.w.id).join('-');
+  const url=`${location.origin}${location.pathname}?c=${ids}&s=${correct}`;
+  if(navigator.share){navigator.share({title:'Stan Slang Challenge',text:`I scored ${correct}/10 on Stan Slang! Can you beat me? \uD83D\uDC9C`,url}).catch(()=>{});}
+  else{navigator.clipboard.writeText(url).then(()=>quizToast('Challenge link copied! \uD83D\uDD17')).catch(()=>quizToast('Copy failed'));}
+}
+
+function checkChallenge(){
+  const params=new URLSearchParams(location.search);
+  const c=params.get('c'),s=params.get('s');
+  if(!c)return;
+  const ids=c.split('-').map(Number);
+  const wMap=Object.fromEntries(words.map(w=>[w.id,w]));
+  const cw=ids.map(id=>wMap[id]).filter(Boolean);
+  if(cw.length!==10)return;
+  window.__challWords=cw;window.__challScore=parseInt(s)||0;
+  history.replaceState({},'',location.pathname);
+  setTimeout(()=>{
+    const b=document.getElementById('challengeBanner');
+    if(b){
+      b.innerHTML=`<span>\u26A1 Challenge: a friend scored <b>${s}/10</b> \u2014 can you beat them?</span><button onclick="startChallenge()">Accept \uD83C\uDFAE</button>`;
+      b.style.display='flex';
+    }
+  },600);
+}
+
+function startChallenge(){
+  document.getElementById('challengeBanner').style.display='none';
+  const cw=window.__challWords;
+  qQuestions=cw.map(w=>{
+    const askKo=Math.random()<0.5;
+    let same=words.filter(x=>x.id!==w.id&&x.category===w.category);
+    let other=words.filter(x=>x.id!==w.id&&x.category!==w.category);
+    let dist=shuffle(same).slice(0,3);
+    if(dist.length<3)dist=dist.concat(shuffle(other).slice(0,3-dist.length));
+    const opts=shuffle([w,...dist]);
+    return{w,askKo,prompt:askKo?w.korean:w.english,sub:askKo?w.romanization:'',label:askKo?'What does this mean?':'Which Korean word?',options:opts.map(o=>({text:askKo?o.english:o.korean,correct:o.id===w.id}))};
+  });
+  qIndex=0;qScore=0;qStreak=0;qBestStreak=0;qCorrect=0;
+  document.getElementById('quizResult').style.display='none';
+  document.getElementById('quizPlay').style.display='';
+  document.getElementById('quizScreen').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderQuestion();
+}
+
+/* Hook into existing showResult + openDetail */
+document.addEventListener('DOMContentLoaded',()=>{
+  const _origShowResult=window.showResult;
+  window.showResult=function(){
+    _origShowResult();
+    onQuizComplete(qCorrect);
+    setTimeout(()=>{
+      const btns=document.querySelector('.quiz-result-btns');
+      if(!btns)return;
+      const cb=document.createElement('button');
+      cb.className='quiz-btn-ghost';
+      cb.innerHTML='\u26A1 Challenge a friend';
+      cb.onclick=()=>createChallenge(qCorrect);
+      btns.insertBefore(cb,btns.children[1]);
+    },100);
+  };
+  const _origOpen=window.openDetail;
+  if(_origOpen)window.openDetail=function(id){trackWordView();_origOpen(id);};
+  updateLevelBadge();
+  checkChallenge();
+});
 
 </script>
 <script>
