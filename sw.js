@@ -1,4 +1,4 @@
-const CACHE = 'stan-korean-v6';
+const CACHE = 'stan-korean-v7';
 const PRECACHE = [
   './',
   './index.html',
@@ -21,13 +21,16 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
+// Network-first: always try to fetch the latest from the internet,
+// fall back to cache only when offline.
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(hit =>
-      hit || fetch(e.request).then(res => {
-        if (res.ok) caches.open(CACHE).then(c => c.put(e.request, res.clone()));
+    fetch(e.request)
+      .then(res => {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, copy));
         return res;
-      }).catch(() => caches.match('./index.html'))
-    )
+      })
+      .catch(() => caches.match(e.request))
   );
 });
