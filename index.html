@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stan Korean &#128156; &#8212; Words Every K-pop Stan Should Know</title>
+  <title>Stan Slang &#128156; &#8212; Learn the K-pop Words Every Stan Knows</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#9747FF">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Stan Korean">
+  <meta name="apple-mobile-web-app-title" content="Stan Slang">
   <link rel="apple-touch-icon" href="icons/icon-192.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,13 +124,60 @@
     .success-close-btn:hover{background:rgba(151,71,255,.28);color:#fff;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
     @keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(151,71,255,0.12);}50%{box-shadow:0 0 38px rgba(151,71,255,0.28);}}
+  
+    /* ===== QUIZ STYLES ===== */
+    .quiz-fab{position:fixed;bottom:24px;left:16px;z-index:60;display:flex;align-items:center;gap:7px;padding:14px 22px;border-radius:100px;border:none;font-family:inherit;font-size:15px;font-weight:700;color:#fff;background:linear-gradient(135deg,#9747FF,#6B46C1);box-shadow:0 8px 28px rgba(151,71,255,0.45);cursor:pointer;animation:pulseGlow 2.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent;transition:transform .18s var(--ease);}
+    .quiz-fab:active{transform:scale(0.94);}
+    .quiz-screen{position:fixed;inset:0;z-index:200;background:var(--bg);overflow-y:auto;transform:translateY(100%);transition:transform .35s var(--ease);display:flex;flex-direction:column;}
+    .quiz-screen.open{transform:translateY(0);}
+    .quiz-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:16px;background:rgba(13,13,26,0.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+    .quiz-close{background:transparent;border:none;color:var(--text-3);font-size:15px;font-family:inherit;font-weight:600;cursor:pointer;padding:6px 10px;border-radius:10px;}
+    .quiz-close:active{background:var(--bg-card);}
+    .quiz-progressbar{flex:1;height:8px;border-radius:100px;background:var(--bg-card);overflow:hidden;}
+    .quiz-progressfill{height:100%;border-radius:100px;background:linear-gradient(90deg,#9747FF,#C084FC);width:0%;transition:width .3s var(--ease);}
+    .quiz-counter{font-size:13px;font-weight:700;color:var(--text-3);min-width:38px;text-align:right;}
+    .quiz-timerwrap{display:flex;align-items:center;justify-content:center;padding:18px 16px 4px;}
+    .quiz-timer{position:relative;width:64px;height:64px;}
+    .quiz-timer svg{transform:rotate(-90deg);}
+    .quiz-timer-track{fill:none;stroke:var(--bg-card);stroke-width:6;}
+    .quiz-timer-fill{fill:none;stroke:var(--purple-lt);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset 1s linear,stroke .3s;}
+    .quiz-timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--text);}
+    .quiz-streak{text-align:center;font-size:13px;font-weight:700;color:var(--purple-lt);height:20px;letter-spacing:.02em;}
+    .quiz-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 20px 28px;max-width:560px;width:100%;margin:0 auto;}
+    .quiz-promptlabel{text-align:center;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-4);margin-bottom:14px;}
+    .quiz-prompt{text-align:center;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.15;word-break:keep-all;}
+    .quiz-prompt.ko{font-size:clamp(40px,12vw,68px);}
+    .quiz-prompt.en{font-size:clamp(26px,7vw,40px);}
+    .quiz-promptsub{text-align:center;font-size:14px;color:var(--text-4);font-style:italic;margin-bottom:30px;min-height:18px;}
+    .quiz-options{display:flex;flex-direction:column;gap:12px;}
+    .quiz-opt{padding:18px 20px;border-radius:16px;border:1.5px solid var(--border);background:var(--bg-card);color:var(--text);font-family:inherit;font-size:17px;font-weight:600;text-align:left;cursor:pointer;transition:all .16s var(--ease);-webkit-tap-highlight-color:transparent;word-break:keep-all;}
+    .quiz-opt:active{transform:scale(0.98);}
+    .quiz-opt:disabled{cursor:default;}
+    .quiz-opt.correct{border-color:#34D399;background:rgba(52,211,153,0.16);color:#A7F3D0;}
+    .quiz-opt.wrong{border-color:#F87171;background:rgba(248,113,113,0.14);color:#FCA5A5;}
+    .quiz-opt.dim{opacity:0.4;}
+    /* result */
+    .quiz-result{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;max-width:520px;margin:0 auto;width:100%;animation:fadeUp .4s var(--ease) both;}
+    .quiz-result-emoji{font-size:72px;margin-bottom:12px;animation:fadeUp .5s var(--ease) both;}
+    .quiz-result-rank{font-size:30px;font-weight:800;color:var(--purple-lt);margin-bottom:6px;}
+    .quiz-result-score{font-size:18px;color:var(--text-2);margin-bottom:4px;}
+    .quiz-result-score b{color:var(--text);font-size:22px;}
+    .quiz-result-blurb{font-size:15px;color:var(--text-3);line-height:1.6;margin:14px 0 30px;}
+    .quiz-result-btns{display:flex;flex-direction:column;gap:12px;width:100%;}
+    .quiz-btn-primary{padding:16px;border-radius:14px;border:none;font-family:inherit;font-size:16px;font-weight:700;color:#fff;background:linear-gradient(135deg,#9747FF,#6B46C1);box-shadow:0 6px 22px rgba(151,71,255,0.4);cursor:pointer;transition:transform .16s;}
+    .quiz-btn-primary:active{transform:scale(0.97);}
+    .quiz-btn-ghost{padding:16px;border-radius:14px;border:1.5px solid var(--border);font-family:inherit;font-size:16px;font-weight:600;color:var(--text-2);background:transparent;cursor:pointer;transition:all .16s;}
+    .quiz-btn-ghost:active{transform:scale(0.97);background:var(--bg-card);}
+    .quiz-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg-card);border:1.5px solid var(--border-2);color:var(--text);padding:13px 22px;border-radius:100px;font-size:14px;font-weight:600;opacity:0;transition:all .3s var(--ease);z-index:300;pointer-events:none;}
+    .quiz-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
   </style>
 </head>
 <body>
 <header class="app-header">
   <div class="header-top">
     <div class="logo-gem">&#128156;</div>
-    <span class="logo-text">Stan Korean</span>
+    <span class="logo-text">Stan Slang</span>
   </div>
   <div class="search-wrap">
     <span class="search-icon">&#128269;</span>
@@ -153,6 +200,35 @@
   <div class="results-count" id="resultsCount"></div>
   <div id="cardsContainer"></div>
 </div>
+<button class="quiz-fab" onclick="startQuiz()">&#127918; Quiz</button>
+<div class="quiz-screen" id="quizScreen">
+  <div class="quiz-top">
+    <button class="quiz-close" onclick="closeQuiz()">&#10005; Exit</button>
+    <div class="quiz-progressbar"><div class="quiz-progressfill" id="quizProgress"></div></div>
+    <div class="quiz-counter" id="quizCounter">1/10</div>
+  </div>
+  <div id="quizPlay">
+    <div class="quiz-timerwrap">
+      <div class="quiz-timer">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle class="quiz-timer-track" cx="32" cy="32" r="28"></circle>
+          <circle class="quiz-timer-fill" id="quizTimerFill" cx="32" cy="32" r="28"></circle>
+        </svg>
+        <div class="quiz-timer-num" id="quizTimerNum">10</div>
+      </div>
+    </div>
+    <div class="quiz-streak" id="quizStreak"></div>
+    <div class="quiz-body">
+      <div class="quiz-promptlabel" id="quizPromptLabel">What does this mean?</div>
+      <div class="quiz-prompt" id="quizPrompt"></div>
+      <div class="quiz-promptsub" id="quizPromptSub"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+    </div>
+  </div>
+  <div id="quizResult" style="display:none;"></div>
+</div>
+<div class="quiz-toast" id="quizToast"></div>
+
 <div class="card-detail" id="cardDetail">
   <div class="detail-header">
     <button class="detail-back" onclick="closeDetail()">&#8592; Back</button>
@@ -874,6 +950,177 @@ document.getElementById('suggestForm').addEventListener('submit',async e=>{
     btn.disabled=false;btn.textContent='제안 보내기 💜';
   }
 });
+
+
+/* ===== QUIZ LOGIC ===== */
+const QUIZ_LEN=10, QUIZ_TIME=10;
+let qQuestions=[], qIndex=0, qScore=0, qStreak=0, qBestStreak=0, qTimer=null, qTimeLeft=0, qLocked=false, qCorrect=0;
+const TIMER_CIRC=2*Math.PI*28;
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function buildQuestions(){
+  const pool=shuffle(words).slice(0,QUIZ_LEN);
+  return pool.map(w=>{
+    const askKo=Math.random()<0.5; // true: show Korean, ask English
+    // distractors: prefer same category, fall back to any
+    let sameCat=words.filter(x=>x.id!==w.id&&x.category===w.category);
+    let others=words.filter(x=>x.id!==w.id&&x.category!==w.category);
+    let distractors=shuffle(sameCat).slice(0,3);
+    if(distractors.length<3)distractors=distractors.concat(shuffle(others).slice(0,3-distractors.length));
+    const opts=shuffle([w,...distractors]);
+    return {
+      w,askKo,
+      prompt: askKo?w.korean:w.english,
+      sub: askKo?w.romanization:'',
+      label: askKo?'What does this mean?':'Which Korean word?',
+      options: opts.map(o=>({text: askKo?o.english:o.korean, correct:o.id===w.id}))
+    };
+  });
+}
+
+function startQuiz(){
+  qQuestions=buildQuestions();
+  qIndex=0;qScore=0;qStreak=0;qBestStreak=0;qCorrect=0;
+  document.getElementById('quizResult').style.display='none';
+  document.getElementById('quizPlay').style.display='';
+  document.getElementById('quizScreen').classList.add('open');
+  document.body.style.overflow='hidden';
+  renderQuestion();
+}
+
+function closeQuiz(){
+  clearInterval(qTimer);
+  document.getElementById('quizScreen').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function renderQuestion(){
+  qLocked=false;
+  const q=qQuestions[qIndex];
+  document.getElementById('quizCounter').textContent=`${qIndex+1}/${QUIZ_LEN}`;
+  document.getElementById('quizProgress').style.width=`${(qIndex/QUIZ_LEN)*100}%`;
+  document.getElementById('quizPromptLabel').textContent=q.label;
+  const pEl=document.getElementById('quizPrompt');
+  pEl.textContent=q.prompt;
+  pEl.className='quiz-prompt '+(q.askKo?'ko':'en');
+  document.getElementById('quizPromptSub').textContent=q.sub;
+  const streakEl=document.getElementById('quizStreak');
+  streakEl.textContent=qStreak>=2?`\u{1F525} ${qStreak} in a row!`:'';
+  const optWrap=document.getElementById('quizOptions');
+  optWrap.innerHTML=q.options.map((o,i)=>`<button class="quiz-opt" onclick="answer(${i})">${o.text}</button>`).join('');
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(qTimer);
+  qTimeLeft=QUIZ_TIME;
+  const fill=document.getElementById('quizTimerFill');
+  const num=document.getElementById('quizTimerNum');
+  fill.style.strokeDasharray=TIMER_CIRC;
+  fill.style.strokeDashoffset=0;
+  fill.style.stroke='var(--purple-lt)';
+  num.textContent=qTimeLeft;
+  // kick off transition
+  requestAnimationFrame(()=>{fill.style.strokeDashoffset=TIMER_CIRC;});
+  qTimer=setInterval(()=>{
+    qTimeLeft--;
+    num.textContent=qTimeLeft;
+    if(qTimeLeft<=3)fill.style.stroke='#F87171';
+    if(qTimeLeft<=0){clearInterval(qTimer);timeUp();}
+  },1000);
+}
+
+function timeUp(){
+  if(qLocked)return;
+  qLocked=true;
+  const q=qQuestions[qIndex];
+  const btns=document.querySelectorAll('.quiz-opt');
+  btns.forEach((b,i)=>{b.disabled=true;if(q.options[i].correct)b.classList.add('correct');else b.classList.add('dim');});
+  qStreak=0;
+  setTimeout(nextQuestion,1400);
+}
+
+function answer(i){
+  if(qLocked)return;
+  qLocked=true;
+  clearInterval(qTimer);
+  const q=qQuestions[qIndex];
+  const btns=document.querySelectorAll('.quiz-opt');
+  const correct=q.options[i].correct;
+  btns.forEach((b,idx)=>{
+    b.disabled=true;
+    if(q.options[idx].correct)b.classList.add('correct');
+    else if(idx===i)b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+  if(correct){
+    // time bonus: faster = more points
+    qScore+=10+Math.max(0,qTimeLeft)*2;
+    qCorrect++;
+    qStreak++;
+    if(qStreak>qBestStreak)qBestStreak=qStreak;
+  }else{
+    qStreak=0;
+  }
+  setTimeout(nextQuestion,1100);
+}
+
+function nextQuestion(){
+  qIndex++;
+  if(qIndex>=QUIZ_LEN)showResult();
+  else renderQuestion();
+}
+
+function rankFor(correctCount){
+  if(correctCount>=10)return{e:'\u{1F451}',r:'K-pop Legend',b:"Perfect score. You ARE the fandom. Are you secretly an idol?"};
+  if(correctCount>=8)return{e:'\u{1F49C}',r:'Certified Stan',b:"Elite level. Your bias would be proud of this dedication."};
+  if(correctCount>=6)return{e:'\u{1F525}',r:'Rising Fan',b:"Solid! You know your stuff. A few more comebacks and you're elite."};
+  if(correctCount>=4)return{e:'\u{1F33F}',r:'Fresh Recruit',b:"You're getting there! Keep streaming and studying those lyrics."};
+  if(correctCount>=2)return{e:'\u{1F423}',r:'Baby Stan',b:"Welcome to the fandom! Everyone starts somewhere. Try again?"};
+  return{e:'\u{1F47B}',r:'Lost Tourist',b:"No worries — even the biggest stans were here once. Run it back!"};
+}
+
+function showResult(){
+  clearInterval(qTimer);
+  document.getElementById('quizProgress').style.width='100%';
+  const cc=qCorrect;
+  const rank=rankFor(cc);
+  document.getElementById('quizPlay').style.display='none';
+  const res=document.getElementById('quizResult');
+  res.style.display='';
+  res.innerHTML=`
+    <div class="quiz-result">
+      <div class="quiz-result-emoji">${rank.e}</div>
+      <div class="quiz-result-rank">${rank.r}</div>
+      <div class="quiz-result-score"><b>${cc}/${QUIZ_LEN}</b> correct &middot; ${qScore} pts</div>
+      <div class="quiz-result-score" style="font-size:14px;color:var(--text-4);">Best streak: \u{1F525} ${qBestStreak}</div>
+      <div class="quiz-result-blurb">${rank.b}</div>
+      <div class="quiz-result-btns">
+        <button class="quiz-btn-primary" onclick="shareResult(${cc},'${rank.r.replace(/'/g,"")}')">\u{1F4E4} Share my result</button>
+        <button class="quiz-btn-primary" onclick="startQuiz()" style="background:linear-gradient(135deg,#6B46C1,#9747FF);">\u{1F504} Play again</button>
+        <button class="quiz-btn-ghost" onclick="closeQuiz()">Back to words</button>
+      </div>
+    </div>`;
+}
+
+function shareResult(cc,rank){
+  const txt=`I'm a "${rank}" on Stan Slang! \u{1F49C}\nScored ${cc}/${QUIZ_LEN} on the K-pop Korean quiz. Can you beat me?`;
+  const url=location.href.split('#')[0];
+  if(navigator.share){
+    navigator.share({title:'Stan Slang Quiz',text:txt,url}).catch(()=>{});
+  }else{
+    navigator.clipboard.writeText(txt+'\n'+url).then(()=>quizToast('Copied! Paste it anywhere \u{1F4CB}')).catch(()=>quizToast('Could not copy'));
+  }
+}
+
+function quizToast(msg){
+  const t=document.getElementById('quizToast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+
 
 renderSotd();
 renderFeed();
