@@ -288,11 +288,11 @@
     .starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
     .star{position:absolute;background:#C084FC;border-radius:50%;opacity:0;animation:twinkle linear infinite;}
     @keyframes twinkle{0%,100%{opacity:0;}50%{opacity:0.7;}}
-    .mascot-wrap{position:fixed;right:14px;bottom:200px;z-index:65;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:floaty 4s ease-in-out infinite;}
+    .mascot-wrap{position:fixed;right:14px;bottom:96px;z-index:65;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:floaty 4s ease-in-out infinite;}
     @keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-12px) rotate(3deg);}}
     .mascot-wrap:active{transform:scale(0.9);}
     .mascot-svg{width:62px;height:62px;filter:drop-shadow(0 4px 14px rgba(151,71,255,0.5));}
-    .mascot-bubble{position:fixed;right:18px;bottom:272px;z-index:66;max-width:200px;background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:16px 16px 4px 16px;padding:12px 16px;font-size:14px;font-weight:600;color:var(--text);box-shadow:0 6px 24px rgba(0,0,0,0.5);opacity:0;transform:translateY(8px) scale(0.9);transform-origin:bottom right;transition:all .28s var(--ease);pointer-events:none;}
+    .mascot-bubble{position:fixed;right:18px;bottom:168px;z-index:66;max-width:200px;background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:16px 16px 4px 16px;padding:12px 16px;font-size:14px;font-weight:600;color:var(--text);box-shadow:0 6px 24px rgba(0,0,0,0.5);opacity:0;transform:translateY(8px) scale(0.9);transform-origin:bottom right;transition:all .28s var(--ease);pointer-events:none;}
     .mascot-bubble.show{opacity:1;transform:translateY(0) scale(1);}
     .mascot-bubble::after{content:'';position:absolute;bottom:-8px;right:20px;width:14px;height:14px;background:var(--bg-card);border-right:1.5px solid var(--border-2);border-bottom:1.5px solid var(--border-2);transform:rotate(45deg);}
     .egg-overlay{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(13,13,26,0.92);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s;flex-direction:column;text-align:center;padding:30px;}
@@ -302,10 +302,123 @@
     .egg-text{font-size:22px;font-weight:800;color:var(--purple-lt);margin-top:20px;}
     .egg-sub{font-size:14px;color:var(--text-3);margin-top:8px;line-height:1.6;max-width:280px;}
 
+  
+    /* ===== BOTTOM NAV BAR ===== */
+    body{padding-bottom:78px;}
+    .bottomnav{position:fixed;bottom:0;left:0;right:0;z-index:80;display:flex;justify-content:space-around;align-items:center;background:rgba(19,19,37,0.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1.5px solid var(--border-2);padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px));}
+    .bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;font-family:inherit;color:var(--text-3);cursor:pointer;padding:6px 2px;-webkit-tap-highlight-color:transparent;transition:color .18s,transform .12s;}
+    .bn-btn:active{transform:scale(0.88);}
+    .bn-ico{font-size:22px;line-height:1;}
+    .bn-lbl{font-size:10px;font-weight:700;}
+    .bn-btn.accent .bn-lbl{color:var(--purple-lt);}
+    /* play hub sheet */
+    .playhub{position:fixed;inset:0;z-index:150;pointer-events:none;}
+    .playhub.open{pointer-events:all;}
+    .playhub-bg{position:absolute;inset:0;background:rgba(0,0,0,0.6);opacity:0;transition:opacity .3s;backdrop-filter:blur(4px);}
+    .playhub.open .playhub-bg{opacity:1;}
+    .playhub-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--bg-card);border-radius:24px 24px 0 0;padding:22px 16px calc(30px + env(safe-area-inset-bottom,0px));transform:translateY(100%);transition:transform .35s var(--ease);}
+    .playhub.open .playhub-sheet{transform:translateY(0);}
+    .playhub-title{font-size:18px;font-weight:800;color:var(--text);text-align:center;margin-bottom:4px;}
+    .playhub-sub{font-size:13px;color:var(--text-3);text-align:center;margin-bottom:20px;}
+    .playhub-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .ph-card{background:var(--bg);border:1.5px solid var(--border-2);border-radius:18px;padding:18px 14px;text-align:center;cursor:pointer;transition:transform .14s,border-color .18s;-webkit-tap-highlight-color:transparent;}
+    .ph-card:active{transform:scale(0.95);}
+    .ph-emoji{font-size:34px;margin-bottom:8px;}
+    .ph-name{font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px;}
+    .ph-desc{font-size:11px;color:var(--text-3);line-height:1.4;}
+    /* ===== SHIP TEST (\ucd5c\uc560 \uad81\ud569) ===== */
+    .ship-screen,.tap-screen{position:fixed;inset:0;z-index:210;background:radial-gradient(ellipse at 50% 0%,#1a1340,#0D0D1A 70%);transform:translateY(100%);transition:transform .35s var(--ease);display:flex;flex-direction:column;overflow-y:auto;}
+    .ship-screen.open,.tap-screen.open{transform:translateY(0);}
+    .ms-top{display:flex;align-items:center;padding:14px 16px;}
+    .ms-close{background:rgba(255,255,255,0.08);border:none;color:var(--text-2);font-size:14px;font-family:inherit;font-weight:600;cursor:pointer;padding:8px 14px;border-radius:100px;}
+    .ship-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;}
+    .ship-emoji{font-size:60px;margin-bottom:10px;}
+    .ship-h{font-size:26px;font-weight:800;color:var(--text);margin-bottom:6px;}
+    .ship-p{font-size:14px;color:var(--text-3);line-height:1.6;margin-bottom:24px;max-width:300px;}
+    .ship-inputs{width:100%;max-width:340px;display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+    .ship-input{padding:16px;border-radius:14px;border:1.5px solid var(--border-2);background:var(--bg-card);color:var(--text);font-family:inherit;font-size:16px;text-align:center;}
+    .ship-input::placeholder{color:var(--text-4);}
+    .ship-btn{padding:16px 40px;border-radius:14px;border:none;font-family:inherit;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);box-shadow:0 6px 22px rgba(244,114,182,0.4);cursor:pointer;width:100%;max-width:340px;transition:transform .16s;}
+    .ship-btn:active{transform:scale(0.97);}
+    .ship-result{width:100%;max-width:340px;animation:fadeUp .5s var(--ease) both;}
+    .ship-score-big{font-size:72px;font-weight:800;background:linear-gradient(135deg,#F9A8D4,#C084FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;}
+    .ship-meter{height:14px;border-radius:100px;background:var(--bg-card);overflow:hidden;margin:16px 0;}
+    .ship-meter-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#F472B6,#C084FC);transition:width 1s var(--ease);}
+    .ship-verdict{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;}
+    .ship-msg{font-size:14px;color:var(--text-3);line-height:1.6;margin-bottom:24px;}
+    .ship-btn-ghost{margin-top:10px;padding:14px;border-radius:14px;border:1.5px solid var(--border-2);font-family:inherit;font-size:15px;font-weight:600;color:var(--text-2);background:transparent;cursor:pointer;width:100%;max-width:340px;}
+    /* ===== TAP GAME (\uc2ac\ub7ad\uc774 \ud0ed\ud0ed) ===== */
+    .tap-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;position:relative;}
+    .tap-hud{display:flex;gap:30px;margin-bottom:20px;}
+    .tap-hud-item{text-align:center;}
+    .tap-hud-num{font-size:32px;font-weight:800;color:var(--purple-lt);line-height:1;}
+    .tap-hud-lbl{font-size:11px;color:var(--text-3);margin-top:4px;}
+    .tap-zone{position:relative;width:100%;max-width:340px;height:340px;}
+    .tap-target{position:absolute;width:74px;height:74px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .07s;filter:drop-shadow(0 4px 12px rgba(151,71,255,0.6));}
+    .tap-target:active{transform:scale(0.82);}
+    .tap-start-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:5;background:rgba(13,13,26,0.5);}
+    .tap-pop{position:absolute;font-size:18px;font-weight:800;color:#F9A8D4;pointer-events:none;animation:tapPop .5s var(--ease) forwards;}
+    @keyframes tapPop{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-40px) scale(1.4);}}
+
   </style>
 </head>
 <body>
 <div class="starfield" id="starfield"></div>
+
+<nav class="bottomnav">
+  <button class="bn-btn" onclick="scrollToTop()"><span class="bn-ico">🏠</span><span class="bn-lbl">홈</span></button>
+  <button class="bn-btn accent" onclick="openPlayHub()"><span class="bn-ico">🎡</span><span class="bn-lbl">놀이터</span></button>
+  <button class="bn-btn" onclick="startQuiz()"><span class="bn-ico">🎮</span><span class="bn-lbl">퀴즈</span></button>
+  <button class="bn-btn" onclick="openMissions()"><span class="bn-ico">🎯</span><span class="bn-lbl">미션</span></button>
+  <button class="bn-btn" onclick="openSuggestModal()"><span class="bn-ico">✏️</span><span class="bn-lbl">제안</span></button>
+</nav>
+
+<div class="playhub" id="playHub">
+  <div class="playhub-bg" onclick="closePlayHub()"></div>
+  <div class="playhub-sheet">
+    <div class="playhub-title">🎡 슬랭이의 놀이터</div>
+    <div class="playhub-sub">심심할 때 아무거나 눌러봐 💜</div>
+    <div class="playhub-grid">
+      <div class="ph-card" onclick="closePlayHub();startQuiz()"><div class="ph-emoji">🎮</div><div class="ph-name">덕력 퀴즈</div><div class="ph-desc">10문제로 보는 내 덕력</div></div>
+      <div class="ph-card" onclick="closePlayHub();openShooter()"><div class="ph-emoji">✈️</div><div class="ph-name">Word Blaster</div><div class="ph-desc">단어 격추 슈팅게임</div></div>
+      <div class="ph-card" onclick="closePlayHub();openShip()"><div class="ph-emoji">💞</div><div class="ph-name">최애 궁합</div><div class="ph-desc">오늘 최애와의 궁합은?</div></div>
+      <div class="ph-card" onclick="closePlayHub();openTap()"><div class="ph-emoji">💜</div><div class="ph-name">슬랭이 탭탭</div><div class="ph-desc">10초 안에 몇 번?</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="ship-screen" id="shipScreen">
+  <div class="ms-top"><button class="ms-close" onclick="closeShip()">✕ 닫기</button></div>
+  <div class="ship-body" id="shipBody">
+    <div class="ship-emoji">💞</div>
+    <div class="ship-h">최애 궁합 테스트</div>
+    <div class="ship-p">내 이름과 최애 이름을 넣으면<br>오늘의 궁합을 봐줄게! 💜</div>
+    <div class="ship-inputs">
+      <input class="ship-input" id="shipMe" placeholder="내 이름 (또는 닉네임)" maxlength="20">
+      <input class="ship-input" id="shipBias" placeholder="최애 이름" maxlength="20">
+    </div>
+    <button class="ship-btn" onclick="runShip()">💕 궁합 보기</button>
+  </div>
+</div>
+
+<div class="tap-screen" id="tapScreen">
+  <div class="ms-top"><button class="ms-close" onclick="closeTap()">✕ 닫기</button></div>
+  <div class="tap-body">
+    <div class="tap-hud">
+      <div class="tap-hud-item"><div class="tap-hud-num" id="tapCount">0</div><div class="tap-hud-lbl">탭</div></div>
+      <div class="tap-hud-item"><div class="tap-hud-num" id="tapTime">10</div><div class="tap-hud-lbl">초</div></div>
+    </div>
+    <div class="tap-zone" id="tapZone">
+      <div class="tap-start-ov" id="tapStartOv">
+        <div class="ship-emoji">💜</div>
+        <div class="ship-h">슬랭이 탭탭</div>
+        <div class="ship-p">10초 동안 슬랭이를<br>최대한 많이 탭해줘!</div>
+        <button class="ship-btn" onclick="startTap()">▶️ 시작</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="mascot-wrap" id="mascotWrap" onclick="mascotTalk()"><svg class="mascot-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
 <div class="mascot-bubble" id="mascotBubble"></div>
 <div class="egg-overlay" id="eggOverlay" onclick="this.classList.remove('show')">
@@ -342,7 +455,7 @@
   <div id="cardsContainer"></div>
 </div>
 <div id="challengeBanner" class="challenge-banner"></div>
-<button class="missions-fab" onclick="openMissions()">&#127919; Missions</button>
+
 <div class="missions-panel" id="missionsPanel">
   <div class="missions-panel-bg" onclick="closeMissions()"></div>
   <div class="missions-panel-sheet">
@@ -371,7 +484,7 @@
   </div>
 </div>
 
-<button class="shooter-fab" onclick="openShooter()">&#9992;&#65039; Word Blaster</button>
+
 <div class="shooter-screen" id="shooterScreen">
   <div class="sh-top">
     <button class="sh-close" onclick="closeShooter()">&#10005; Exit</button>
@@ -394,7 +507,7 @@
   <div class="sh-options" id="shOptions"></div>
 </div>
 
-<button class="quiz-fab" onclick="startQuiz()">&#127918; Quiz</button>
+
 <div class="quiz-screen" id="quizScreen">
   <div class="quiz-top">
     <button class="quiz-close" onclick="closeQuiz()">&#10005; Exit</button>
@@ -430,7 +543,7 @@
   </div>
   <div class="detail-body" id="detailBody"></div>
 </div>
-<button class="float-btn" onclick="openSuggestModal()">&#9999;&#65039; &#45800;&#50612; &#51228;&#50504;&#54616;&#44592;</button>
+
 
 <div id="appFooter" class="app-footer">
   <div class="footer-inner">
@@ -1328,6 +1441,135 @@ function quizToast(msg){
   setTimeout(()=>t.classList.remove('show'),2200);
 }
 
+
+
+
+/* ===== PLAY HUB ===== */
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+function openPlayHub(){document.getElementById('playHub').classList.add('open');document.body.style.overflow='hidden';}
+function closePlayHub(){document.getElementById('playHub').classList.remove('open');document.body.style.overflow='';}
+
+/* ===== SHIP TEST (\ucd5c\uc560 \uad81\ud569) ===== */
+function openShip(){
+  document.getElementById('shipScreen').classList.add('open');
+  document.body.style.overflow='hidden';
+  // reset to input view
+  resetShipView();
+}
+function closeShip(){document.getElementById('shipScreen').classList.remove('open');document.body.style.overflow='';}
+function resetShipView(){
+  document.getElementById('shipBody').innerHTML=`
+    <div class="ship-emoji">\u{1F49E}</div>
+    <div class="ship-h">\ucd5c\uc560 \uad81\ud569 \ud14c\uc2a4\ud2b8</div>
+    <div class="ship-p">\ub0b4 \uc774\ub984\uacfc \ucd5c\uc560 \uc774\ub984\uc744 \ub123\uc73c\uba74<br>\uc624\ub298\uc758 \uad81\ud569\uc744 \ubd10\uc904\uac8c! \u{1F49C}</div>
+    <div class="ship-inputs">
+      <input class="ship-input" id="shipMe" placeholder="\ub0b4 \uc774\ub984 (\ub610\ub294 \ub2c9\ub124\uc784)" maxlength="20">
+      <input class="ship-input" id="shipBias" placeholder="\ucd5c\uc560 \uc774\ub984" maxlength="20">
+    </div>
+    <button class="ship-btn" onclick="runShip()">\u{1F495} \uad81\ud569 \ubcf4\uae30</button>`;
+}
+function shipHash(str){
+  // deterministic per name-pair + per day
+  const today=(typeof todayStr==='function')?todayStr():new Date().toDateString();
+  let s=str+'|'+today, h=0;
+  for(let i=0;i<s.length;i++){h=((h<<5)-h+s.charCodeAt(i))|0;}
+  return Math.abs(h);
+}
+function runShip(){
+  const me=(document.getElementById('shipMe').value||'').trim();
+  const bias=(document.getElementById('shipBias').value||'').trim();
+  if(!me||!bias){quizToast('\ub450 \uc774\ub984 \ubaa8\ub450 \ub123\uc5b4\uc918! \u{1F495}');return;}
+  const score=shipHash(me+'\u2764'+bias)%101; // 0-100
+  let verdict,msg,emoji;
+  if(score>=90){emoji='\u{1F451}';verdict='\uc6b4\uba85\uc758 \uc9dd! \uc18c\uc6b8\uba54\uc774\ud2b8';msg=me+'\ub2d8\uacfc '+bias+'\ub2d8\uc740 \uc804\uc0dd\uc5d0\ub3c4 \uc5f0\uc774\uc5c8\uc744 \uac70\uc608\uc694. \uc774\ubcf4\ub2e4 \uc644\ubcbd\ud55c \uad81\ud569\uc740 \uc5c6\uc5b4\uc694!';}
+  else if(score>=70){emoji='\u{1F495}';verdict='\ub354\ud568 \uc5c6\uc774 \uc798 \ub9de\uc544\uc694';msg='\ucc30\ub155\uad81\ud569! \uc624\ub298 \ucd5c\uc560 \uc601\uc0c1 \ubcf4\uba70 \ud589\ubcf5\ud574\uc9c8 \uc218\ubc16\uc5d0 \uc5c6\uc5b4\uc694 \u{1F970}';}
+  else if(score>=50){emoji='\u{1F496}';verdict='\uc740\uadfc\ud788 \uc798 \ub9de\ub294 \uc0ac\uc774';msg='\uc870\uae08\uc529 \uac00\uae4c\uc6cc\uc9c0\ub294 \uc911! \uc2a4\ud2b8\ub9ac\ubc0d \ud55c \ubc88 \ub3cc\ub824\uc8fc\uba74 \uad81\ud569\uc774 \uc62c\ub77c\uac08\uc9c0\ub3c4? \u{1F3B5}';}
+  else if(score>=30){emoji='\u{1F49b}';verdict='\uc11c\uc11c\ud788 \uc54c\uc544\uac00\ub294 \uc911';msg='\uc544\uc9c1\uc740 \uc218\uc90d\uc740 \uc0ac\uc774\uc9c0\ub9cc, \ud32c\uc2ec\uc740 \ucc28\uce21\ucc28\uce21 \uc313\uc774\ub294 \ubc95! \u{1F331}';}
+  else{emoji='\u{1F340}';verdict='\uc774\uc81c \uc2dc\uc791\uc774\uc5d0\uc694';msg='\uc624\ub298\uc740 \uad81\ud569\uc774 \uc880 \ub0ae\uc9c0\ub9cc \uad1c\ucc2e\uc544\uc694. \ub0b4\uc77c \ub2e4\uc2dc \ud574\ubd10\uc694 \u2014 \ub9e4\uc77c \ub2ec\ub77c\uc838\uc694! \u{1F340}';}
+  document.getElementById('shipBody').innerHTML=`
+    <div class="ship-result">
+      <div style="font-size:48px;margin-bottom:4px">${emoji}</div>
+      <div style="font-size:14px;color:var(--text-3);margin-bottom:4px">${me} \u{1F49E} ${bias}</div>
+      <div class="ship-score-big">${score}%</div>
+      <div class="ship-meter"><div class="ship-meter-fill" style="width:0%"></div></div>
+      <div class="ship-verdict">${verdict}</div>
+      <div class="ship-msg">${msg}</div>
+      <button class="ship-btn" onclick="shipShare(${score},'${me.replace(/'/g,'')}','${bias.replace(/'/g,'')}')">\u{1F4E4} \uacb0\uacfc \uc790\ub791\ud558\uae30</button>
+      <button class="ship-btn-ghost" onclick="resetShipView()">\u{1F504} \ub2e4\uc2dc \ud558\uae30</button>
+    </div>`;
+  setTimeout(()=>{const f=document.querySelector('.ship-meter-fill');if(f)f.style.width=score+'%';},100);
+  if(typeof awardXP==='function')awardXP(10,'\uad81\ud569 \ud14c\uc2a4\ud2b8');
+}
+function shipShare(score,me,bias){
+  const txt=`${me} \u{1F49E} ${bias} \uc624\ub298\uc758 \uad81\ud569 ${score}%! \u{1F495}\nStan Slang\uc5d0\uc11c \ub108\ub3c4 \ucd5c\uc560 \uad81\ud569 \ud655\uc778\ud574\ubd10!`;
+  const url=location.href.split('?')[0].split('#')[0];
+  if(navigator.share)navigator.share({title:'\ucd5c\uc560 \uad81\ud569',text:txt,url}).catch(()=>{});
+  else navigator.clipboard.writeText(txt+'\n'+url).then(()=>quizToast('\ubcf5\uc0ac \uc644\ub8cc! \u{1F4CB}')).catch(()=>{});
+}
+
+/* ===== TAP GAME (\uc2ac\ub7ad\uc774 \ud0ed\ud0ed) ===== */
+let tapCount=0,tapTime=10,tapTimer=null,tapActive=false;
+const TAP_MASCOT=`<svg class="tap-mascot-svg" style="width:100%;height:100%" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg>`;
+function openTap(){document.getElementById('tapScreen').classList.add('open');document.body.style.overflow='hidden';resetTapView();}
+function closeTap(){tapActive=false;clearInterval(tapTimer);document.getElementById('tapScreen').classList.remove('open');document.body.style.overflow='';}
+function resetTapView(){
+  tapActive=false;clearInterval(tapTimer);
+  tapCount=0;tapTime=10;
+  document.getElementById('tapCount').textContent='0';
+  document.getElementById('tapTime').textContent='10';
+  const z=document.getElementById('tapZone');
+  z.innerHTML=`<div class="tap-start-ov" id="tapStartOv"><div class="ship-emoji">\u{1F49C}</div><div class="ship-h">\uc2ac\ub7ad\uc774 \ud0ed\ud0ed</div><div class="ship-p">10\ucd08 \ub3d9\uc548 \uc2ac\ub7ad\uc774\ub97c<br>\ucd5c\ub300\ud55c \ub9ce\uc774 \ud0ed\ud574\uc918!</div><button class="ship-btn" onclick="startTap()">\u25B6\uFE0F \uc2dc\uc791</button></div>`;
+}
+function startTap(){
+  tapCount=0;tapTime=10;tapActive=true;
+  document.getElementById('tapCount').textContent='0';
+  document.getElementById('tapTime').textContent='10';
+  document.getElementById('tapZone').innerHTML='';
+  moveTarget();
+  tapTimer=setInterval(()=>{
+    tapTime--;
+    document.getElementById('tapTime').textContent=tapTime;
+    if(tapTime<=0){clearInterval(tapTimer);endTap();}
+  },1000);
+}
+function moveTarget(){
+  if(!tapActive)return;
+  const z=document.getElementById('tapZone');
+  const max=z.clientWidth-74;
+  const maxH=z.clientHeight-74;
+  const x=Math.random()*max,y=Math.random()*maxH;
+  z.innerHTML=`<div class="tap-target" style="left:${x}px;top:${y}px" onclick="hitTarget(event)">${TAP_MASCOT}</div>`;
+}
+function hitTarget(e){
+  if(!tapActive)return;
+  tapCount++;
+  document.getElementById('tapCount').textContent=tapCount;
+  // pop effect
+  const z=document.getElementById('tapZone');
+  const pop=document.createElement('div');
+  pop.className='tap-pop';pop.textContent='+1';
+  pop.style.left=(e.offsetX||30)+'px';pop.style.top=(e.offsetY||30)+'px';
+  e.currentTarget.appendChild(pop);
+  moveTarget();
+}
+function endTap(){
+  tapActive=false;
+  const z=document.getElementById('tapZone');
+  let rank;
+  if(tapCount>=60)rank='\u{1F451} \uad11\uc18d\uc758 \uc2e0';
+  else if(tapCount>=45)rank='\u{1F525} \ud0ed\uc7a5\uc778';
+  else if(tapCount>=30)rank='\u{1F4AA} \uc81c\ubc95\uc778\ub370?';
+  else if(tapCount>=15)rank='\u{1F331} \uc6b4\uc190 \u48dc\ub294 \uc911';
+  else rank='\u{1F423} \ub290\uae00\ub290\uae00';
+  z.innerHTML=`<div class="tap-start-ov"><div class="ship-emoji">\u{1F389}</div><div class="ship-h">${tapCount}\ud0ed!</div><div class="ship-verdict" style="margin:8px 0 20px">${rank}</div><button class="ship-btn" onclick="tapShare(${tapCount})">\u{1F4E4} \uc790\ub791\ud558\uae30</button><button class="ship-btn-ghost" onclick="startTap()">\u{1F504} \ub2e4\uc2dc</button></div>`;
+  if(typeof awardXP==='function')awardXP(Math.floor(tapCount/3),'\uc2ac\ub7ad\uc774 \ud0ed\ud0ed');
+}
+function tapShare(c){
+  const txt=`\uc2ac\ub7ad\uc774 \ud0ed\ud0ed 10\ucd08\uc5d0 ${c}\ud0ed! \u{1F49C} Stan Slang\uc5d0\uc11c \ub108\ub3c4 \ub3c4\uc804\ud574\ubd10!`;
+  const url=location.href.split('?')[0].split('#')[0];
+  if(navigator.share)navigator.share({title:'\uc2ac\ub7ad\uc774 \ud0ed\ud0ed',text:txt,url}).catch(()=>{});
+  else navigator.clipboard.writeText(txt+'\n'+url).then(()=>quizToast('\ubcf5\uc0ac \uc644\ub8cc! \u{1F4CB}')).catch(()=>{});
+}
 
 
 renderSotd();
