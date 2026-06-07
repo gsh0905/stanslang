@@ -244,6 +244,45 @@
     .footer-btn.ad{background:var(--bg);border:1.5px solid var(--border-2);color:var(--text-3);}
     .footer-copy{font-size:11px;color:var(--text-4);line-height:1.6;}
 
+  
+    /* ===== SHOOTER GAME ===== */
+    .shooter-fab{position:fixed;bottom:136px;left:16px;z-index:60;display:flex;align-items:center;gap:7px;padding:12px 18px;border-radius:100px;border:none;font-family:inherit;font-size:14px;font-weight:700;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);box-shadow:0 4px 18px rgba(244,114,182,0.4);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .18s var(--ease);}
+    .shooter-fab:active{transform:scale(0.94);}
+    .shooter-screen{position:fixed;inset:0;z-index:210;background:radial-gradient(ellipse at 50% 0%,#1a1340,#0D0D1A 70%);transform:translateY(100%);transition:transform .35s var(--ease);display:flex;flex-direction:column;overflow:hidden;}
+    .shooter-screen.open{transform:translateY(0);}
+    .sh-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;z-index:5;}
+    .sh-close{background:rgba(255,255,255,0.08);border:none;color:var(--text-2);font-size:14px;font-family:inherit;font-weight:600;cursor:pointer;padding:8px 14px;border-radius:100px;}
+    .sh-stat{display:flex;gap:16px;align-items:center;}
+    .sh-score{font-size:16px;font-weight:800;color:var(--text);}
+    .sh-score span{color:var(--purple-lt);}
+    .sh-lives{font-size:16px;letter-spacing:2px;}
+    .sh-arena{position:relative;flex:1;overflow:hidden;}
+    .sh-falling{position:absolute;top:0;left:50%;transform:translateX(-50%);padding:12px 22px;border-radius:16px;background:rgba(151,71,255,0.16);border:1.5px solid var(--border-2);backdrop-filter:blur(4px);white-space:nowrap;will-change:transform;}
+    .sh-falling .fw-ko{font-size:30px;font-weight:800;color:var(--text);line-height:1;}
+    .sh-falling .fw-rom{font-size:12px;color:var(--text-3);text-align:center;margin-top:3px;font-style:italic;}
+    .sh-falling.hit{animation:shExplode .4s var(--ease) forwards;}
+    @keyframes shExplode{0%{transform:translateX(-50%) scale(1);opacity:1;}100%{transform:translateX(-50%) scale(1.6);opacity:0;}}
+    .sh-falling.miss{animation:shMiss .4s var(--ease) forwards;}
+    @keyframes shMiss{0%{opacity:1;}100%{transform:translateX(-50%) scale(0.7);opacity:0;filter:grayscale(1);}}
+    .sh-jet{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:40px;z-index:3;transition:left .12s var(--ease);filter:drop-shadow(0 0 8px rgba(151,71,255,0.6));}
+    .sh-laser{position:absolute;width:4px;border-radius:4px;background:linear-gradient(180deg,#C084FC,transparent);z-index:2;pointer-events:none;}
+    .sh-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px 28px;}
+    .sh-opt{padding:16px 12px;border-radius:14px;border:1.5px solid var(--border);background:var(--bg-card);color:var(--text);font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:transform .12s;-webkit-tap-highlight-color:transparent;word-break:keep-all;text-align:center;}
+    .sh-opt:active{transform:scale(0.96);background:var(--bg-card2);}
+    .sh-countdown{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:8;background:rgba(13,13,26,0.85);}
+    .sh-cd-num{font-size:90px;font-weight:800;color:var(--purple-lt);animation:pulse .6s var(--ease);}
+    .sh-cd-label{font-size:16px;color:var(--text-3);margin-top:8px;}
+    /* start / gameover screens reuse quiz-result style */
+    .sh-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9;background:rgba(13,13,26,0.92);text-align:center;padding:32px 24px;}
+    .sh-title{font-size:34px;font-weight:800;color:var(--text);margin-bottom:6px;}
+    .sh-subtitle{font-size:15px;color:var(--text-3);line-height:1.6;margin-bottom:24px;max-width:300px;}
+    .sh-howto{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:24px;max-width:320px;text-align:left;}
+    .sh-btn{padding:16px 40px;border-radius:14px;border:none;font-family:inherit;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);box-shadow:0 6px 22px rgba(244,114,182,0.4);cursor:pointer;transition:transform .16s;width:100%;max-width:320px;}
+    .sh-btn:active{transform:scale(0.97);}
+    .sh-btn-ghost{margin-top:12px;padding:14px;border-radius:14px;border:1.5px solid var(--border-2);font-family:inherit;font-size:15px;font-weight:600;color:var(--text-2);background:transparent;cursor:pointer;width:100%;max-width:320px;}
+    .sh-result-emoji{font-size:64px;margin-bottom:10px;}
+    .sh-revive{margin-top:12px;padding:14px;border-radius:14px;border:1.5px solid #F472B6;font-family:inherit;font-size:15px;font-weight:700;color:#F9A8D4;background:rgba(244,114,182,0.12);cursor:pointer;width:100%;max-width:320px;}
+
   </style>
 </head>
 <body>
@@ -302,6 +341,29 @@
     <button class="quiz-btn-primary" onclick="closeProModal();quizToast('Pro waitlist opening soon! &#128156;')">Join the waitlist &#128156;</button>
     <button class="quiz-btn-ghost" style="margin-top:10px;width:100%" onclick="closeProModal()">Maybe later</button>
   </div>
+</div>
+
+<button class="shooter-fab" onclick="openShooter()">&#9992;&#65039; Word Blaster</button>
+<div class="shooter-screen" id="shooterScreen">
+  <div class="sh-top">
+    <button class="sh-close" onclick="closeShooter()">&#10005; Exit</button>
+    <div class="sh-stat">
+      <div class="sh-score">Score <span id="shScore">0</span></div>
+      <div class="sh-lives" id="shLives">&#128156;&#128156;&#128156;</div>
+    </div>
+  </div>
+  <div class="sh-arena" id="shArena">
+    <div class="sh-jet" id="shJet">&#128640;</div>
+    <div class="sh-overlay" id="shStart">
+      <div class="sh-title">&#9992;&#65039; Word Blaster</div>
+      <div class="sh-subtitle">\uB2E8\uC5B4\uAC00 \uB5A8\uC5B4\uC9C0\uAE30 \uC804\uC5D0 \uB73B\uC744 \uB9DE\ucD94\uC11C \uACA9\ucD94\uD558\uC138\uC694!</div>
+      <div class="sh-howto">&#127919; \uC704\uC5D0\uC11C \uD55C\uAD6D\uC5B4 \uB2E8\uC5B4\uAC00 \uB0B4\uB824\uC640\uC694<br>&#128293; \uC544\uB798 4\uAC1C \uBCF4\uAE30 \uC911 \uB9DE\uB294 \uB73B\uC744 \uD0ED!<br>&#128164; \uD2C0\uB9AC\uAC70\uB098 \uB193\uCE58\uBA74 \uC0DD\uBA85 \uAC10\uC18C<br>&#9889; \uC810\uC810 \uBE68\uB77C\uC838\uC694</div>
+      <button class="sh-btn" onclick="shStartGame()">&#127918; \uC2DC\uC791\uD558\uAE30</button>
+    </div>
+    <div class="sh-overlay" id="shGameover" style="display:none;"></div>
+    <div class="sh-countdown" id="shCountdown" style="display:none;"><div class="sh-cd-num" id="shCdNum">3</div><div class="sh-cd-label">\uC900\uBE44...</div></div>
+  </div>
+  <div class="sh-options" id="shOptions"></div>
 </div>
 
 <button class="quiz-fab" onclick="startQuiz()">&#127918; Quiz</button>
@@ -1242,6 +1304,188 @@ function quizToast(msg){
 
 renderSotd();
 renderFeed();
+
+/* ===== WORD BLASTER SHOOTER ===== */
+let shScore=0, shLives=3, shCurrent=null, shFallEl=null, shRAF=null,
+    shFallY=0, shSpeed=0, shActive=false, shLocked=false, shStartTime=0,
+    shHits=0, shUsedRevive=false;
+
+function openShooter(){
+  document.getElementById('shooterScreen').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('shStart').style.display='flex';
+  document.getElementById('shGameover').style.display='none';
+}
+function closeShooter(){
+  shActive=false;
+  if(shRAF)cancelAnimationFrame(shRAF);
+  document.getElementById('shooterScreen').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function shStartGame(){
+  shScore=0;shLives=3;shHits=0;shUsedRevive=false;
+  document.getElementById('shStart').style.display='none';
+  document.getElementById('shGameover').style.display='none';
+  updateShHUD();
+  shCountdownThenPlay();
+}
+
+function shCountdownThenPlay(){
+  const cd=document.getElementById('shCountdown'),num=document.getElementById('shCdNum');
+  cd.style.display='flex';let n=3;num.textContent=n;
+  const iv=setInterval(()=>{
+    n--;
+    if(n<=0){clearInterval(iv);cd.style.display='none';shActive=true;shStartTime=Date.now();spawnWord();}
+    else{num.textContent=n;num.style.animation='none';void num.offsetWidth;num.style.animation='pulse .6s var(--ease)';}
+  },800);
+}
+
+function updateShHUD(){
+  document.getElementById('shScore').textContent=shScore;
+  document.getElementById('shLives').textContent='\u{1F49C}'.repeat(shLives)+'\u{1F90D}'.repeat(Math.max(0,3-shLives));
+}
+
+function spawnWord(){
+  if(!shActive)return;
+  shLocked=false;
+  const w=words[Math.floor(Math.random()*words.length)];
+  shCurrent=w;
+  // distractors same category
+  let same=words.filter(x=>x.id!==w.id&&x.category===w.category);
+  let other=words.filter(x=>x.id!==w.id&&x.category!==w.category);
+  let dist=shuffle(same).slice(0,3);
+  if(dist.length<3)dist=dist.concat(shuffle(other).slice(0,3-dist.length));
+  const opts=shuffle([w,...dist]);
+  // render falling word
+  const arena=document.getElementById('shArena');
+  const el=document.createElement('div');
+  el.className='sh-falling';
+  el.innerHTML=`<div class="fw-ko">${w.korean}</div><div class="fw-rom">${w.romanization}</div>`;
+  arena.appendChild(el);
+  shFallEl=el;
+  shFallY=0;
+  // speed scales with elapsed time and hits
+  const elapsed=(Date.now()-shStartTime)/1000;
+  shSpeed=0.55+Math.min(elapsed/45,1.0)+shHits*0.015; // px per frame approx
+  // options
+  const optWrap=document.getElementById('shOptions');
+  optWrap.innerHTML=opts.map((o,i)=>`<button class="sh-opt" onclick="shAnswer(${o.id===w.id?1:0},this)">${o.english}</button>`).join('');
+  // animate fall
+  const arenaH=arena.clientHeight;
+  const jetZone=arenaH-90;
+  function step(){
+    if(!shActive){return;}
+    shFallY+=shSpeed*2.2;
+    el.style.top=shFallY+'px';
+    // move jet toward word horizontally (visual)
+    if(shFallY>=jetZone){
+      // reached bottom = miss
+      wordMissed();
+      return;
+    }
+    shRAF=requestAnimationFrame(step);
+  }
+  shRAF=requestAnimationFrame(step);
+}
+
+function shAnswer(correct,btn){
+  if(shLocked||!shActive)return;
+  shLocked=true;
+  if(shRAF)cancelAnimationFrame(shRAF);
+  if(correct){
+    fireLaser();
+    shFallEl.classList.add('hit');
+    const elapsed=(Date.now()-shStartTime)/1000;
+    shScore+=10+Math.floor(elapsed/10)*2;
+    shHits++;
+    updateShHUD();
+    setTimeout(()=>{if(shFallEl)shFallEl.remove();if(shActive)spawnWord();},420);
+  }else{
+    btn.style.borderColor='#F87171';btn.style.color='#FCA5A5';
+    shFallEl.classList.add('miss');
+    loseLife();
+    setTimeout(()=>{if(shFallEl)shFallEl.remove();if(shActive&&shLives>0)spawnWord();},420);
+  }
+}
+
+function wordMissed(){
+  if(shLocked)return;
+  shLocked=true;
+  if(shFallEl)shFallEl.classList.add('miss');
+  loseLife();
+  setTimeout(()=>{if(shFallEl)shFallEl.remove();if(shActive&&shLives>0)spawnWord();},420);
+}
+
+function loseLife(){
+  shLives--;
+  updateShHUD();
+  if(shLives<=0){shActive=false;setTimeout(shGameOver,500);}
+}
+
+function fireLaser(){
+  const arena=document.getElementById('shArena');
+  const laser=document.createElement('div');
+  laser.className='sh-laser';
+  const jetTop=arena.clientHeight-48;
+  laser.style.left='calc(50% - 2px)';
+  laser.style.bottom='48px';
+  laser.style.height=(jetTop-shFallY)+'px';
+  arena.appendChild(laser);
+  setTimeout(()=>laser.remove(),200);
+}
+
+function shRankFor(score){
+  if(score>=300)return{e:'\u{1F451}',r:'\uC804\uC124\uC758 \uACA9\ucD94\uC655'};
+  if(score>=200)return{e:'\u{1F525}',r:'\uC5D0\uC774\uC2A4 \ud30C\uC77C\uB7FF'};
+  if(score>=120)return{e:'\u{1F4AA}',r:'\uC2E4\uB825\uD30C \uC2A4\ud0A8'};
+  if(score>=60)return{e:'\u{1F331}',r:'\uC131\uC7A5\uD558\uB294 \uD30C\uC77C\uB7FF'};
+  return{e:'\u{1F423}',r:'\uC2E0\uBCD1 \uC870\uC885\uC0AC'};
+}
+
+function shGameOver(){
+  if(shRAF)cancelAnimationFrame(shRAF);
+  if(shFallEl)shFallEl.remove();
+  document.getElementById('shOptions').innerHTML='';
+  const rank=shRankFor(shScore);
+  // award XP based on score
+  if(typeof awardXP==='function'){awardXP(Math.floor(shScore/5),'Word Blaster');}
+  const ov=document.getElementById('shGameover');
+  const reviveBtn=!shUsedRevive?`<button class="sh-revive" onclick="shRevive()">\u{1F49C} \uAD11\uACE0 \uBCF4\uACE0 \uBD80\uD65C\uD558\uAE30 (\uC0DD\uBA85 +1)</button>`:'';
+  ov.innerHTML=`
+    <div class="sh-result-emoji">${rank.e}</div>
+    <div class="sh-title">${rank.r}</div>
+    <div class="sh-subtitle">\uCD5C\uC885 \uC810\uC218 <b style="color:var(--purple-lt);font-size:22px">${shScore}</b></div>
+    <button class="sh-btn" onclick="shShare()">\u{1F4E4} \uC810\uC218 \uC790\uB791\uD558\uAE30</button>
+    ${reviveBtn}
+    <button class="sh-btn-ghost" onclick="shStartGame()">\u{1F504} \ub2E4\uC2DC \ub3C4\uC804</button>
+    <button class="sh-btn-ghost" onclick="closeShooter()">\ub098\uAC00\uAE30</button>`;
+  ov.style.display='flex';
+}
+
+function shRevive(){
+  // monetization hook: simulate rewarded ad
+  shUsedRevive=true;
+  if(typeof showProModal==='function'){
+    // show a quick toast instead of real ad for now
+  }
+  quizToast('\u{1F4FA} \uAD11\uACE0 \uAE30\uB2A5\uC740 \uACE7 \uCD94\uAC00\ub429\ub2c8\ub2e4! \uC77C\ub2e8 \ubd80\ud65c\ud574\ub4dc\ub824\uc694 \u{1F49C}');
+  shLives=1;
+  shActive=true;
+  updateShHUD();
+  document.getElementById('shGameover').style.display='none';
+  shStartTime=Date.now()-(20000); // keep some difficulty
+  spawnWord();
+}
+
+function shShare(){
+  const rank=shRankFor(shScore);
+  const txt=`Word Blaster\uC5D0\uC11C ${shScore}\uC810! \uB098\uB294 "${rank.r}" \uB4F1\uAE09 \u{1F680}\uD83D\uDC9C K-pop \uB2E8\uC5B4 \uC288\ud305\uAC8C\uC784, \uB108\ub3c4 \ud574\ubd10!`;
+  const url=location.href.split('?')[0].split('#')[0];
+  if(navigator.share){navigator.share({title:'Stan Slang - Word Blaster',text:txt,url}).catch(()=>{});}
+  else{navigator.clipboard.writeText(txt+'\n'+url).then(()=>quizToast('\uBCF5\uC0AC \uC644\uB8CC! \uBD99\uC5EC\ub123\uAE30 \u{1F4CB}')).catch(()=>{});}
+}
+
 
 /* ===== LEVEL / MISSIONS / CHALLENGE SYSTEM ===== */
 const LS={get:k=>{try{return JSON.parse(localStorage.getItem('ss_'+k));}catch(e){return null;}},set:(k,v)=>{try{localStorage.setItem('ss_'+k,JSON.stringify(v));}catch(e){}}};
