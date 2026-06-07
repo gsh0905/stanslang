@@ -360,6 +360,51 @@
     .tap-pop{position:absolute;font-size:18px;font-weight:800;color:#F9A8D4;pointer-events:none;animation:tapPop .5s var(--ease) forwards;}
     @keyframes tapPop{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-40px) scale(1.4);}}
 
+  
+    /* ===== ARCADE GAMES SHARED ===== */
+    .arcade-screen{position:fixed;inset:0;z-index:210;background:radial-gradient(ellipse at 50% 0%,#1a1340,#0D0D1A 70%);transform:translateY(100%);transition:transform .35s var(--ease);display:flex;flex-direction:column;overflow-y:auto;}
+    .arcade-screen.open{transform:translateY(0);}
+    .ac-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;}
+    .ac-close{background:rgba(255,255,255,0.08);border:none;color:var(--text-2);font-size:14px;font-family:inherit;font-weight:600;cursor:pointer;padding:8px 14px;border-radius:100px;}
+    .ac-title{font-size:16px;font-weight:800;color:var(--text);}
+    .ac-best{font-size:13px;color:var(--purple-lt);font-weight:700;min-width:60px;text-align:right;}
+    .ac-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;}
+    .ac-h{font-size:24px;font-weight:800;color:var(--text);margin-bottom:6px;}
+    .ac-p{font-size:14px;color:var(--text-3);line-height:1.6;margin-bottom:24px;max-width:300px;}
+    .ac-btn{padding:16px 40px;border-radius:14px;border:none;font-family:inherit;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);box-shadow:0 6px 22px rgba(244,114,182,0.4);cursor:pointer;width:100%;max-width:320px;transition:transform .16s;}
+    .ac-btn:active{transform:scale(0.97);}
+    .ac-btn-ghost{margin-top:10px;padding:14px;border-radius:14px;border:1.5px solid var(--border-2);font-family:inherit;font-size:15px;font-weight:600;color:var(--text-2);background:transparent;cursor:pointer;width:100%;max-width:320px;}
+    /* reaction */
+    .rt-pad{width:100%;max-width:340px;height:300px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;text-align:center;padding:20px;}
+    .rt-wait{background:#6B46C1;}
+    .rt-go{background:#34D399;}
+    .rt-early{background:#F87171;}
+    .rt-result{background:var(--bg-card);border:1.5px solid var(--border-2);}
+    /* memory */
+    .mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:340px;}
+    .mem-card{aspect-ratio:1;border-radius:12px;background:var(--bg-card);border:1.5px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .2s,background .2s;transform-style:preserve-3d;}
+    .mem-card.flipped{background:rgba(151,71,255,0.2);transform:rotateY(180deg);}
+    .mem-card.matched{background:rgba(52,211,153,0.18);border-color:#34D399;opacity:0.7;}
+    .mem-card .mc-face{transform:rotateY(180deg);}
+    /* jump */
+    .jump-canvas{width:100%;max-width:360px;height:240px;border-radius:18px;background:linear-gradient(180deg,#1a1340,#0D0D1A);border:1.5px solid var(--border-2);position:relative;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+    .jp-player{position:absolute;width:36px;height:36px;left:40px;bottom:30px;font-size:30px;line-height:1;transition:none;z-index:2;}
+    .jp-ground{position:absolute;bottom:30px;left:0;right:0;height:2px;background:var(--border-2);}
+    .jp-obstacle{position:absolute;bottom:32px;width:24px;font-size:22px;z-index:1;}
+    .jp-cloud{position:absolute;font-size:18px;opacity:0.4;z-index:0;}
+    /* 2048 */
+    .g2048-board{position:relative;width:300px;height:300px;background:var(--bg-card);border-radius:14px;padding:8px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:8px;touch-action:none;}
+    .g2-cell{background:rgba(255,255,255,0.04);border-radius:8px;}
+    .g2-tile{position:absolute;width:64px;height:64px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;transition:all .12s var(--ease);}
+    .g2048-hint{font-size:13px;color:var(--text-4);margin-top:14px;}
+    /* simon */
+    .sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:280px;height:280px;}
+    .sim-pad{border-radius:18px;cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:0.55;transition:opacity .15s,transform .1s;}
+    .sim-pad.lit{opacity:1;transform:scale(0.96);}
+    .sim-pad:active{transform:scale(0.96);}
+    .sim-0{background:#F472B6;}.sim-1{background:#60A5FA;}.sim-2{background:#FBBF24;}.sim-3{background:#34D399;}
+    .sim-status{font-size:15px;font-weight:700;color:var(--text-2);margin-bottom:18px;height:22px;}
+
   </style>
 </head>
 <body>
@@ -383,6 +428,11 @@
       <div class="ph-card" onclick="closePlayHub();openShooter()"><div class="ph-emoji">✈️</div><div class="ph-name">Word Blaster</div><div class="ph-desc">단어 격추 슈팅게임</div></div>
       <div class="ph-card" onclick="closePlayHub();openShip()"><div class="ph-emoji">💞</div><div class="ph-name">최애 궁합</div><div class="ph-desc">오늘 최애와의 궁합은?</div></div>
       <div class="ph-card" onclick="closePlayHub();openTap()"><div class="ph-emoji">💜</div><div class="ph-name">슬랭이 탭탭</div><div class="ph-desc">10초 안에 몇 번?</div></div>
+      <div class="ph-card" onclick="closePlayHub();openRt()"><div class="ph-emoji">⚡</div><div class="ph-name">반응속도</div><div class="ph-desc">색 바뀌면 빨리 탭!</div></div>
+      <div class="ph-card" onclick="closePlayHub();openMem()"><div class="ph-emoji">🃏</div><div class="ph-name">짝 맞추기</div><div class="ph-desc">기억력 메모리 게임</div></div>
+      <div class="ph-card" onclick="closePlayHub();openJump()"><div class="ph-emoji">🦘</div><div class="ph-name">슬랭이 점프</div><div class="ph-desc">장애물 피해 점프!</div></div>
+      <div class="ph-card" onclick="closePlayHub();open2048()"><div class="ph-emoji">🔢</div><div class="ph-name">2048</div><div class="ph-desc">숫자 합치기 퍼즐</div></div>
+      <div class="ph-card" onclick="closePlayHub();openSim()"><div class="ph-emoji">🎵</div><div class="ph-name">패턴 따라하기</div><div class="ph-desc">순서 외워서 따라!</div></div>
     </div>
   </div>
 </div>
@@ -416,6 +466,53 @@
         <button class="ship-btn" onclick="startTap()">▶️ 시작</button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="arcade-screen" id="rtScreen">
+  <div class="ac-top"><button class="ac-close" onclick="closeArcade('rt')">&#10005;</button><span class="ac-title">&#9889; \uBC18\uC751\uC18D\uB3C4</span><span class="ac-best" id="rtBest"></span></div>
+  <div class="ac-body"><div class="rt-pad rt-result" id="rtPad" onclick="rtTap()"><span id="rtMsg">\uD0ED\uD574\uC11C \uC2DC\uC791<br><span style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:600">\uCD08\uB85D\uC0C9\uC774 \uB418\uBA74 \uCD5C\uB300\uD55C \uBE68\uB9AC \uD0ED!</span></span></div></div>
+</div>
+
+<div class="arcade-screen" id="memScreen">
+  <div class="ac-top"><button class="ac-close" onclick="closeArcade('mem')">&#10005;</button><span class="ac-title">&#127183; \uC9DD \uB9DE\uCD94\uAE30</span><span class="ac-best" id="memBest"></span></div>
+  <div class="ac-body">
+    <div class="sim-status" id="memStatus"></div>
+    <div class="mem-grid" id="memGrid"></div>
+    <button class="ac-btn-ghost" style="margin-top:20px" onclick="startMem()">&#128260; \uC0C8 \uAC8C\uC784</button>
+  </div>
+</div>
+
+<div class="arcade-screen" id="jumpScreen">
+  <div class="ac-top"><button class="ac-close" onclick="closeArcade('jump')">&#10005;</button><span class="ac-title">&#129446; \uC2AC\uB7AD\uC774 \uC810\uD504</span><span class="ac-best" id="jumpBest"></span></div>
+  <div class="ac-body">
+    <div class="sim-status" id="jumpScore">\uC810\uC218 0</div>
+    <div class="jump-canvas" id="jumpCanvas" onclick="jumpAction()"></div>
+    <div class="ac-p" style="margin-top:14px;margin-bottom:0">\uD654\uBA74\uC744 \uD0ED\uD558\uBA74 \uC810\uD504! \uC7A5\uC560\uBB3C\uC744 \uD53C\uD574\uC694</div>
+  </div>
+</div>
+
+<div class="arcade-screen" id="g2048Screen">
+  <div class="ac-top"><button class="ac-close" onclick="closeArcade('g2048')">&#10005;</button><span class="ac-title">&#128290; 2048</span><span class="ac-best" id="g2048Best"></span></div>
+  <div class="ac-body">
+    <div class="sim-status" id="g2048Score">\uC810\uC218 0</div>
+    <div class="g2048-board" id="g2048Board"></div>
+    <div class="g2048-hint">\uC0C1\uD558\uC88C\uC6B0\uB85C \uC2A4\uC640\uC774\uD504\uD574\uC11C \uC22B\uC790\uB97C 합쳐 보세요</div>
+    <button class="ac-btn-ghost" style="margin-top:14px" onclick="start2048()">&#128260; \uC0C8 \uAC8C\uC784</button>
+  </div>
+</div>
+
+<div class="arcade-screen" id="simScreen">
+  <div class="ac-top"><button class="ac-close" onclick="closeArcade('sim')">&#10005;</button><span class="ac-title">&#127925; \uD328\uD134 \uB530\uB77C\uD558\uAE30</span><span class="ac-best" id="simBest"></span></div>
+  <div class="ac-body">
+    <div class="sim-status" id="simStatus">\uD0ED\uD574\uC11C \uC2DC\uC791</div>
+    <div class="sim-grid" id="simGrid">
+      <div class="sim-pad sim-0" onclick="simTap(0)"></div>
+      <div class="sim-pad sim-1" onclick="simTap(1)"></div>
+      <div class="sim-pad sim-2" onclick="simTap(2)"></div>
+      <div class="sim-pad sim-3" onclick="simTap(3)"></div>
+    </div>
+    <button class="ac-btn" style="margin-top:24px" onclick="startSim()">&#9654;&#65039; \uC2DC\uC791</button>
   </div>
 </div>
 
@@ -1569,6 +1666,244 @@ function tapShare(c){
   const url=location.href.split('?')[0].split('#')[0];
   if(navigator.share)navigator.share({title:'\uc2ac\ub7ad\uc774 \ud0ed\ud0ed',text:txt,url}).catch(()=>{});
   else navigator.clipboard.writeText(txt+'\n'+url).then(()=>quizToast('\ubcf5\uc0ac \uc644\ub8cc! \u{1F4CB}')).catch(()=>{});
+}
+
+
+
+/* ===== ARCADE: shared ===== */
+function openArcade(id){document.getElementById(id+'Screen').classList.add('open');document.body.style.overflow='hidden';}
+function closeArcade(id){
+  document.getElementById(id+'Screen').classList.remove('open');document.body.style.overflow='';
+  if(id==='jump'){jpActive=false;cancelAnimationFrame(jpRAF);}
+  if(id==='rt'){clearTimeout(rtTimer);}
+  if(id==='sim'){simPlaying=false;}
+}
+function acBest(key){return parseInt(localStorage.getItem('ss_best_'+key)||'0');}
+function acSetBest(key,v,higherBetter){
+  const cur=acBest(key);
+  if((higherBetter&&v>cur)||(!higherBetter&&(cur===0||v<cur))){localStorage.setItem('ss_best_'+key,v);return true;}
+  return false;
+}
+
+/* ===== REACTION TEST ===== */
+let rtState='idle',rtTimer=null,rtStart=0;
+function openRt(){openArcade('rt');rtReset();updateRtBest();}
+function updateRtBest(){const b=acBest('rt');document.getElementById('rtBest').textContent=b?b+'ms':'';}
+function rtReset(){
+  rtState='idle';
+  const pad=document.getElementById('rtPad');
+  pad.className='rt-pad rt-result';
+  document.getElementById('rtMsg').innerHTML='\uD0ED\uD574\uC11C \uC2DC\uC791<br><span style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:600">\uCD08\uB85D\uC0C9\uC774 \uB418\uBA74 \uCD5C\uB300\uD55C \uBE68\uB9AC \uD0ED!</span>';
+}
+function rtTap(){
+  const pad=document.getElementById('rtPad'),msg=document.getElementById('rtMsg');
+  if(rtState==='idle'){
+    rtState='waiting';pad.className='rt-pad rt-wait';msg.innerHTML='\uCD08\uB85D\uC0C9\uC774 \uB420 \uB54C\uAE4C\uC9C0 \uAE30\uB2E4\uB824...';
+    const delay=1200+Math.random()*2800;
+    rtTimer=setTimeout(()=>{rtState='go';pad.className='rt-pad rt-go';msg.textContent='\uC9C0\uAE08! \uD0ED!';rtStart=Date.now();},delay);
+  }else if(rtState==='waiting'){
+    clearTimeout(rtTimer);rtState='idle';pad.className='rt-pad rt-early';msg.innerHTML='\uB108\uBB34 \uBE68\uB790\uC5B4! \uD83D\uDE05<br><span style="font-size:14px;font-weight:600">\uB2E4\uC2DC \uD0ED</span>';
+    setTimeout(rtReset,1200);
+  }else if(rtState==='go'){
+    const ms=Date.now()-rtStart;rtState='idle';pad.className='rt-pad rt-result';
+    const isBest=acSetBest('rt',ms,false);
+    msg.innerHTML=`<span style="font-size:40px">${ms}ms</span><br><span style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.7)">${rtRank(ms)}${isBest?' \u2728 \uC2E0\uAE30\uB85D!':''}</span><br><span style="font-size:13px;color:rgba(255,255,255,0.5)">\uD0ED\uD574\uC11C \ub2e4\uc2dc</span>`;
+    updateRtBest();
+    if(typeof awardXP==='function')awardXP(5,'\uBC18\uC751\uC18D\uB3C4');
+  }
+}
+function rtRank(ms){if(ms<200)return '\uCD08\uC778\uAC04 \u26A1';if(ms<280)return '\uBC88\uAC1C\uAC19\uC740 \uC190 \uD83D\uDD25';if(ms<350)return '\uD3C9\uADE0 \uC774\uC0C1 \uD83D\uDC4D';if(ms<450)return '\uB098\uC050\uC9C0 \uC54A\uC544\uC694';return '\uCC9C\uCC9C\ud788... \uD83D\uDC22';}
+
+/* ===== MEMORY (\uC9DD \ub9DE\ucD94\uAE30) ===== */
+const MEM_ICONS=['\uD83D\uDC9C','\u2B50','\uD83D\uDD25','\u2728','\uD83C\uDFA4','\uD83C\uDFB5','\uD83D\uDC51','\uD83C\uDF80'];
+let memFlipped=[],memMatched=0,memLock=false,memMoves=0;
+function openMem(){openArcade('mem');startMem();updateMemBest();}
+function updateMemBest(){const b=acBest('mem');document.getElementById('memBest').textContent=b?b+'\uD68C':'';}
+function startMem(){
+  memFlipped=[];memMatched=0;memLock=false;memMoves=0;
+  document.getElementById('memStatus').textContent='\uCE74\uB4DC\uB97C \ub4a4\uc9d1\uc5b4 \uc9dd\uc744 \ucc3e\uc544\uc694!';
+  const deck=shuffle([...MEM_ICONS,...MEM_ICONS]);
+  const grid=document.getElementById('memGrid');
+  grid.innerHTML=deck.map((ic,i)=>`<div class="mem-card" data-i="${i}" data-ic="${ic}" onclick="memFlip(${i})"><span class="mc-face">${ic}</span></div>`).join('');
+}
+function memFlip(i){
+  if(memLock)return;
+  const card=document.querySelector(`.mem-card[data-i="${i}"]`);
+  if(card.classList.contains('flipped')||card.classList.contains('matched'))return;
+  card.classList.add('flipped');
+  memFlipped.push(card);
+  if(memFlipped.length===2){
+    memLock=true;memMoves++;
+    const[a,b]=memFlipped;
+    if(a.dataset.ic===b.dataset.ic){
+      setTimeout(()=>{a.classList.add('matched');b.classList.add('matched');memFlipped=[];memLock=false;memMatched++;
+        if(memMatched===MEM_ICONS.length){memWin();}
+      },400);
+    }else{
+      setTimeout(()=>{a.classList.remove('flipped');b.classList.remove('flipped');memFlipped=[];memLock=false;},800);
+    }
+  }
+}
+function memWin(){
+  const isBest=acSetBest('mem',memMoves,false);
+  document.getElementById('memStatus').innerHTML=`\uD83C\uDF89 ${memMoves}\uD68C\uB9CC\uC5D0 \ud074\ub9ac\uc5b4!${isBest?' \u2728 \uCD5C\uACE0\uAE30\ub85d!':''}`;
+  updateMemBest();
+  if(typeof awardXP==='function')awardXP(20,'\uC9DD \ub9DE\ucD94\uAE30');
+}
+
+/* ===== JUMP (\uC2AC\uB7AD\uC774 \uC810\ud504) ===== */
+let jpActive=false,jpRAF=null,jpY=0,jpVel=0,jpObs=[],jpScore=0,jpSpeed=0,jpFrame=0,jpJumping=false;
+function openJump(){openArcade('jump');jpStart();updateJumpBest();}
+function updateJumpBest(){const b=acBest('jump');document.getElementById('jumpBest').textContent=b?b+'\uC810':'';}
+function jpStart(){
+  jpActive=true;jpY=0;jpVel=0;jpObs=[];jpScore=0;jpSpeed=3.2;jpFrame=0;jpJumping=false;
+  document.getElementById('jumpScore').textContent='\uC810\uC218 0';
+  const c=document.getElementById('jumpCanvas');
+  c.innerHTML='<div class="jp-ground"></div><div class="jp-player" id="jpPlayer">\uD83D\uDC9C</div><div class="jp-cloud" id="jpCloud1" style="top:30px;left:200px">\u2601\uFE0F</div>';
+  if(jpRAF)cancelAnimationFrame(jpRAF);
+  jpLoop();
+}
+function jumpAction(){
+  if(!jpActive){jpStart();return;}
+  if(!jpJumping){jpVel=11;jpJumping=true;}
+}
+function jpLoop(){
+  if(!jpActive)return;
+  jpFrame++;
+  const c=document.getElementById('jumpCanvas'),p=document.getElementById('jpPlayer');
+  if(!c||!p){return;}
+  // physics
+  jpY+=jpVel;jpVel-=0.6;
+  if(jpY<=0){jpY=0;jpVel=0;jpJumping=false;}
+  p.style.bottom=(30+jpY)+'px';
+  // spawn obstacles
+  if(jpFrame%Math.max(50,90-Math.floor(jpScore/5))===0){
+    const ob=document.createElement('div');ob.className='jp-obstacle';ob.textContent='\uD83C\uDF1F';
+    ob.style.left=c.clientWidth+'px';c.appendChild(ob);jpObs.push(ob);
+  }
+  // move obstacles
+  for(let i=jpObs.length-1;i>=0;i--){
+    const ob=jpObs[i];let x=parseFloat(ob.style.left)-jpSpeed;ob.style.left=x+'px';
+    // collision
+    if(x>20&&x<70&&jpY<28){jpGameOver();return;}
+    if(x<-30){ob.remove();jpObs.splice(i,1);jpScore++;document.getElementById('jumpScore').textContent='\uC810\uC218 '+jpScore;jpSpeed+=0.04;}
+  }
+  jpRAF=requestAnimationFrame(jpLoop);
+}
+function jpGameOver(){
+  jpActive=false;cancelAnimationFrame(jpRAF);
+  const isBest=acSetBest('jump',jpScore,true);
+  updateJumpBest();
+  const c=document.getElementById('jumpCanvas');
+  c.innerHTML=`<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center"><div style="font-size:40px">\uD83D\uDCA5</div><div style="font-size:22px;font-weight:800;margin:6px 0">${jpScore}\uC810</div>${isBest?'<div style="color:#F9A8D4;font-weight:700;font-size:14px">\u2728 \uCD5C\uACE0\uAE30\ub85d!</div>':''}<div style="font-size:13px;color:rgba(255,255,255,0.6);margin-top:8px">\ud654\uba74 \ud0ed\ud574\uc11c \ub2e4\uc2dc</div></div>`;
+  c.onclick=function(){jpStart();c.onclick=jumpAction;};
+  if(typeof awardXP==='function')awardXP(Math.floor(jpScore/2)+2,'\uC2AC\uB7AD\uC774 \uC810\ud504');
+}
+
+/* ===== 2048 ===== */
+let g2grid=[],g2score=0;
+const G2_COLORS={2:'#776e65',4:'#8a7a5c',8:'#d4843a',16:'#dd7d3a',32:'#e06348',64:'#e04e2e',128:'#9747FF',256:'#8b3ff0',512:'#7c2fe0',1024:'#6B46C1',2048:'#F472B6'};
+function open2048(){openArcade('g2048');start2048();update2048Best();}
+function update2048Best(){const b=acBest('g2048');document.getElementById('g2048Best').textContent=b?b+'\uC810':'';}
+function start2048(){
+  g2grid=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];g2score=0;
+  g2AddTile();g2AddTile();render2048();
+  document.getElementById('g2048Score').textContent='\uC810\uC218 0';
+  const board=document.getElementById('g2048Board');
+  // build cell backgrounds once
+  let cells='';for(let i=0;i<16;i++)cells+='<div class="g2-cell"></div>';
+  board.dataset.cells=cells;
+  setup2048Swipe();
+}
+function g2AddTile(){
+  const empty=[];for(let r=0;r<4;r++)for(let c=0;c<4;c++)if(g2grid[r][c]===0)empty.push([r,c]);
+  if(!empty.length)return;
+  const[r,c]=empty[Math.floor(Math.random()*empty.length)];
+  g2grid[r][c]=Math.random()<0.9?2:4;
+}
+function render2048(){
+  const board=document.getElementById('g2048Board');
+  let html=board.dataset.cells||'';
+  for(let r=0;r<4;r++)for(let c=0;c<4;c++){
+    const v=g2grid[r][c];if(!v)continue;
+    const x=8+c*72,y=8+r*72;
+    const col=G2_COLORS[v]||'#F472B6';
+    const fs=v>=1000?20:v>=100?23:26;
+    html+=`<div class="g2-tile" style="left:${x}px;top:${y}px;background:${col};font-size:${fs}px">${v}</div>`;
+  }
+  board.innerHTML=html;
+}
+function g2Slide(row){
+  let arr=row.filter(x=>x);
+  for(let i=0;i<arr.length-1;i++){if(arr[i]===arr[i+1]){arr[i]*=2;g2score+=arr[i];arr.splice(i+1,1);}}
+  while(arr.length<4)arr.push(0);
+  return arr;
+}
+function g2Move(dir){
+  const before=JSON.stringify(g2grid);
+  if(dir==='left'){for(let r=0;r<4;r++)g2grid[r]=g2Slide(g2grid[r]);}
+  else if(dir==='right'){for(let r=0;r<4;r++)g2grid[r]=g2Slide(g2grid[r].slice().reverse()).reverse();}
+  else if(dir==='up'){for(let c=0;c<4;c++){let col=g2Slide([g2grid[0][c],g2grid[1][c],g2grid[2][c],g2grid[3][c]]);for(let r=0;r<4;r++)g2grid[r][c]=col[r];}}
+  else if(dir==='down'){for(let c=0;c<4;c++){let col=g2Slide([g2grid[3][c],g2grid[2][c],g2grid[1][c],g2grid[0][c]]);for(let r=0;r<4;r++)g2grid[3-r][c]=col[r];}}
+  if(JSON.stringify(g2grid)!==before){g2AddTile();render2048();document.getElementById('g2048Score').textContent='\uC810\uC218 '+g2score;
+    if(g2IsOver()){g2GameOver();}}
+}
+function g2IsOver(){
+  for(let r=0;r<4;r++)for(let c=0;c<4;c++){if(g2grid[r][c]===0)return false;if(c<3&&g2grid[r][c]===g2grid[r][c+1])return false;if(r<3&&g2grid[r][c]===g2grid[r+1][c])return false;}
+  return true;
+}
+function g2GameOver(){
+  const isBest=acSetBest('g2048',g2score,true);update2048Best();
+  document.getElementById('g2048Score').innerHTML=`\uAC8C\uC784\uC624\uBC84 \u00B7 ${g2score}\uC810${isBest?' \u2728':''}`;
+  if(typeof awardXP==='function')awardXP(Math.floor(g2score/50)+3,'2048');
+}
+let g2TouchX=0,g2TouchY=0;
+function setup2048Swipe(){
+  const board=document.getElementById('g2048Board');
+  board.ontouchstart=e=>{g2TouchX=e.touches[0].clientX;g2TouchY=e.touches[0].clientY;};
+  board.ontouchend=e=>{
+    const dx=e.changedTouches[0].clientX-g2TouchX,dy=e.changedTouches[0].clientY-g2TouchY;
+    if(Math.abs(dx)<20&&Math.abs(dy)<20)return;
+    if(Math.abs(dx)>Math.abs(dy))g2Move(dx>0?'right':'left');
+    else g2Move(dy>0?'down':'up');
+  };
+}
+
+/* ===== SIMON (\uD328\ud134 \ub530\ub77c\ud558\uae30) ===== */
+let simSeq=[],simInput=[],simPlaying=false,simRound=0;
+function openSim(){openArcade('sim');simReset();updateSimBest();}
+function updateSimBest(){const b=acBest('sim');document.getElementById('simBest').textContent=b?b+'\ub2e8\uacc4':'';}
+function simReset(){simSeq=[];simInput=[];simPlaying=false;simRound=0;document.getElementById('simStatus').textContent='\uC2DC\uC791\uC744 \ub20c\ub7ec\uc8fc\uc138\uC694';}
+function startSim(){simSeq=[];simRound=0;simPlaying=true;simNext();}
+function simNext(){
+  simInput=[];simRound++;
+  simSeq.push(Math.floor(Math.random()*4));
+  document.getElementById('simStatus').textContent=`${simRound}\ub2e8\uacc4 \u00b7 \uc798 \ubcf4\uc138\uc694...`;
+  let i=0;
+  const iv=setInterval(()=>{
+    if(i>=simSeq.length){clearInterval(iv);document.getElementById('simStatus').textContent=`${simRound}\ub2e8\uacc4 \u00b7 \ub530\ub77c\ud574\uc694!`;return;}
+    simLight(simSeq[i]);i++;
+  },650);
+}
+function simLight(idx){
+  const pad=document.querySelectorAll('.sim-pad')[idx];
+  pad.classList.add('lit');setTimeout(()=>pad.classList.remove('lit'),350);
+}
+function simTap(idx){
+  if(!simPlaying)return;
+  simLight(idx);simInput.push(idx);
+  const i=simInput.length-1;
+  if(simInput[i]!==simSeq[i]){simGameOver();return;}
+  if(simInput.length===simSeq.length){
+    setTimeout(simNext,700);
+  }
+}
+function simGameOver(){
+  simPlaying=false;
+  const reached=simRound-1;
+  const isBest=acSetBest('sim',reached,true);updateSimBest();
+  document.getElementById('simStatus').innerHTML=`\uD83D\uDCA5 ${reached}\ub2e8\uacc4 \ub3c4\ub2ec!${isBest?' \u2728 \uCD5C\uACE0\uAE30\ub85d':''}`;
+  if(typeof awardXP==='function')awardXP(reached*3,'\uD328\ud134 \ub530\ub77c\ud558\uae30');
 }
 
 
