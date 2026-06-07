@@ -515,6 +515,24 @@
     .char-chip-name{font-size:10px;font-weight:700;color:var(--text-2);margin-top:3px;}
     .char-chip.active .char-chip-name{color:#C084FC;}
 
+  
+    /* ===== MY SLANG CARD (home top) ===== */
+    .my-slang-card{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(151,71,255,0.18),rgba(244,114,182,0.12)),radial-gradient(circle at 15% 30%,rgba(192,132,252,0.3),transparent 60%);border:1.5px solid rgba(192,132,252,0.4);border-radius:20px;padding:16px;margin-bottom:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;box-shadow:inset 0 0 30px rgba(151,71,255,0.12),0 6px 24px rgba(0,0,0,0.4);transition:transform .14s;position:relative;overflow:hidden;}
+    .my-slang-card:active{transform:scale(0.98);}
+    .msc-pet{width:80px;height:80px;flex-shrink:0;}
+    .msc-pet svg{width:100%;height:100%;filter:drop-shadow(0 4px 14px rgba(151,71,255,0.5));}
+    .msc-info{flex:1;min-width:0;}
+    .msc-greet{font-size:16px;font-weight:800;color:#fff;text-shadow:0 0 12px rgba(192,132,252,0.5);margin-bottom:2px;}
+    .msc-stage{font-size:12px;color:#C084FC;font-weight:700;margin-bottom:8px;}
+    .msc-bar-wrap{display:flex;align-items:center;gap:7px;margin-bottom:8px;}
+    .msc-bar-ico{font-size:13px;}
+    .msc-bar{flex:1;height:8px;border-radius:100px;background:rgba(0,0,0,0.35);overflow:hidden;border:1px solid rgba(244,114,182,0.25);}
+    .msc-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#F472B6,#F9A8D4);box-shadow:0 0 8px rgba(244,114,182,0.6);transition:width .5s var(--ease);}
+    .msc-go{font-size:11px;font-weight:700;color:#9D8BC0;}
+    /* emphasize 슬랭이 nav button */
+    .bn-btn.pet-accent .bn-ico{filter:drop-shadow(0 0 8px rgba(192,132,252,0.8));}
+    .bn-btn.pet-accent .bn-lbl{color:#C084FC;}
+
   </style>
 </head>
 <body>
@@ -524,7 +542,7 @@
   <button class="bn-btn" onclick="scrollToTop()"><span class="bn-ico">🏠</span><span class="bn-lbl">홈</span></button>
   <button class="bn-btn accent" onclick="openPlayHub()"><span class="bn-ico">🎡</span><span class="bn-lbl">놀이터</span></button>
   <button class="bn-btn" onclick="startQuiz()"><span class="bn-ico">🎮</span><span class="bn-lbl">퀴즈</span></button>
-  <button class="bn-btn" onclick="openPet()"><span class="bn-ico">🐾</span><span class="bn-lbl">슬랭이</span></button>
+  <button class="bn-btn pet-accent" onclick="openPet()"><span class="bn-ico">🐾</span><span class="bn-lbl">슬랭이</span></button>
   <button class="bn-btn" onclick="openSuggestModal()"><span class="bn-ico">✏️</span><span class="bn-lbl">제안</span></button>
 </nav>
 
@@ -695,6 +713,15 @@
 </div>
 <div class="feed" id="feed">
 <div class="home-hero" id="homeHero">
+  <div class="my-slang-card" id="mySlangCard" onclick="openPet()">
+    <div class="msc-pet" id="mscPet"></div>
+    <div class="msc-info">
+      <div class="msc-greet" id="mscGreet">내 슬랭이</div>
+      <div class="msc-stage" id="mscStage"></div>
+      <div class="msc-bar-wrap"><span class="msc-bar-ico">💖</span><div class="msc-bar"><div class="msc-bar-fill" id="mscBond" style="width:0%"></div></div></div>
+      <div class="msc-go">탭해서 돌보기 →</div>
+    </div>
+  </div>
   <div class="hero-banner">
     <div class="hero-greet">💜 슬랭이의 K-pop 놀이터</div>
     <div class="hero-title">심심해? 슬랭이랑<br>한 판 놀자 🎮</div>
@@ -2185,6 +2212,7 @@ function selectChar(k){
   }
   setPetChar(k);
   renderLivingPet();renderCharSelect();
+  if(typeof renderMySlangCard==='function')renderMySlangCard();
   petSay(c.lines[0]);
 }
 
@@ -2208,7 +2236,7 @@ function petFeed(){
     disp.appendChild(h);setTimeout(()=>h.remove(),1300);
   }
   if(typeof awardXP==='function')awardXP(5,'\uD558\uD2B8 \uC8FC\uAE30');
-  setTimeout(renderPet,300);
+  setTimeout(renderPet,300);if(typeof renderMySlangCard==='function')renderMySlangCard();
   if(pet.bond>=100&&typeof quizToast==='function')quizToast('\uC2AC\uB7AD\uC774\uC640 \uC644\uC804 \uCE5C\ud574\uC84C\uC5B4\uC694! \uD83D\uDC96');
 }
 
@@ -2392,8 +2420,40 @@ function petSay(msg){
 }
 
 
+/* ===== MY SLANG CARD (home) ===== */
+let mscAnimRAF=null,mscAnimT=0;
+function renderMySlangCard(){
+  const card=document.getElementById('mscPet');
+  if(!card)return;
+  const key=(typeof getPetChar==='function')?getPetChar():'ruby';
+  const mood=(typeof petMood==='function')?petMood():'happy';
+  card.innerHTML=buildCharSvg(key,mood);
+  // stage + bond
+  const prof=(typeof getProfile==='function')?getProfile():{xp:0};
+  const xp=prof.xp||0;
+  const s=(typeof petStage==='function')?petStage(xp):0;
+  const stage=PET_STAGES[s];
+  const pet=(typeof getPet==='function')?getPet():{bond:0};
+  const c=CHARS[key];
+  document.getElementById('mscGreet').textContent=c?c.name:'\uB0B4 \uC2AC\uB7AD\uC774';
+  document.getElementById('mscStage').textContent=stage?stage.name:'';
+  document.getElementById('mscBond').style.width=Math.min(pet.bond||0,100)+'%';
+  // gentle breathing animation
+  if(mscAnimRAF)cancelAnimationFrame(mscAnimRAF);
+  const svg=card.querySelector('.cBody');
+  mscAnimT=0;
+  function loop(){
+    mscAnimT+=0.03;
+    const breathe=1+Math.sin(mscAnimT*1.6)*0.03;
+    if(svg)svg.style.transform=`scale(${breathe})`;
+    mscAnimRAF=requestAnimationFrame(loop);
+  }
+  loop();
+}
+
 renderSotd();
 renderFeed();
+renderMySlangCard();
 
 /* ===== MASCOT: SLANG-I ===== */
 const MASCOT_LINES=[
