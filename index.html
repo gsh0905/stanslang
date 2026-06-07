@@ -405,6 +405,33 @@
     .sim-0{background:#F472B6;}.sim-1{background:#60A5FA;}.sim-2{background:#FBBF24;}.sim-3{background:#34D399;}
     .sim-status{font-size:15px;font-weight:700;color:var(--text-2);margin-bottom:18px;height:22px;}
 
+  
+    /* ===== HOME PLAYGROUND HERO ===== */
+    .home-hero{padding:18px 16px 6px;}
+    .hero-banner{background:linear-gradient(135deg,rgba(244,114,182,0.18),rgba(151,71,255,0.18));border:1.5px solid var(--border-2);border-radius:20px;padding:18px 18px 20px;margin-bottom:18px;position:relative;overflow:hidden;}
+    .hero-greet{font-size:13px;font-weight:700;color:var(--purple-lt);margin-bottom:4px;}
+    .hero-title{font-size:22px;font-weight:800;color:var(--text);line-height:1.25;margin-bottom:14px;}
+    .hero-cta{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:100px;border:none;font-family:inherit;font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);box-shadow:0 6px 20px rgba(244,114,182,0.4);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .16s;}
+    .hero-cta:active{transform:scale(0.95);}
+    .home-section-title{display:flex;align-items:center;justify-content:space-between;padding:0 2px 12px;}
+    .home-section-title h3{font-size:16px;font-weight:800;color:var(--text);}
+    .home-section-title .more{font-size:13px;color:var(--purple-lt);font-weight:700;cursor:pointer;background:none;border:none;font-family:inherit;}
+    .game-rail{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
+    .game-tile{border-radius:18px;padding:18px 14px;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .14s;border:1.5px solid var(--border-2);background:var(--bg-card);}
+    .game-tile:active{transform:scale(0.95);}
+    .game-tile.feature{grid-column:1 / -1;background:linear-gradient(135deg,rgba(151,71,255,0.22),rgba(244,114,182,0.15));display:flex;align-items:center;gap:16px;text-align:left;padding:20px;}
+    .game-tile.feature .gt-emoji{font-size:46px;}
+    .game-tile.feature .gt-info{flex:1;}
+    .game-tile.feature .gt-name{font-size:19px;}
+    .gt-badge{display:inline-block;font-size:10px;font-weight:800;color:#F9A8D4;background:rgba(244,114,182,0.2);padding:3px 9px;border-radius:100px;margin-bottom:6px;}
+    .gt-emoji{font-size:32px;margin-bottom:8px;}
+    .gt-name{font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px;}
+    .gt-desc{font-size:11px;color:var(--text-3);line-height:1.4;}
+    .gt-play{margin-top:8px;display:inline-block;font-size:13px;font-weight:800;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);padding:8px 18px;border-radius:100px;}
+    .home-words-head{padding:24px 2px 4px;border-top:1px solid var(--border);margin-top:14px;}
+    .home-words-head h3{font-size:16px;font-weight:800;color:var(--text);}
+    .home-words-head p{font-size:12px;color:var(--text-3);margin-top:3px;}
+
   </style>
 </head>
 <body>
@@ -546,6 +573,37 @@
   </div>
 </div>
 <div class="feed" id="feed">
+<div class="home-hero" id="homeHero">
+  <div class="hero-banner">
+    <div class="hero-greet">💜 슬랭이의 K-pop 놀이터</div>
+    <div class="hero-title">심심해? 슬랭이랑<br>한 판 놀자 🎮</div>
+    <button class="hero-cta" onclick="openPlayHub()">🎡 놀이터 열기</button>
+  </div>
+  <div class="home-section-title">
+    <h3>🔥 인기 게임</h3>
+    <button class="more" onclick="openPlayHub()">전체보기 →</button>
+  </div>
+  <div class="game-tile feature" onclick="openJump()">
+    <div class="gt-emoji">🦘</div>
+    <div class="gt-info">
+      <span class="gt-badge">가장 인기 🔥</span>
+      <div class="gt-name">슬랭이 점프</div>
+      <div class="gt-desc">장애물 피해 점프! 최고기록에 도전</div>
+      <span class="gt-play">▶ 플레이</span>
+    </div>
+  </div>
+  <div class="game-rail">
+    <div class="game-tile" onclick="open2048()"><div class="gt-emoji">🔢</div><div class="gt-name">2048</div><div class="gt-desc">숫자 합치기 퍼즐</div></div>
+    <div class="game-tile" onclick="openRt()"><div class="gt-emoji">⚡</div><div class="gt-name">반응속도</div><div class="gt-desc">색 바뀌면 빨리 탭!</div></div>
+    <div class="game-tile" onclick="openTap()"><div class="gt-emoji">💜</div><div class="gt-name">슬랭이 탭탭</div><div class="gt-desc">10초 안에 몇 번?</div></div>
+    <div class="game-tile" onclick="openShip()"><div class="gt-emoji">💞</div><div class="gt-name">최애 궁합</div><div class="gt-desc">오늘의 궁합은?</div></div>
+  </div>
+  <div class="home-words-head">
+    <h3>💜 오늘의 K-pop 단어</h3>
+    <p>스크롤해서 단어 500개 구경하기</p>
+  </div>
+</div>
+
   <div id="sotdSection"></div>
   <div id="feedLabel" class="feed-label">💜 Moments</div>
   <div class="results-count" id="resultsCount"></div>
@@ -1258,6 +1316,7 @@ function renderFeed(){
   const n=list.length;
   const hasSearch=query.trim().length>0;
   document.getElementById('sotdSection').style.display=hasSearch?'none':'block';
+  var _hh=document.getElementById('homeHero');if(_hh)_hh.style.display=(hasSearch||currentCat!=='all')?'none':'block';
   document.getElementById('feedLabel').textContent=hasSearch?'검색 결과':'💜 Moments';
   document.getElementById('resultsCount').innerHTML=`<em>${n}</em> word${n!==1?'s':''}`;
   if(n===0){
