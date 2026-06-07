@@ -283,9 +283,37 @@
     .sh-result-emoji{font-size:64px;margin-bottom:10px;}
     .sh-revive{margin-top:12px;padding:14px;border-radius:14px;border:1.5px solid #F472B6;font-family:inherit;font-size:15px;font-weight:700;color:#F9A8D4;background:rgba(244,114,182,0.12);cursor:pointer;width:100%;max-width:320px;}
 
+  
+    /* ===== MASCOT: SLANG-I ===== */
+    .starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .star{position:absolute;background:#C084FC;border-radius:50%;opacity:0;animation:twinkle linear infinite;}
+    @keyframes twinkle{0%,100%{opacity:0;}50%{opacity:0.7;}}
+    .mascot-wrap{position:fixed;right:14px;bottom:200px;z-index:65;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:floaty 4s ease-in-out infinite;}
+    @keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-12px) rotate(3deg);}}
+    .mascot-wrap:active{transform:scale(0.9);}
+    .mascot-svg{width:62px;height:62px;filter:drop-shadow(0 4px 14px rgba(151,71,255,0.5));}
+    .mascot-bubble{position:fixed;right:18px;bottom:272px;z-index:66;max-width:200px;background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:16px 16px 4px 16px;padding:12px 16px;font-size:14px;font-weight:600;color:var(--text);box-shadow:0 6px 24px rgba(0,0,0,0.5);opacity:0;transform:translateY(8px) scale(0.9);transform-origin:bottom right;transition:all .28s var(--ease);pointer-events:none;}
+    .mascot-bubble.show{opacity:1;transform:translateY(0) scale(1);}
+    .mascot-bubble::after{content:'';position:absolute;bottom:-8px;right:20px;width:14px;height:14px;background:var(--bg-card);border-right:1.5px solid var(--border-2);border-bottom:1.5px solid var(--border-2);transform:rotate(45deg);}
+    .egg-overlay{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(13,13,26,0.92);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s;flex-direction:column;text-align:center;padding:30px;}
+    .egg-overlay.show{opacity:1;pointer-events:all;}
+    .egg-mascot{width:140px;height:140px;animation:eggDance .8s ease-in-out infinite;filter:drop-shadow(0 0 30px rgba(151,71,255,0.7));}
+    @keyframes eggDance{0%,100%{transform:rotate(-12deg) scale(1);}50%{transform:rotate(12deg) scale(1.12);}}
+    .egg-text{font-size:22px;font-weight:800;color:var(--purple-lt);margin-top:20px;}
+    .egg-sub{font-size:14px;color:var(--text-3);margin-top:8px;line-height:1.6;max-width:280px;}
+
   </style>
 </head>
 <body>
+<div class="starfield" id="starfield"></div>
+<div class="mascot-wrap" id="mascotWrap" onclick="mascotTalk()"><svg class="mascot-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
+<div class="mascot-bubble" id="mascotBubble"></div>
+<div class="egg-overlay" id="eggOverlay" onclick="this.classList.remove('show')">
+  <div class="egg-mascot"><svg class="mascot-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
+  <div class="egg-text" id="eggText"></div>
+  <div class="egg-sub">슬랭이의 비밀 방에 입장했어요! 💜 진짜 찐팬만 여기 들어올 수 있어요.</div>
+</div>
+
 <header class="app-header">
   <div class="header-top">
     <div class="logo-gem">&#128156;</div>
@@ -1304,6 +1332,76 @@ function quizToast(msg){
 
 renderSotd();
 renderFeed();
+
+/* ===== MASCOT: SLANG-I ===== */
+const MASCOT_LINES=[
+  '\uC624\uB298 \uCD5C\uC560 \uBD24\uC5B4? \uD83D\uDC40',
+  '\uD034\uC988 \uD55C \uD310 \uC5B4\uB54C? \uD83C\uDFAE',
+  'Word Blaster\uC5D0\uC11C \uB0B4 \uAE30\uB85D \uAE68\uBCF4\uC2DC\uC9C0 \uD83D\uDE80',
+  '\uC624\uB298\uC758 \uB2E8\uC5B4 \uD655\uC778\uD588\uC5B4? \u2728',
+  '\uC2EC\uC2EC\uD558\uBA74 \uB098\uB791 \uB180\uC790 \uD83D\uDC9C',
+  '\uCE5C\uAD6C\uD55C\uD14C \uCC4C\uB9B0\uC9C0 \uBCF4\uB0B4\uBD10! \u26A1',
+  '\uB2F9\uC2E0\uC758 \uB374\uB825\uC740 \uBA87 \uB808\uBCA8? \uD83D\uDC51',
+  '\uC624\uB298\uB3C4 \uC640\uC918\uC11C \uACE0\uB9C8\uC6CC \u{1F970}',
+  '\uBBF8\uC158 \uB2E4 \uAE54\uC73C\uBA74 XP \uAC1C\uC774\uB4DD! \uD83C\uDF1F',
+  '\uD639\uC2DC... \uB108\uB3C4 \uADF8 \uADF8\uB8F9 \uD32C\uC774\uC57C? \uD83D\uDC40'
+];
+let mascotTimer=null;
+
+function mascotTalk(line){
+  const b=document.getElementById('mascotBubble');
+  if(!b)return;
+  const txt=line||MASCOT_LINES[Math.floor(Math.random()*MASCOT_LINES.length)];
+  b.textContent=txt;
+  b.classList.add('show');
+  clearTimeout(mascotTimer);
+  mascotTimer=setTimeout(()=>b.classList.remove('show'),3500);
+}
+
+function initStarfield(){
+  const sf=document.getElementById('starfield');
+  if(!sf)return;
+  let html='';
+  for(let i=0;i<40;i++){
+    const size=Math.random()*2.5+1;
+    const left=Math.random()*100;
+    const top=Math.random()*100;
+    const dur=Math.random()*4+3;
+    const delay=Math.random()*5;
+    html+=`<div class="star" style="width:${size}px;height:${size}px;left:${left}%;top:${top}%;animation-duration:${dur}s;animation-delay:${delay}s;"></div>`;
+  }
+  sf.innerHTML=html;
+}
+
+/* Easter egg: tap logo 5x */
+let logoTaps=0, logoTapTimer=null;
+function initEasterEgg(){
+  const logo=document.querySelector('.logo-gem');
+  if(!logo)return;
+  logo.style.cursor='pointer';
+  logo.addEventListener('click',()=>{
+    logoTaps++;
+    clearTimeout(logoTapTimer);
+    logoTapTimer=setTimeout(()=>{logoTaps=0;},1200);
+    if(logoTaps>=5){
+      logoTaps=0;
+      const eggMsgs=['\uCC50\uD32C \uC778\uC99D \uB05D! \uD83D\uDC51','\uBE44\uBC00\uC758 \uD32C \uD83D\uDC9C','\uC228\uC740 \uBC29 \uD574\uAE08! \u2728'];
+      document.getElementById('eggText').textContent=eggMsgs[Math.floor(Math.random()*eggMsgs.length)];
+      document.getElementById('eggOverlay').classList.add('show');
+      if(typeof awardXP==='function')awardXP(50,'\uC774\uC2A4\uD130\uC5D0\uADF8 \uBC1C\uACAC!');
+    }
+  });
+}
+
+/* greet on first load + occasional spontaneous lines */
+function initMascot(){
+  initStarfield();
+  initEasterEgg();
+  setTimeout(()=>mascotTalk('\uC548\uB155! \uB09C \uC2AC\uB7AD\uC774\uC57C \uD83D\uDC9C \uB180\uB7EC \uC654\uC5B4?'),1800);
+  setInterval(()=>{if(Math.random()<0.5&&!document.querySelector('.quiz-screen.open')&&!document.querySelector('.shooter-screen.open'))mascotTalk();},45000);
+}
+document.addEventListener('DOMContentLoaded',initMascot);
+
 
 /* ===== WORD BLASTER SHOOTER ===== */
 let shScore=0, shLives=3, shCurrent=null, shFallEl=null, shRAF=null,
