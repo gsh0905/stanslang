@@ -1,7 +1,7 @@
 {
   "name": "Stan Slang — K-pop Korean",
   "short_name": "Stan Slang",
-  "description": "Learn the Korean words every K-pop stan knows. Browse 500+ words, take the quiz, level up your fandom fluency.",
+  "description": "K-pop 팬심 충전소 — 미니게임, 슬랭이 키우기, 덕력 퀴즈가 가득한 놀이터",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0D0D1A",
