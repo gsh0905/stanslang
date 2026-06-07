@@ -533,6 +533,17 @@
     .bn-btn.pet-accent .bn-ico{filter:drop-shadow(0 0 8px rgba(192,132,252,0.8));}
     .bn-btn.pet-accent .bn-lbl{color:#C084FC;}
 
+  
+    /* ===== SOUND ===== */
+    .header-top{position:relative;}
+    .sound-btn{background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:50%;width:38px;height:38px;font-size:17px;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;transition:transform .14s;}
+    .sound-btn:active{transform:scale(0.9);}
+    .sound-menu{position:absolute;top:46px;right:0;z-index:200;background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:14px;padding:6px;width:180px;box-shadow:0 8px 28px rgba(0,0,0,0.5);display:none;}
+    .sound-menu.open{display:block;}
+    .snd-row{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-radius:10px;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;}
+    .snd-row:active{background:var(--bg);}
+    .snd-state{font-size:12px;color:var(--purple-lt);font-weight:700;}
+
   </style>
 </head>
 <body>
@@ -695,6 +706,8 @@
     <div class="logo-gem">&#128156;</div>
     <span class="logo-text">Stan Slang</span>
     <div id="levelBadge" class="level-badge" onclick="openMissions()"></div>
+    <button id="soundBtn" class="sound-btn" onclick="openSoundMenu()">&#128266;</button>
+    <div id="soundMenu" class="sound-menu"></div>
   </div>
   <div class="search-wrap">
     <span class="search-icon">&#128269;</span>
@@ -1751,7 +1764,7 @@ function quizToast(msg){
 
 /* ===== PLAY HUB ===== */
 function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
-function openPlayHub(){document.getElementById('playHub').classList.add('open');document.body.style.overflow='hidden';}
+function openPlayHub(){sfx('tap');document.getElementById('playHub').classList.add('open');document.body.style.overflow='hidden';}
 function closePlayHub(){document.getElementById('playHub').classList.remove('open');document.body.style.overflow='';}
 
 /* ===== SHIP TEST (\ucd5c\uc560 \uad81\ud569) ===== */
@@ -1973,6 +1986,7 @@ function jpStart(){
 }
 function jumpAction(){
   if(!jpActive){jpStart();return;}
+  if(!jpJumping)sfx('jump');
   if(!jpJumping){jpVel=11;jpJumping=true;}
 }
 function jpLoop(){
@@ -2176,6 +2190,7 @@ function renderPet(){
 }
 
 function petPoke(){
+  sfx('pop');
   const floatEl=document.getElementById('petFloat');
   const svg=floatEl?floatEl.querySelector('.cSvg'):null;
   if(svg){svg.style.transition='transform .15s';svg.style.transform=`scale(1.16) rotate(${Math.random()*20-10}deg)`;setTimeout(()=>{svg.style.transform='scale(1)';},200);}
@@ -2217,6 +2232,7 @@ function selectChar(k){
 }
 
 function petFeed(){
+  sfx('heart');
   const pet=getPet();
   const today=(typeof todayStr==='function')?todayStr():new Date().toDateString();
   if(pet.fedDate!==today){pet.fedDate=today;pet.fedCount=0;}
@@ -2451,6 +2467,116 @@ function renderMySlangCard(){
   loop();
 }
 
+
+/* ===== SOUND ENGINE (Web Audio, no files) ===== */
+let audioCtx=null, sfxOn=true, bgmOn=false, bgmTimer=null, bgmStep=0, bgmGain=null;
+
+function initAudio(){
+  if(audioCtx)return;
+  try{audioCtx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){audioCtx=null;}
+  sfxOn=LS.get('sfxOn')!==false; // default on
+  bgmOn=LS.get('bgmOn')===true;  // default off
+}
+
+function ensureAudio(){
+  if(!audioCtx)initAudio();
+  if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
+}
+
+// generic tone
+function tone(freq,dur,type,vol,when){
+  if(!sfxOn||!audioCtx)return;
+  const t=audioCtx.currentTime+(when||0);
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.type=type||'sine';o.frequency.setValueAtTime(freq,t);
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(vol||0.18,t+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g);g.connect(audioCtx.destination);
+  o.start(t);o.stop(t+dur+0.02);
+}
+
+// named SFX
+function sfx(name){
+  ensureAudio();
+  if(!sfxOn||!audioCtx)return;
+  switch(name){
+    case 'tap': tone(620,0.09,'triangle',0.14); break;
+    case 'pop': tone(880,0.08,'sine',0.16); tone(1320,0.06,'sine',0.1,0.04); break;
+    case 'correct': tone(660,0.1,'triangle',0.16); tone(880,0.12,'triangle',0.16,0.1); break;
+    case 'wrong': tone(220,0.18,'sawtooth',0.12); tone(170,0.2,'sawtooth',0.1,0.08); break;
+    case 'levelup': [523,659,784,1047].forEach((f,i)=>tone(f,0.18,'triangle',0.16,i*0.1)); break;
+    case 'heart': tone(523,0.1,'sine',0.14); tone(784,0.14,'sine',0.14,0.09); break;
+    case 'laser': tone(1200,0.08,'sawtooth',0.1); tone(500,0.1,'sawtooth',0.08,0.02); break;
+    case 'jump': tone(440,0.08,'square',0.1); tone(660,0.06,'square',0.08,0.05); break;
+    case 'coin': tone(988,0.06,'square',0.12); tone(1319,0.1,'square',0.12,0.05); break;
+  }
+}
+
+// background music: simple K-pop-ish synth loop
+const BGM_NOTES=[523,587,659,784,659,587,523,440]; // pentatonic-ish
+const BGM_BASS=[131,131,165,196];
+function bgmTick(){
+  if(!bgmOn||!audioCtx)return;
+  const t=audioCtx.currentTime;
+  // melody
+  const note=BGM_NOTES[bgmStep%BGM_NOTES.length];
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.type='triangle';o.frequency.setValueAtTime(note,t);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.06,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);
+  o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+0.34);
+  // bass every 2 steps
+  if(bgmStep%2===0){
+    const b=BGM_BASS[(bgmStep/2)%BGM_BASS.length];
+    const ob=audioCtx.createOscillator(),gb=audioCtx.createGain();
+    ob.type='sine';ob.frequency.setValueAtTime(b,t);
+    gb.gain.setValueAtTime(0,t);gb.gain.linearRampToValueAtTime(0.08,t+0.02);
+    gb.gain.exponentialRampToValueAtTime(0.0001,t+0.5);
+    ob.connect(gb);gb.connect(audioCtx.destination);ob.start(t);ob.stop(t+0.52);
+  }
+  bgmStep++;
+}
+function startBgm(){
+  if(!audioCtx||bgmTimer)return;
+  bgmStep=0;
+  bgmTimer=setInterval(bgmTick,300);
+}
+function stopBgm(){if(bgmTimer){clearInterval(bgmTimer);bgmTimer=null;}}
+
+function toggleSfx(){
+  ensureAudio();
+  sfxOn=!sfxOn;LS.set('sfxOn',sfxOn);
+  updateSoundBtn();
+  if(sfxOn)sfx('pop');
+}
+function toggleBgm(){
+  ensureAudio();
+  bgmOn=!bgmOn;LS.set('bgmOn',bgmOn);
+  if(bgmOn)startBgm();else stopBgm();
+  updateSoundBtn();
+}
+function updateSoundBtn(){
+  const b=document.getElementById('soundBtn');
+  if(b)b.textContent=bgmOn?'\uD83C\uDFB5':(sfxOn?'\uD83D\uDD0A':'\uD83D\uDD07');
+}
+// open a tiny sound menu on tap
+function openSoundMenu(){
+  ensureAudio();
+  const m=document.getElementById('soundMenu');
+  if(!m)return;
+  m.classList.toggle('open');
+  renderSoundMenu();
+}
+function renderSoundMenu(){
+  const m=document.getElementById('soundMenu');
+  if(!m)return;
+  m.innerHTML=`
+    <div class="snd-row" onclick="toggleSfx();renderSoundMenu();event.stopPropagation();"><span>\uD6A8\uACFC\uC74C</span><span class="snd-state">${sfxOn?'\uD83D\uDD0A ON':'\uD83D\uDD07 OFF'}</span></div>
+    <div class="snd-row" onclick="toggleBgm();renderSoundMenu();event.stopPropagation();"><span>\uBC30\uACBD\uC74C\uC545</span><span class="snd-state">${bgmOn?'\uD83C\uDFB5 ON':'\u23F8\uFE0F OFF'}</span></div>`;
+}
+
+
 renderSotd();
 renderFeed();
 
@@ -2470,7 +2596,7 @@ const MASCOT_LINES=[
 const MASCOT_GREET={ko:'\uC548\uB155! \uB09C \uC2AC\uB7AD\uC774\uC57C \uD83D\uDC9C',en:"Hey! I'm Slang-i. Wanna play?"};
 let mascotTimer=null;
 
-function mascotTalk(obj){
+function mascotTalk(obj){sfx('pop');
   const b=document.getElementById('mascotBubble');
   if(!b)return;
   const o=obj||MASCOT_LINES[Math.floor(Math.random()*MASCOT_LINES.length)];
@@ -2612,6 +2738,7 @@ function spawnWord(){
 function shAnswer(correct,btn){
   if(shLocked||!shActive)return;
   shLocked=true;
+  sfx(correct?'laser':'wrong');
   if(shRAF)cancelAnimationFrame(shRAF);
   if(correct){
     fireLaser();
@@ -2806,6 +2933,7 @@ function showXPFloat(amount){
 }
 
 function showLevelUp(idx){
+  sfx('levelup');
   const L=LEVELS[idx],el=document.getElementById('levelUpOverlay');
   el.innerHTML=`<div class="lvlup-box"><div class="lvlup-emoji">${L.emoji}</div><div class="lvlup-title">LEVEL UP!</div><div class="lvlup-name">${L.name}</div><button class="quiz-btn-primary" style="margin-top:20px;width:100%" onclick="document.getElementById('levelUpOverlay').classList.remove('show')">Let\u2019s go! \uD83C\uDF89</button></div>`;
   el.classList.add('show');
@@ -2892,6 +3020,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 /* ===== SAFE INIT (after all definitions) ===== */
+document.addEventListener('click',function(e){var m=document.getElementById('soundMenu');var b=document.getElementById('soundBtn');if(m&&m.classList.contains('open')&&e.target!==b&&!m.contains(e.target))m.classList.remove('open');});
+try{ initAudio(); updateSoundBtn(); if(bgmOn) {} }catch(e){}
 try{ if(typeof renderMySlangCard==='function') renderMySlangCard(); }catch(e){ console.error('mySlangCard init',e); }
 </script>
 <script>
