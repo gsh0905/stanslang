@@ -288,10 +288,26 @@
     .starfield{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
     .star{position:absolute;background:#C084FC;border-radius:50%;opacity:0;animation:twinkle linear infinite;}
     @keyframes twinkle{0%,100%{opacity:0;}50%{opacity:0.7;}}
-    .mascot-wrap{position:fixed;right:14px;bottom:96px;z-index:65;cursor:pointer;-webkit-tap-highlight-color:transparent;animation:floaty 4s ease-in-out infinite;}
-    @keyframes floaty{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-12px) rotate(3deg);}}
-    .mascot-wrap:active{transform:scale(0.9);}
-    .mascot-svg{width:62px;height:62px;filter:drop-shadow(0 4px 14px rgba(151,71,255,0.5));}
+/* ===== ROAMING SLANG-I ===== */
+    .mascot-wrap{position:fixed;left:0;bottom:90px;z-index:65;cursor:pointer;-webkit-tap-highlight-color:transparent;width:58px;height:58px;transition:transform .15s var(--ease);will-change:transform,left,bottom;animation:none;}
+    .mascot-wrap .mascot-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 4px 12px rgba(151,71,255,0.5));transition:transform .2s var(--ease);}
+    .mascot-wrap:active{transform:scale(0.88);}
+    /* behavior animations applied to inner svg */
+    .ms-idle{animation:msBreathe 3s ease-in-out infinite;}
+    @keyframes msBreathe{0%,100%{transform:scale(1) rotate(-2deg);}50%{transform:scale(1.04) rotate(2deg);}}
+    .ms-walk{animation:msWalk .5s ease-in-out infinite;}
+    @keyframes msWalk{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-6px) rotate(4deg);}}
+    .ms-jump{animation:msJump .6s ease-in-out;}
+    @keyframes msJump{0%{transform:translateY(0);}40%{transform:translateY(-40px) scale(1.05,0.95);}100%{transform:translateY(0);}}
+    .ms-roll{animation:msRoll .9s linear;}
+    @keyframes msRoll{0%{transform:rotate(0);}100%{transform:rotate(720deg);}}
+    .ms-lazy{animation:msLazy 2.4s ease-in-out infinite;}
+    @keyframes msLazy{0%,100%{transform:rotate(82deg) scale(1);}50%{transform:rotate(82deg) scale(1.03);}}
+    .ms-excited{animation:msExcited .4s ease-in-out infinite;}
+    @keyframes msExcited{0%,100%{transform:translateY(0) rotate(-8deg);}25%{transform:translateY(-10px) rotate(8deg);}75%{transform:translateY(-10px) rotate(-8deg);}}
+    .ms-zzz{position:fixed;z-index:66;font-size:18px;opacity:0;pointer-events:none;animation:msZzz 2.4s ease-in-out infinite;}
+    @keyframes msZzz{0%{opacity:0;transform:translateY(0) scale(0.6);}40%{opacity:0.9;}100%{opacity:0;transform:translateY(-30px) scale(1.1);}}
+    
     .mascot-bubble{position:fixed;right:18px;bottom:168px;z-index:66;max-width:230px;background:linear-gradient(135deg,#241640,#1a1030);border:1.5px solid #9747FF;border-radius:16px 16px 4px 16px;padding:13px 17px;font-size:14px;font-weight:600;color:#fff;box-shadow:0 6px 28px rgba(151,71,255,0.45),0 0 0 1px rgba(192,132,252,0.2);opacity:0;transform:translateY(8px) scale(0.9);transform-origin:bottom right;transition:all .28s var(--ease);pointer-events:none;}
     .mascot-bubble.show{opacity:1;transform:translateY(0) scale(1);}
     .mascot-bubble::after{content:'';position:absolute;bottom:-8px;right:20px;width:14px;height:14px;background:#1a1030;border-right:1.5px solid #9747FF;border-bottom:1.5px solid #9747FF;transform:rotate(45deg);}
@@ -693,7 +709,7 @@
   </div>
 </div>
 
-<div class="mascot-wrap" id="mascotWrap" onclick="mascotTalk()"><svg class="mascot-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
+<div class="mascot-wrap" id="mascotWrap" onclick="mascotTapped()"><svg class="mascot-svg ms-idle" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
 <div class="mascot-bubble" id="mascotBubble"></div>
 <div class="egg-overlay" id="eggOverlay" onclick="this.classList.remove('show')">
   <div class="egg-mascot"><svg class="mascot-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
@@ -2577,6 +2593,119 @@ function renderSoundMenu(){
 }
 
 
+
+/* ===== ROAMING SLANG-I ENGINE ===== */
+let roamX=20, roamTimer=null, roamFacing=1, roamBusy=false;
+
+function msEl(){return document.getElementById('mascotWrap');}
+function msSvg(){const w=msEl();return w?w.querySelector('.mascot-svg'):null;}
+
+function setMsAnim(cls){
+  const svg=msSvg();if(!svg)return;
+  svg.className='mascot-svg '+cls;
+}
+function faceDir(dir){
+  const svg=msSvg();if(!svg)return;
+  roamFacing=dir;
+  // flip handled via parent scaleX
+}
+
+// behaviors pick
+const ROAM_ACTIONS=['walk','walk','roll','jump','lazy','hungry','play','idle'];
+function roamNext(){
+  if(roamBusy){roamTimer=setTimeout(roamNext,1500);return;}
+  const w=msEl();if(!w){return;}
+  // don't roam while a fullscreen overlay is open
+  const blocked=document.querySelector('.quiz-screen.open,.shooter-screen.open,.pet-screen.open,.ship-screen.open,.tap-screen.open,.arcade-screen.open,.playhub.open,.missions-panel.open');
+  if(blocked){roamTimer=setTimeout(roamNext,3000);return;}
+
+  const action=ROAM_ACTIONS[Math.floor(Math.random()*ROAM_ACTIONS.length)];
+  const vw=window.innerWidth;
+  switch(action){
+    case 'walk':{
+      const target=Math.max(6,Math.min(vw-64,roamX+(Math.random()*160-80)));
+      const dir=target>roamX?1:-1;faceDir(dir);
+      setMsAnim('ms-walk');
+      const w2=msEl();w2.style.transition='left 1.6s linear';
+      w2.style.transform=`scaleX(${dir})`;
+      roamX=target;w2.style.left=roamX+'px';
+      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},1700);
+      break;}
+    case 'roll':{
+      const target=Math.max(6,Math.min(vw-64,roamX+(Math.random()<0.5?-120:120)));
+      faceDir(target>roamX?1:-1);
+      setMsAnim('ms-roll');
+      const w2=msEl();w2.style.transition='left .9s linear';w2.style.left=target+'px';roamX=target;
+      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},1000);
+      break;}
+    case 'jump':{
+      setMsAnim('ms-jump');
+      if(typeof sfx==='function')sfx('jump');
+      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},700);
+      break;}
+    case 'lazy':{
+      setMsAnim('ms-lazy');
+      showZzz();
+      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},3500);
+      break;}
+    case 'hungry':{
+      setMsAnim('ms-idle');
+      roamSay({ko:'\uBC30\uACE0\uD30C~ \uD558\uD2B8 \uC8FC\uC138\uC694 \uD83D\uDE2B',en:"I'm hungry~ feed me!"});
+      roamTimer=setTimeout(roamNext,4000);
+      break;}
+    case 'play':{
+      setMsAnim('ms-excited');
+      roamSay({ko:'\uC2EC\uC2EC\ud574! \uAC8C\uC784\ud558\uC790 \uD83C\uDFAE',en:"Bored! Let's play a game!"});
+      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},4000);
+      break;}
+    default:{
+      setMsAnim('ms-idle');
+      roamTimer=setTimeout(roamNext,2500);
+    }
+  }
+}
+
+function showZzz(){
+  const w=msEl();if(!w)return;
+  const z=document.createElement('div');z.className='ms-zzz';z.textContent='\uD83D\uDCA4';
+  z.style.left=(roamX+40)+'px';z.style.bottom='150px';
+  document.body.appendChild(z);
+  setTimeout(()=>z.remove(),2400);
+}
+
+let roamBubbleTimer=null;
+function roamSay(obj){
+  const b=document.getElementById('mascotBubble');
+  if(!b)return;
+  // position bubble above mascot
+  b.style.left=Math.max(10,Math.min(window.innerWidth-240,roamX-80))+'px';
+  b.style.right='auto';
+  b.style.bottom='150px';
+  b.innerHTML=`<span class="mb-ko">${obj.ko}</span><span class="mb-en">${obj.en}</span>`;
+  b.classList.add('show');
+  clearTimeout(roamBubbleTimer);
+  roamBubbleTimer=setTimeout(()=>b.classList.remove('show'),3800);
+}
+
+// tap reaction
+function mascotTapped(){
+  if(typeof sfx==='function')sfx('pop');
+  roamBusy=true;
+  setMsAnim('ms-excited');
+  const lines=(typeof MASCOT_LINES!=='undefined')?MASCOT_LINES:[{ko:'\uD788\ud788 \uD83D\uDC9C',en:'Hehe!'}];
+  roamSay(lines[Math.floor(Math.random()*lines.length)]);
+  setTimeout(()=>{roamBusy=false;setMsAnim('ms-idle');},1500);
+}
+
+function startRoaming(){
+  const w=msEl();if(!w)return;
+  w.style.left=roamX+'px';
+  setMsAnim('ms-idle');
+  if(roamTimer)clearTimeout(roamTimer);
+  roamTimer=setTimeout(roamNext,2500);
+}
+
+
 renderSotd();
 renderFeed();
 
@@ -2645,8 +2774,8 @@ function initEasterEgg(){
 function initMascot(){
   initStarfield();
   initEasterEgg();
-  setTimeout(()=>mascotTalk(MASCOT_GREET),1800);
-  setInterval(()=>{if(Math.random()<0.5&&!document.querySelector('.quiz-screen.open')&&!document.querySelector('.shooter-screen.open'))mascotTalk();},45000);
+  // greeting via roaming bubble (positioned at mascot)
+  setTimeout(()=>{ if(typeof roamSay==='function') roamSay(MASCOT_GREET); },2000);
 }
 document.addEventListener('DOMContentLoaded',initMascot);
 
@@ -3021,6 +3150,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 /* ===== SAFE INIT (after all definitions) ===== */
 document.addEventListener('click',function(e){var m=document.getElementById('soundMenu');var b=document.getElementById('soundBtn');if(m&&m.classList.contains('open')&&e.target!==b&&!m.contains(e.target))m.classList.remove('open');});
+try{ if(typeof startRoaming==='function') startRoaming(); }catch(e){}
 try{ initAudio(); updateSoundBtn(); if(bgmOn) {} }catch(e){}
 try{ if(typeof renderMySlangCard==='function') renderMySlangCard(); }catch(e){ console.error('mySlangCard init',e); }
 </script>
