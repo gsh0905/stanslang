@@ -572,6 +572,18 @@
     .bd-spin{animation:bdSpin .8s ease-in-out;}
     @keyframes bdSpin{0%{transform:rotate(0);}100%{transform:rotate(360deg);}}
 
+  
+    /* ===== AD OVERLAY ===== */
+    .ad-overlay{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.88);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s;padding:24px;}
+    .ad-overlay.open{opacity:1;pointer-events:all;}
+    .ad-box{background:var(--bg-card);border:1.5px solid var(--border-2);border-radius:22px;padding:28px 24px;text-align:center;width:100%;max-width:340px;position:relative;}
+    .ad-badge{position:absolute;top:14px;left:14px;font-size:11px;font-weight:800;color:#fff;background:#F59E0B;padding:3px 10px;border-radius:6px;}
+    .ad-count{font-size:48px;font-weight:800;color:var(--purple-lt);margin-bottom:8px;}
+    .ad-text{font-size:14px;color:var(--text-3);margin-bottom:18px;}
+    .ad-fake{background:var(--bg);border:1.5px dashed var(--border-2);border-radius:14px;padding:34px 16px;font-size:16px;font-weight:700;color:var(--text-2);line-height:1.8;margin-bottom:18px;}
+    .ad-fake span{font-size:11px;color:var(--text-4);font-weight:600;}
+    .ad-skip{width:100%;padding:15px;border-radius:14px;border:none;font-family:inherit;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);cursor:pointer;}
+
   </style>
 </head>
 <body>
@@ -724,6 +736,16 @@
 <div class="mascot-wrap" id="mascotWrap" onclick="mascotTapped()"><svg class="mascot-svg ms-idle" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="mbody" cx="40%" cy="34%" r="72%"><stop offset="0%" stop-color="#D8B4FE"/><stop offset="55%" stop-color="#C084FC"/><stop offset="100%" stop-color="#8B3FE0"/></radialGradient><radialGradient id="mhl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></radialGradient><radialGradient id="msh" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#5B21B6" stop-opacity="0.5"/><stop offset="100%" stop-color="#5B21B6" stop-opacity="0"/></radialGradient></defs><ellipse cx="190" cy="300" rx="80" ry="16" fill="#000" opacity="0.2"/><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><path d="M190 280 C220 250,285 215,285 165 C285 135,265 115,240 108 C258 130,256 165,238 195 C212 240,200 258,190 270 Z" fill="url(#msh)"/><ellipse cx="142" cy="148" rx="40" ry="28" fill="url(#mhl)" transform="rotate(-20 142 148)"/><circle cx="120" cy="124" r="10" fill="#fff" opacity="0.85"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
 <div class="buddy" id="buddyChoco" onclick="buddyTap('choco')"><svg class="buddy-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bchoco" cx="40%" cy="34%" r="72%"><stop offset="0%" stop-color="#E8C8A0"/><stop offset="55%" stop-color="#D4A574"/><stop offset="100%" stop-color="#8B5E2F"/></radialGradient><radialGradient id="bchohl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff" stop-opacity="0.85"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><g class="bbody"><ellipse cx="48" cy="78" rx="20" ry="32" fill="#8B5E3C" transform="rotate(-20 48 78)"/><ellipse cx="152" cy="78" rx="20" ry="32" fill="#8B5E3C" transform="rotate(20 152 78)"/><ellipse cx="100" cy="184" rx="46" ry="9" fill="#000" opacity="0.2"/><path d="M100 62 C77 32,32 43,32 89 C32 127,77 150,100 175 C123 150,168 127,168 89 C168 43,123 32,100 62 Z" fill="url(#bchoco)"/><ellipse cx="74" cy="76" rx="22" ry="15" fill="url(#bchohl)" transform="rotate(-20 74 76)"/><path d="M165 130 q28 -6 24 -34 q-4 16 -20 22 z" fill="#8B5E3C"/><ellipse class="beye" cx="80" cy="100" rx="11" ry="14" fill="#3d2510"/><ellipse class="beye" cx="120" cy="100" rx="11" ry="14" fill="#3d2510"/><circle cx="83" cy="95" r="4" fill="#fff"/><circle cx="123" cy="95" r="4" fill="#fff"/><ellipse cx="100" cy="124" rx="16" ry="12" fill="#E8C9A0"/><ellipse cx="100" cy="118" rx="6" ry="4.5" fill="#3d2510"/><path d="M94 128 q6 12 12 0 z" fill="#F472B6"/></g></svg></div>
 <div class="buddy" id="buddyDubu" onclick="buddyTap('dubu')"><svg class="buddy-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bdubu" cx="40%" cy="34%" r="72%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="55%" stop-color="#F0EAF8"/><stop offset="100%" stop-color="#C9BBE0"/></radialGradient><radialGradient id="bduhl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff" stop-opacity="0.95"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><g class="bbody"><path d="M50 70 L42 36 L74 58 Z" fill="#E0D4F0"/><path d="M52 62 L48 44 L66 56 Z" fill="#F9A8D4"/><path d="M150 70 L158 36 L126 58 Z" fill="#E0D4F0"/><path d="M148 62 L152 44 L134 56 Z" fill="#F9A8D4"/><ellipse cx="100" cy="184" rx="46" ry="9" fill="#000" opacity="0.18"/><path d="M100 62 C77 32,32 43,32 89 C32 127,77 150,100 175 C123 150,168 127,168 89 C168 43,123 32,100 62 Z" fill="url(#bdubu)"/><ellipse cx="74" cy="76" rx="22" ry="15" fill="url(#bduhl)" transform="rotate(-20 74 76)"/><path d="M168 120 q30 4 30 -28 q-8 18 -26 18 z" fill="#E0D4F0"/><ellipse class="beye" cx="80" cy="100" rx="10" ry="15" fill="#5B3F7A"/><ellipse class="beye" cx="120" cy="100" rx="10" ry="15" fill="#5B3F7A"/><circle cx="82" cy="95" r="3.5" fill="#fff"/><circle cx="122" cy="95" r="3.5" fill="#fff"/><ellipse cx="62" cy="118" rx="8" ry="5" fill="#F9A8D4" opacity="0.6"/><ellipse cx="138" cy="118" rx="8" ry="5" fill="#F9A8D4" opacity="0.6"/><path d="M96 120 l8 0 -4 5 z" fill="#F472B6"/><g stroke="#B8A8D0" stroke-width="1.5"><line x1="58" y1="116" x2="80" y2="120"/><line x1="58" y1="124" x2="80" y2="125"/><line x1="142" y1="116" x2="120" y2="120"/><line x1="142" y1="124" x2="120" y2="125"/></g></g></svg></div>
+
+<div class="ad-overlay" id="adOverlay">
+  <div class="ad-box">
+    <div class="ad-badge">AD</div>
+    <div class="ad-count" id="adCount">3</div>
+    <div class="ad-text" id="adText">광고 재생 중...</div>
+    <div class="ad-fake">📺 광고 자리<br><span>실제 광고는 출시 후 연결돼요</span></div>
+    <button class="ad-skip" id="adSkip" style="display:none">보상 받기 🎁</button>
+  </div>
+</div>
 
 <div class="mascot-bubble" id="mascotBubble"></div>
 <div class="egg-overlay" id="eggOverlay" onclick="this.classList.remove('show')">
@@ -2268,7 +2290,12 @@ function petFeed(){
   const today=(typeof todayStr==='function')?todayStr():new Date().toDateString();
   if(pet.fedDate!==today){pet.fedDate=today;pet.fedCount=0;}
   if(pet.fedCount>=3){
-    if(typeof showProModal==='function')showProModal('\uD558\uD2B8\uB97C \uB354 \uC8FC\uACE0 \uC2F6\uC73C\uBA74 Stan Slang Pro! \uD83D\uDC9C \uB9E4\uC77C \uBB34\uC81C\uD55C \uD558\uD2B8\ub97c \uc904 \uc218 \uC788\uC5B4\uC694.');
+    // offer: watch ad for +3 hearts, or go Pro
+    rewardedAd(()=>{
+      const p2=getPet();p2.fedCount=Math.max(0,(p2.fedCount||3)-3);savePet(p2);
+      if(typeof quizToast==='function')quizToast('\uD558\uD2B8 3\uAC1C \uCDA9\uC804 \uC644\ub8cc! \uD83D\uDC9D');
+      setTimeout(renderPet,200);
+    },'\uD558\uD2B8 \uAD11\uACE0 \uBCF4\uB294 \uC911...');
     return;
   }
   pet.fedCount++;
@@ -2852,6 +2879,46 @@ function startBuddies(){
 }
 
 
+
+/* ===== AD / REWARD SYSTEM ===== */
+// rewardedAd(onReward, label): shows ad placeholder, then grants reward.
+// Later: replace the body with real AdMob/AdSense rewarded ad SDK call.
+let adWatching=false;
+function rewardedAd(onReward, label){
+  if(adWatching)return;
+  adWatching=true;
+  const ov=document.getElementById('adOverlay');
+  const txt=document.getElementById('adText');
+  const skip=document.getElementById('adSkip');
+  if(!ov){adWatching=false;if(onReward)onReward();return;}
+  txt.textContent=label||'\uAD11\uACE0 \uC7AC\uC0DD \uC911...';
+  skip.style.display='none';
+  ov.classList.add('open');
+  // simulate a short rewarded ad (real ad SDK goes here)
+  let n=3;
+  const cd=document.getElementById('adCount');
+  cd.textContent=n;
+  const iv=setInterval(()=>{
+    n--;
+    if(n<=0){
+      clearInterval(iv);
+      cd.textContent='\u2713';
+      skip.style.display='block';
+      skip.textContent='\uBCF4\uC0C1 \uBC1B\uAE30 \uD83C\uDF81';
+      skip.onclick=()=>{
+        ov.classList.remove('open');adWatching=false;
+        if(onReward)onReward();
+      };
+    }else{cd.textContent=n;}
+  },1000);
+}
+function closeAd(){
+  const ov=document.getElementById('adOverlay');
+  if(ov)ov.classList.remove('open');
+  adWatching=false;
+}
+
+
 renderSotd();
 renderFeed();
 
@@ -3086,18 +3153,13 @@ function shGameOver(){
 }
 
 function shRevive(){
-  // monetization hook: simulate rewarded ad
   shUsedRevive=true;
-  if(typeof showProModal==='function'){
-    // show a quick toast instead of real ad for now
-  }
-  quizToast('\u{1F4FA} \uAD11\uACE0 \uAE30\uB2A5\uC740 \uACE7 \uCD94\uAC00\ub429\ub2c8\ub2e4! \uC77C\ub2e8 \ubd80\ud65c\ud574\ub4dc\ub824\uc694 \u{1F49C}');
-  shLives=1;
-  shActive=true;
-  updateShHUD();
-  document.getElementById('shGameover').style.display='none';
-  shStartTime=Date.now()-(20000); // keep some difficulty
-  spawnWord();
+  rewardedAd(()=>{
+    shLives=1;shActive=true;updateShHUD();
+    document.getElementById('shGameover').style.display='none';
+    shStartTime=Date.now()-(20000);
+    spawnWord();
+  },'\uBD80\uD65C \uAD11\uACE0 \uBCF4\uB294 \uC911...');
 }
 
 function shShare(){
@@ -3221,15 +3283,22 @@ function showProModal(reason){
 function closeProModal(){document.getElementById('proModal').classList.remove('open');}
 
 /* Challenge */
-function createChallenge(correct){
-  const p=getProfile(),today=todayStr();
-  if(p.challDay!==today){p.challCount=0;p.challDay=today;}
-  if(p.challCount>=1){showProModal('Create unlimited challenges with Stan Slang Pro! \uD83D\uDC9C');return;}
-  p.challCount++;saveProfile(p);
+function doShareChallenge(correct){
   const ids=qQuestions.map(q=>q.w.id).join('-');
   const url=`${location.origin}${location.pathname}?c=${ids}&s=${correct}`;
   if(navigator.share){navigator.share({title:'Stan Slang Challenge',text:`I scored ${correct}/10 on Stan Slang! Can you beat me? \uD83D\uDC9C`,url}).catch(()=>{});}
   else{navigator.clipboard.writeText(url).then(()=>quizToast('Challenge link copied! \uD83D\uDD17')).catch(()=>quizToast('Copy failed'));}
+}
+function createChallenge(correct){
+  const p=getProfile(),today=todayStr();
+  if(p.challDay!==today){p.challCount=0;p.challDay=today;}
+  if(p.challCount>=1){
+    // over daily limit: watch ad for one more
+    rewardedAd(()=>{ doShareChallenge(correct); },'\uCC4C\ub9b0\uc9c0 \uAD11\uACE0 \uBCF4\uB294 \uC911...');
+    return;
+  }
+  p.challCount++;saveProfile(p);
+  doShareChallenge(correct);
 }
 
 function checkChallenge(){
