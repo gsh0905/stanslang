@@ -560,6 +560,18 @@
     .snd-row:active{background:var(--bg);}
     .snd-state{font-size:12px;color:var(--purple-lt);font-weight:700;}
 
+  
+    /* ===== BUDDIES (choco dog + dubu cat) ===== */
+    .buddy{position:fixed;bottom:88px;z-index:64;width:50px;height:50px;cursor:pointer;-webkit-tap-highlight-color:transparent;will-change:transform,left;}
+    .buddy .buddy-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 3px 9px rgba(0,0,0,0.4));transition:transform .2s var(--ease);}
+    .buddy:active .buddy-svg{transform:scale(0.85);}
+    .bd-hop{animation:bdHop .55s ease-in-out infinite;}
+    @keyframes bdHop{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-9px) rotate(3deg);}}
+    .bd-idle{animation:bdIdle 2.6s ease-in-out infinite;}
+    @keyframes bdIdle{0%,100%{transform:scale(1) rotate(-2deg);}50%{transform:scale(1.04) rotate(2deg);}}
+    .bd-spin{animation:bdSpin .8s ease-in-out;}
+    @keyframes bdSpin{0%{transform:rotate(0);}100%{transform:rotate(360deg);}}
+
   </style>
 </head>
 <body>
@@ -710,6 +722,9 @@
 </div>
 
 <div class="mascot-wrap" id="mascotWrap" onclick="mascotTapped()"><svg class="mascot-svg ms-idle" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
+<div class="buddy" id="buddyChoco" onclick="buddyTap('choco')"><svg class="buddy-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bchoco" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D4A574"/><stop offset="100%" stop-color="#A0703F"/></linearGradient></defs><g class="bbody"><ellipse cx="48" cy="78" rx="20" ry="32" fill="#8B5E3C" transform="rotate(-20 48 78)"/><ellipse cx="152" cy="78" rx="20" ry="32" fill="#8B5E3C" transform="rotate(20 152 78)"/><path d="M100 62 C77 32,32 43,32 89 C32 127,77 150,100 175 C123 150,168 127,168 89 C168 43,123 32,100 62 Z" fill="url(#bchoco)"/><path d="M165 130 q28 -6 24 -34 q-4 16 -20 22 z" fill="#8B5E3C"/><ellipse class="beye" cx="80" cy="100" rx="11" ry="14" fill="#3d2510"/><ellipse class="beye" cx="120" cy="100" rx="11" ry="14" fill="#3d2510"/><circle cx="83" cy="95" r="4" fill="#fff"/><circle cx="123" cy="95" r="4" fill="#fff"/><ellipse cx="100" cy="124" rx="16" ry="12" fill="#E8C9A0"/><ellipse cx="100" cy="118" rx="6" ry="4.5" fill="#3d2510"/><path d="M94 128 q6 12 12 0 z" fill="#F472B6"/></g></svg></div>
+<div class="buddy" id="buddyDubu" onclick="buddyTap('dubu')"><svg class="buddy-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bdubu" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F5F0FA"/><stop offset="100%" stop-color="#D8CCE8"/></linearGradient></defs><g class="bbody"><path d="M50 70 L42 36 L74 58 Z" fill="#E0D4F0"/><path d="M52 62 L48 44 L66 56 Z" fill="#F9A8D4"/><path d="M150 70 L158 36 L126 58 Z" fill="#E0D4F0"/><path d="M148 62 L152 44 L134 56 Z" fill="#F9A8D4"/><path d="M100 62 C77 32,32 43,32 89 C32 127,77 150,100 175 C123 150,168 127,168 89 C168 43,123 32,100 62 Z" fill="url(#bdubu)"/><path d="M168 120 q30 4 30 -28 q-8 18 -26 18 z" fill="#E0D4F0"/><ellipse class="beye" cx="80" cy="100" rx="10" ry="15" fill="#5B3F7A"/><ellipse class="beye" cx="120" cy="100" rx="10" ry="15" fill="#5B3F7A"/><circle cx="82" cy="95" r="3.5" fill="#fff"/><circle cx="122" cy="95" r="3.5" fill="#fff"/><ellipse cx="62" cy="118" rx="8" ry="5" fill="#F9A8D4" opacity="0.6"/><ellipse cx="138" cy="118" rx="8" ry="5" fill="#F9A8D4" opacity="0.6"/><path d="M96 120 l8 0 -4 5 z" fill="#F472B6"/><g stroke="#B8A8D0" stroke-width="1.5"><line x1="58" y1="116" x2="80" y2="120"/><line x1="58" y1="124" x2="80" y2="125"/><line x1="142" y1="116" x2="120" y2="120"/><line x1="142" y1="124" x2="120" y2="125"/></g></g></svg></div>
+
 <div class="mascot-bubble" id="mascotBubble"></div>
 <div class="egg-overlay" id="eggOverlay" onclick="this.classList.remove('show')">
   <div class="egg-mascot"><svg class="mascot-svg" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C084FC"/><stop offset="100%" stop-color="#9747FF"/></linearGradient></defs><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
@@ -2706,6 +2721,73 @@ function startRoaming(){
 }
 
 
+
+/* ===== BUDDIES ENGINE ===== */
+const BUDDY_DATA={
+  choco:{x:90,timer:null,lines:[{ko:'\uBA4D! \uAC19\uC774 \uB180\uC790 \uD83D\uDC36',en:'Woof! Play with me!'},{ko:'\uAFAC\uC9C0\uAF2C\uB9AC \uD64D\uD64D \uD83D\uDC15',en:'*tail wag wag*'},{ko:'\uC0B0\uCC45 \uAC00\uACE0 \uC2F6\uC5B4! \uD83D\uDC3E',en:'I wanna go for a walk!'}]},
+  dubu:{x:200,timer:null,lines:[{ko:'\uB0D0\uC639~ \uC4F0\uB2EC\uB354\uC918 \uD83D\uDC31',en:'Meow~ pet me!'},{ko:'\uADF8\uB439\uADF8\uB439 \uD83D\uDE3C',en:'*purr purr*'},{ko:'\uB0AE\uC7A0 \uC798\uB798... \uD83D\uDE3D',en:'Time for a nap...'}]}
+};
+function buddyEl(k){return document.getElementById(k==='choco'?'buddyChoco':'buddyDubu');}
+function buddySvg(k){const e=buddyEl(k);return e?e.querySelector('.buddy-svg'):null;}
+function setBuddyAnim(k,cls){const s=buddySvg(k);if(s)s.className='buddy-svg '+cls;}
+
+function buddyRoam(k){
+  const d=BUDDY_DATA[k];const e=buddyEl(k);if(!e){return;}
+  const blocked=document.querySelector('.quiz-screen.open,.shooter-screen.open,.pet-screen.open,.ship-screen.open,.tap-screen.open,.arcade-screen.open,.playhub.open,.missions-panel.open');
+  if(blocked){d.timer=setTimeout(()=>buddyRoam(k),3000);return;}
+  const vw=window.innerWidth;
+  const act=Math.random();
+  if(act<0.55){
+    // hop to new spot
+    const target=Math.max(6,Math.min(vw-56,d.x+(Math.random()*180-90)));
+    const dir=target>d.x?1:-1;
+    setBuddyAnim(k,'bd-hop');
+    e.style.transition='left 1.4s ease-in-out';
+    e.style.transform=`scaleX(${dir})`;
+    d.x=target;e.style.left=target+'px';
+    d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},1500);
+  }else if(act<0.7){
+    // spin
+    setBuddyAnim(k,'bd-spin');
+    d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},900);
+  }else if(act<0.85){
+    // talk
+    setBuddyAnim(k,'bd-idle');
+    buddySay(k,d.lines[Math.floor(Math.random()*d.lines.length)]);
+    d.timer=setTimeout(()=>buddyRoam(k),3500);
+  }else{
+    setBuddyAnim(k,'bd-idle');
+    d.timer=setTimeout(()=>buddyRoam(k),2600);
+  }
+}
+function buddySay(k,obj){
+  const d=BUDDY_DATA[k];
+  const b=document.getElementById('mascotBubble');
+  if(!b)return;
+  b.style.left=Math.max(10,Math.min(window.innerWidth-240,d.x-90))+'px';
+  b.style.right='auto';b.style.bottom='144px';
+  b.innerHTML=`<span class="mb-ko">${obj.ko}</span><span class="mb-en">${obj.en}</span>`;
+  b.classList.add('show');
+  clearTimeout(window.__buddyBub);
+  window.__buddyBub=setTimeout(()=>b.classList.remove('show'),3500);
+}
+function buddyTap(k){
+  if(typeof sfx==='function')sfx('pop');
+  const d=BUDDY_DATA[k];
+  setBuddyAnim(k,'bd-hop');
+  buddySay(k,d.lines[Math.floor(Math.random()*d.lines.length)]);
+  setTimeout(()=>setBuddyAnim(k,'bd-idle'),1200);
+}
+function startBuddies(){
+  ['choco','dubu'].forEach(k=>{
+    const d=BUDDY_DATA[k];const e=buddyEl(k);
+    if(e){e.style.left=d.x+'px';setBuddyAnim(k,'bd-idle');}
+    if(d.timer)clearTimeout(d.timer);
+    d.timer=setTimeout(()=>buddyRoam(k),1500+Math.random()*2000);
+  });
+}
+
+
 renderSotd();
 renderFeed();
 
@@ -3151,6 +3233,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 /* ===== SAFE INIT (after all definitions) ===== */
 document.addEventListener('click',function(e){var m=document.getElementById('soundMenu');var b=document.getElementById('soundBtn');if(m&&m.classList.contains('open')&&e.target!==b&&!m.contains(e.target))m.classList.remove('open');});
 try{ if(typeof startRoaming==='function') startRoaming(); }catch(e){}
+try{ if(typeof startBuddies==='function') startBuddies(); }catch(e){}
 try{ initAudio(); updateSoundBtn(); if(bgmOn) {} }catch(e){}
 try{ if(typeof renderMySlangCard==='function') renderMySlangCard(); }catch(e){ console.error('mySlangCard init',e); }
 </script>
