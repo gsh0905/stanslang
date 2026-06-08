@@ -289,7 +289,7 @@
     .star{position:absolute;background:#C084FC;border-radius:50%;opacity:0;animation:twinkle linear infinite;}
     @keyframes twinkle{0%,100%{opacity:0;}50%{opacity:0.7;}}
 /* ===== ROAMING SLANG-I ===== */
-    .mascot-wrap{position:fixed;left:0;bottom:90px;z-index:65;cursor:pointer;-webkit-tap-highlight-color:transparent;width:58px;height:58px;transition:transform .15s var(--ease);will-change:transform,left,bottom;animation:none;}
+    .mascot-wrap{position:fixed;left:0;top:300px;z-index:65;cursor:pointer;-webkit-tap-highlight-color:transparent;width:58px;height:58px;transition:transform .15s var(--ease);will-change:transform,left,bottom;animation:none;}
     .mascot-wrap .mascot-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 4px 12px rgba(151,71,255,0.5));transition:transform .2s var(--ease);}
     .mascot-wrap:active{transform:scale(0.88);}
     /* behavior animations applied to inner svg */
@@ -562,7 +562,7 @@
 
   
     /* ===== BUDDIES (choco dog + dubu cat) ===== */
-    .buddy{position:fixed;bottom:88px;z-index:64;width:50px;height:50px;cursor:pointer;-webkit-tap-highlight-color:transparent;will-change:transform,left;}
+    .buddy{position:fixed;top:300px;z-index:64;width:50px;height:50px;cursor:pointer;-webkit-tap-highlight-color:transparent;will-change:transform,left;}
     .buddy .buddy-svg{width:100%;height:100%;display:block;filter:drop-shadow(0 3px 9px rgba(0,0,0,0.4));transition:transform .2s var(--ease);}
     .buddy:active .buddy-svg{transform:scale(0.85);}
     .bd-hop{animation:bdHop .55s ease-in-out infinite;}
@@ -2609,58 +2609,84 @@ function renderSoundMenu(){
 
 
 
-/* ===== ROAMING SLANG-I ENGINE ===== */
-let roamX=20, roamTimer=null, roamFacing=1, roamBusy=false;
+/* ===== ROAMING SLANG-I ENGINE (2D) ===== */
+let roamX=40, roamY=300, roamTimer=null, roamBusy=false;
 
 function msEl(){return document.getElementById('mascotWrap');}
 function msSvg(){const w=msEl();return w?w.querySelector('.mascot-svg'):null;}
+function setMsAnim(cls){const svg=msSvg();if(svg)svg.className='mascot-svg '+cls;}
 
-function setMsAnim(cls){
-  const svg=msSvg();if(!svg)return;
-  svg.className='mascot-svg '+cls;
+function roamBounds(){
+  return {minX:6,maxX:window.innerWidth-64,minY:90,maxY:window.innerHeight-150};
 }
-function faceDir(dir){
-  const svg=msSvg();if(!svg)return;
-  roamFacing=dir;
-  // flip handled via parent scaleX
+function moveMs(x,y,dur,dir){
+  const w=msEl();if(!w)return;
+  const b=roamBounds();
+  roamX=Math.max(b.minX,Math.min(b.maxX,x));
+  roamY=Math.max(b.minY,Math.min(b.maxY,y));
+  w.style.transition=`left ${dur}s ease-in-out, top ${dur}s ease-in-out`;
+  w.style.left=roamX+'px';
+  w.style.top=roamY+'px';
+  if(dir)w.style.transform=`scaleX(${dir})`;
 }
 
-// behaviors pick
-const ROAM_ACTIONS=['walk','walk','roll','jump','lazy','hungry','play','idle'];
+const ROAM_ACTIONS=['walk','wallclimb','diagroll','airjump','freemove','lazy','hungry','play','idle'];
 function roamNext(){
   if(roamBusy){roamTimer=setTimeout(roamNext,1500);return;}
   const w=msEl();if(!w){return;}
-  // don't roam while a fullscreen overlay is open
   const blocked=document.querySelector('.quiz-screen.open,.shooter-screen.open,.pet-screen.open,.ship-screen.open,.tap-screen.open,.arcade-screen.open,.playhub.open,.missions-panel.open');
   if(blocked){roamTimer=setTimeout(roamNext,3000);return;}
-
+  const b=roamBounds();
   const action=ROAM_ACTIONS[Math.floor(Math.random()*ROAM_ACTIONS.length)];
-  const vw=window.innerWidth;
   switch(action){
     case 'walk':{
-      const target=Math.max(6,Math.min(vw-64,roamX+(Math.random()*160-80)));
-      const dir=target>roamX?1:-1;faceDir(dir);
+      const tx=roamX+(Math.random()*180-90);
       setMsAnim('ms-walk');
-      const w2=msEl();w2.style.transition='left 1.6s linear';
-      w2.style.transform=`scaleX(${dir})`;
-      roamX=target;w2.style.left=roamX+'px';
+      moveMs(tx,roamY,1.6,tx>roamX?1:-1);
       roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},1700);
       break;}
-    case 'roll':{
-      const target=Math.max(6,Math.min(vw-64,roamX+(Math.random()<0.5?-120:120)));
-      faceDir(target>roamX?1:-1);
-      setMsAnim('ms-roll');
-      const w2=msEl();w2.style.transition='left .9s linear';w2.style.left=target+'px';roamX=target;
-      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},1000);
+    case 'wallclimb':{
+      // go to nearest wall then climb up
+      const toLeft=roamX<window.innerWidth/2;
+      const wallX=toLeft?b.minX:b.maxX;
+      setMsAnim('ms-walk');
+      moveMs(wallX,roamY,0.9,toLeft?-1:1);
+      roamTimer=setTimeout(()=>{
+        setMsAnim('ms-roll');
+        moveMs(wallX,b.minY+Math.random()*60,2.0);
+        roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},2100);
+      },1000);
       break;}
-    case 'jump':{
+    case 'diagroll':{
+      // roll diagonally down to bottom area
+      const tx=roamX+(Math.random()<0.5?-160:160);
+      setMsAnim('ms-roll');
+      moveMs(tx,b.maxY-Math.random()*40,1.3,tx>roamX?1:-1);
+      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},1400);
+      break;}
+    case 'airjump':{
+      // leap to a random spot (arc feel via two hops)
       setMsAnim('ms-jump');
       if(typeof sfx==='function')sfx('jump');
-      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},700);
+      const tx=roamX+(Math.random()*200-100);
+      const ty=roamY-(80+Math.random()*120);
+      moveMs(tx,ty,0.5,tx>roamX?1:-1);
+      roamTimer=setTimeout(()=>{
+        setMsAnim('ms-walk');
+        moveMs(tx,b.maxY-Math.random()*60,0.6);
+        roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},700);
+      },520);
+      break;}
+    case 'freemove':{
+      // dart diagonally anywhere
+      const tx=b.minX+Math.random()*(b.maxX-b.minX);
+      const ty=b.minY+Math.random()*(b.maxY-b.minY);
+      setMsAnim('ms-excited');
+      moveMs(tx,ty,1.0,tx>roamX?1:-1);
+      roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},1100);
       break;}
     case 'lazy':{
-      setMsAnim('ms-lazy');
-      showZzz();
+      setMsAnim('ms-lazy');showZzz();
       roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},3500);
       break;}
     case 'hungry':{
@@ -2670,12 +2696,12 @@ function roamNext(){
       break;}
     case 'play':{
       setMsAnim('ms-excited');
-      roamSay({ko:'\uC2EC\uC2EC\ud574! \uAC8C\uC784\ud558\uC790 \uD83C\uDFAE',en:"Bored! Let's play a game!"});
+      roamSay({ko:'\uC2EC\uC2EC\ud574! \uAC8C\uC784\ud558\uC790 \uD83C\uDFAE',en:"Bored! Let's play!"});
       roamTimer=setTimeout(()=>{setMsAnim('ms-idle');roamNext();},4000);
       break;}
     default:{
       setMsAnim('ms-idle');
-      roamTimer=setTimeout(roamNext,2500);
+      roamTimer=setTimeout(roamNext,2200);
     }
   }
 }
@@ -2683,7 +2709,7 @@ function roamNext(){
 function showZzz(){
   const w=msEl();if(!w)return;
   const z=document.createElement('div');z.className='ms-zzz';z.textContent='\uD83D\uDCA4';
-  z.style.left=(roamX+40)+'px';z.style.bottom='150px';
+  z.style.left=(roamX+40)+'px';z.style.top=(roamY-10)+'px';z.style.bottom='auto';
   document.body.appendChild(z);
   setTimeout(()=>z.remove(),2400);
 }
@@ -2692,17 +2718,16 @@ let roamBubbleTimer=null;
 function roamSay(obj){
   const b=document.getElementById('mascotBubble');
   if(!b)return;
-  // position bubble above mascot
   b.style.left=Math.max(10,Math.min(window.innerWidth-240,roamX-80))+'px';
   b.style.right='auto';
-  b.style.bottom='150px';
+  b.style.top=Math.max(10,roamY-70)+'px';
+  b.style.bottom='auto';
   b.innerHTML=`<span class="mb-ko">${obj.ko}</span><span class="mb-en">${obj.en}</span>`;
   b.classList.add('show');
   clearTimeout(roamBubbleTimer);
   roamBubbleTimer=setTimeout(()=>b.classList.remove('show'),3800);
 }
 
-// tap reaction
 function mascotTapped(){
   if(typeof sfx==='function')sfx('pop');
   roamBusy=true;
@@ -2714,50 +2739,69 @@ function mascotTapped(){
 
 function startRoaming(){
   const w=msEl();if(!w)return;
+  const b=roamBounds();
+  roamY=b.maxY-60;
   w.style.left=roamX+'px';
+  w.style.top=roamY+'px';
   setMsAnim('ms-idle');
   if(roamTimer)clearTimeout(roamTimer);
   roamTimer=setTimeout(roamNext,2500);
 }
 
 
-
-/* ===== BUDDIES ENGINE ===== */
+/* ===== BUDDIES ENGINE (2D) ===== */
 const BUDDY_DATA={
-  choco:{x:90,timer:null,lines:[{ko:'\uBA4D! \uAC19\uC774 \uB180\uC790 \uD83D\uDC36',en:'Woof! Play with me!'},{ko:'\uAFAC\uC9C0\uAF2C\uB9AC \uD64D\uD64D \uD83D\uDC15',en:'*tail wag wag*'},{ko:'\uC0B0\uCC45 \uAC00\uACE0 \uC2F6\uC5B4! \uD83D\uDC3E',en:'I wanna go for a walk!'}]},
-  dubu:{x:200,timer:null,lines:[{ko:'\uB0D0\uC639~ \uC4F0\uB2EC\uB354\uC918 \uD83D\uDC31',en:'Meow~ pet me!'},{ko:'\uADF8\uB439\uADF8\uB439 \uD83D\uDE3C',en:'*purr purr*'},{ko:'\uB0AE\uC7A0 \uC798\uB798... \uD83D\uDE3D',en:'Time for a nap...'}]}
+  choco:{x:90,y:300,timer:null,lines:[{ko:'\uBA4D! \uAC19\uC774 \uB180\uC790 \uD83D\uDC36',en:'Woof! Play with me!'},{ko:'\uAFAC\uC9C0\uAF2C\uB9AC \uD64D\uD64D \uD83D\uDC15',en:'*tail wag wag*'},{ko:'\uC0B0\uCC45 \uAC00\uACE0 \uC2F6\uC5B4! \uD83D\uDC3E',en:'I wanna go for a walk!'}]},
+  dubu:{x:200,y:340,timer:null,lines:[{ko:'\uB0D0\uC639~ \uC4F0\uB2EC\uB354\uC918 \uD83D\uDC31',en:'Meow~ pet me!'},{ko:'\uADF8\uB439\uADF8\uB439 \uD83D\uDE3C',en:'*purr purr*'},{ko:'\uB0AE\uC7A0 \uC798\uB798... \uD83D\uDE3D',en:'Time for a nap...'}]}
 };
 function buddyEl(k){return document.getElementById(k==='choco'?'buddyChoco':'buddyDubu');}
 function buddySvg(k){const e=buddyEl(k);return e?e.querySelector('.buddy-svg'):null;}
 function setBuddyAnim(k,cls){const s=buddySvg(k);if(s)s.className='buddy-svg '+cls;}
-
+function buddyBounds(){return {minX:6,maxX:window.innerWidth-52,minY:90,maxY:window.innerHeight-150};}
+function moveBuddy(k,x,y,dur,dir){
+  const e=buddyEl(k);if(!e)return;const b=buddyBounds();const d=BUDDY_DATA[k];
+  d.x=Math.max(b.minX,Math.min(b.maxX,x));d.y=Math.max(b.minY,Math.min(b.maxY,y));
+  e.style.transition=`left ${dur}s ease-in-out, top ${dur}s ease-in-out`;
+  e.style.left=d.x+'px';e.style.top=d.y+'px';
+  if(dir)e.style.transform=`scaleX(${dir})`;
+}
 function buddyRoam(k){
   const d=BUDDY_DATA[k];const e=buddyEl(k);if(!e){return;}
   const blocked=document.querySelector('.quiz-screen.open,.shooter-screen.open,.pet-screen.open,.ship-screen.open,.tap-screen.open,.arcade-screen.open,.playhub.open,.missions-panel.open');
   if(blocked){d.timer=setTimeout(()=>buddyRoam(k),3000);return;}
-  const vw=window.innerWidth;
+  const b=buddyBounds();
   const act=Math.random();
-  if(act<0.55){
-    // hop to new spot
-    const target=Math.max(6,Math.min(vw-56,d.x+(Math.random()*180-90)));
-    const dir=target>d.x?1:-1;
+  if(act<0.35){
+    // hop diagonally somewhere
+    const tx=d.x+(Math.random()*200-100), ty=d.y+(Math.random()*160-80);
     setBuddyAnim(k,'bd-hop');
-    e.style.transition='left 1.4s ease-in-out';
-    e.style.transform=`scaleX(${dir})`;
-    d.x=target;e.style.left=target+'px';
-    d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},1500);
-  }else if(act<0.7){
-    // spin
+    moveBuddy(k,tx,ty,1.3,tx>d.x?1:-1);
+    d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},1400);
+  }else if(act<0.5){
+    // climb a wall
+    const toLeft=d.x<window.innerWidth/2;const wallX=toLeft?b.minX:b.maxX;
+    setBuddyAnim(k,'bd-hop');
+    moveBuddy(k,wallX,b.minY+Math.random()*80,1.6,toLeft?-1:1);
+    d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},1700);
+  }else if(act<0.65){
+    // tumble down diagonally
+    const tx=d.x+(Math.random()<0.5?-140:140);
     setBuddyAnim(k,'bd-spin');
-    d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},900);
-  }else if(act<0.85){
-    // talk
+    moveBuddy(k,tx,b.maxY-Math.random()*40,1.2,tx>d.x?1:-1);
+    d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},1300);
+  }else if(act<0.78){
+    // air leap
+    setBuddyAnim(k,'bd-hop');
+    const tx=d.x+(Math.random()*160-80), ty=d.y-(80+Math.random()*100);
+    moveBuddy(k,tx,ty,0.5,tx>d.x?1:-1);
+    d.timer=setTimeout(()=>{moveBuddy(k,tx,b.maxY-Math.random()*50,0.6);d.timer=setTimeout(()=>{setBuddyAnim(k,'bd-idle');buddyRoam(k);},700);},520);
+  }else if(act<0.9){
     setBuddyAnim(k,'bd-idle');
     buddySay(k,d.lines[Math.floor(Math.random()*d.lines.length)]);
     d.timer=setTimeout(()=>buddyRoam(k),3500);
   }else{
     setBuddyAnim(k,'bd-idle');
-    d.timer=setTimeout(()=>buddyRoam(k),2600);
+    d.timer=setTimeout(()=>buddyRoam(k),2400);
   }
 }
 function buddySay(k,obj){
@@ -2765,7 +2809,7 @@ function buddySay(k,obj){
   const b=document.getElementById('mascotBubble');
   if(!b)return;
   b.style.left=Math.max(10,Math.min(window.innerWidth-240,d.x-90))+'px';
-  b.style.right='auto';b.style.bottom='144px';
+  b.style.right='auto';b.style.top=Math.max(10,d.y-66)+'px';b.style.bottom='auto';
   b.innerHTML=`<span class="mb-ko">${obj.ko}</span><span class="mb-en">${obj.en}</span>`;
   b.classList.add('show');
   clearTimeout(window.__buddyBub);
@@ -2780,8 +2824,9 @@ function buddyTap(k){
 }
 function startBuddies(){
   ['choco','dubu'].forEach(k=>{
-    const d=BUDDY_DATA[k];const e=buddyEl(k);
-    if(e){e.style.left=d.x+'px';setBuddyAnim(k,'bd-idle');}
+    const d=BUDDY_DATA[k];const e=buddyEl(k);const b=buddyBounds();
+    d.y=b.maxY-(k==='choco'?70:40);
+    if(e){e.style.left=d.x+'px';e.style.top=d.y+'px';setBuddyAnim(k,'bd-idle');}
     if(d.timer)clearTimeout(d.timer);
     d.timer=setTimeout(()=>buddyRoam(k),1500+Math.random()*2000);
   });
