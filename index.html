@@ -584,6 +584,17 @@
     .ad-fake span{font-size:11px;color:var(--text-4);font-weight:600;}
     .ad-skip{width:100%;padding:15px;border-radius:14px;border:none;font-family:inherit;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(135deg,#F472B6,#9747FF);cursor:pointer;}
 
+  
+    /* ===== TOSS QR MODAL ===== */
+    .tossqr-overlay{position:fixed;inset:0;z-index:420;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s;padding:24px;}
+    .tossqr-overlay.open{opacity:1;pointer-events:all;}
+    .tossqr-box{background:#fff;border-radius:24px;padding:28px 24px;text-align:center;width:100%;max-width:330px;position:relative;}
+    .tossqr-x{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:none;background:#f0f0f5;color:#666;font-size:15px;cursor:pointer;font-family:inherit;}
+    .tossqr-title{font-size:19px;font-weight:800;color:#1a1a2e;margin-bottom:6px;}
+    .tossqr-sub{font-size:14px;color:#666;line-height:1.5;margin-bottom:20px;font-weight:600;}
+    .tossqr-img{width:100%;max-width:240px;height:auto;border-radius:16px;border:1px solid #eee;}
+    .tossqr-howto{font-size:12px;color:#999;line-height:1.6;margin-top:18px;font-weight:600;}
+
   </style>
 </head>
 <body>
@@ -736,6 +747,16 @@
 <div class="mascot-wrap" id="mascotWrap" onclick="mascotTapped()"><svg class="mascot-svg ms-idle" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="mbody" cx="40%" cy="34%" r="72%"><stop offset="0%" stop-color="#D8B4FE"/><stop offset="55%" stop-color="#C084FC"/><stop offset="100%" stop-color="#8B3FE0"/></radialGradient><radialGradient id="mhl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></radialGradient><radialGradient id="msh" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#5B21B6" stop-opacity="0.5"/><stop offset="100%" stop-color="#5B21B6" stop-opacity="0"/></radialGradient></defs><ellipse cx="190" cy="300" rx="80" ry="16" fill="#000" opacity="0.2"/><g transform="rotate(8 190 190)"><path d="M190 130 C160 90,95 105,95 165 C95 215,160 250,190 280 C220 250,285 215,285 165 C285 105,220 90,190 130 Z" fill="url(#mbody)"/><path d="M190 280 C220 250,285 215,285 165 C285 135,265 115,240 108 C258 130,256 165,238 195 C212 240,200 258,190 270 Z" fill="url(#msh)"/><ellipse cx="142" cy="148" rx="40" ry="28" fill="url(#mhl)" transform="rotate(-20 142 148)"/><circle cx="120" cy="124" r="10" fill="#fff" opacity="0.85"/><ellipse cx="150" cy="190" rx="16" ry="20" fill="#1a0a2e"/><ellipse cx="230" cy="190" rx="16" ry="20" fill="#1a0a2e"/><circle cx="155" cy="183" r="5" fill="#fff"/><circle cx="235" cy="183" r="5" fill="#fff"/><ellipse cx="125" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><ellipse cx="255" cy="215" rx="13" ry="8" fill="#F472B6" opacity="0.6"/><path d="M175 223 Q190 235 205 223" stroke="#1a0a2e" stroke-width="4" fill="none" stroke-linecap="round"/></g></svg></div>
 <div class="buddy" id="buddyChoco" onclick="buddyTap('choco')"><svg class="buddy-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bchoco" cx="40%" cy="34%" r="72%"><stop offset="0%" stop-color="#E8C8A0"/><stop offset="55%" stop-color="#D4A574"/><stop offset="100%" stop-color="#8B5E2F"/></radialGradient><radialGradient id="bchohl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff" stop-opacity="0.85"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><g class="bbody"><ellipse cx="48" cy="78" rx="20" ry="32" fill="#8B5E3C" transform="rotate(-20 48 78)"/><ellipse cx="152" cy="78" rx="20" ry="32" fill="#8B5E3C" transform="rotate(20 152 78)"/><ellipse cx="100" cy="184" rx="46" ry="9" fill="#000" opacity="0.2"/><path d="M100 62 C77 32,32 43,32 89 C32 127,77 150,100 175 C123 150,168 127,168 89 C168 43,123 32,100 62 Z" fill="url(#bchoco)"/><ellipse cx="74" cy="76" rx="22" ry="15" fill="url(#bchohl)" transform="rotate(-20 74 76)"/><path d="M165 130 q28 -6 24 -34 q-4 16 -20 22 z" fill="#8B5E3C"/><ellipse class="beye" cx="80" cy="100" rx="11" ry="14" fill="#3d2510"/><ellipse class="beye" cx="120" cy="100" rx="11" ry="14" fill="#3d2510"/><circle cx="83" cy="95" r="4" fill="#fff"/><circle cx="123" cy="95" r="4" fill="#fff"/><ellipse cx="100" cy="124" rx="16" ry="12" fill="#E8C9A0"/><ellipse cx="100" cy="118" rx="6" ry="4.5" fill="#3d2510"/><path d="M94 128 q6 12 12 0 z" fill="#F472B6"/></g></svg></div>
 <div class="buddy" id="buddyDubu" onclick="buddyTap('dubu')"><svg class="buddy-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bdubu" cx="40%" cy="34%" r="72%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="55%" stop-color="#F0EAF8"/><stop offset="100%" stop-color="#C9BBE0"/></radialGradient><radialGradient id="bduhl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff" stop-opacity="0.95"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><g class="bbody"><path d="M50 70 L42 36 L74 58 Z" fill="#E0D4F0"/><path d="M52 62 L48 44 L66 56 Z" fill="#F9A8D4"/><path d="M150 70 L158 36 L126 58 Z" fill="#E0D4F0"/><path d="M148 62 L152 44 L134 56 Z" fill="#F9A8D4"/><ellipse cx="100" cy="184" rx="46" ry="9" fill="#000" opacity="0.18"/><path d="M100 62 C77 32,32 43,32 89 C32 127,77 150,100 175 C123 150,168 127,168 89 C168 43,123 32,100 62 Z" fill="url(#bdubu)"/><ellipse cx="74" cy="76" rx="22" ry="15" fill="url(#bduhl)" transform="rotate(-20 74 76)"/><path d="M168 120 q30 4 30 -28 q-8 18 -26 18 z" fill="#E0D4F0"/><ellipse class="beye" cx="80" cy="100" rx="10" ry="15" fill="#5B3F7A"/><ellipse class="beye" cx="120" cy="100" rx="10" ry="15" fill="#5B3F7A"/><circle cx="82" cy="95" r="3.5" fill="#fff"/><circle cx="122" cy="95" r="3.5" fill="#fff"/><ellipse cx="62" cy="118" rx="8" ry="5" fill="#F9A8D4" opacity="0.6"/><ellipse cx="138" cy="118" rx="8" ry="5" fill="#F9A8D4" opacity="0.6"/><path d="M96 120 l8 0 -4 5 z" fill="#F472B6"/><g stroke="#B8A8D0" stroke-width="1.5"><line x1="58" y1="116" x2="80" y2="120"/><line x1="58" y1="124" x2="80" y2="125"/><line x1="142" y1="116" x2="120" y2="120"/><line x1="142" y1="124" x2="120" y2="125"/></g></g></svg></div>
+
+<div class="tossqr-overlay" id="tossqrOverlay" onclick="closeTossQR()">
+  <div class="tossqr-box" onclick="event.stopPropagation()">
+    <button class="tossqr-x" onclick="closeTossQR()">✕</button>
+    <div class="tossqr-title">💜 개발자 응원하기</div>
+    <div class="tossqr-sub">토스로 QR을 스캔해서<br>응원해주세요!</div>
+    <img class="tossqr-img" src="toss-qr.jpg" alt="토스 송금 QR" />
+    <div class="tossqr-howto">토스 앱 → 송금 → QR 스캔<br>또는 카메라로 QR을 비춰주세요</div>
+  </div>
+</div>
 
 <div class="ad-overlay" id="adOverlay">
   <div class="ad-box">
@@ -920,7 +941,7 @@
     <div class="footer-logo">💜 Stan Slang</div>
     <div class="footer-tagline">K-pop 팬심 충전소</div>
     <div class="footer-links">
-      <a class="footer-btn support" href="https://qr.kakaopay.com/FWU1A2gEc" target="_blank" rel="noopener">☕ 개발자 응원하기</a>
+      <a class="footer-btn support" onclick="openTossQR()">☕ 개발자 응원하기</a>
       <a class="footer-btn pro" onclick="showProModal('Stan Slang Pro로 무제한 즐기기 💜')">⭐ Pro 멤버십</a>
       <a class="footer-btn ad" href="mailto:gsh090509@gmail.com?subject=Stan Slang 광고 문의" target="_blank" rel="noopener">📩 광고 문의</a>
     </div>
@@ -2917,6 +2938,11 @@ function closeAd(){
   if(ov)ov.classList.remove('open');
   adWatching=false;
 }
+
+
+
+function openTossQR(){document.getElementById('tossqrOverlay').classList.add('open');}
+function closeTossQR(){document.getElementById('tossqrOverlay').classList.remove('open');}
 
 
 renderSotd();
