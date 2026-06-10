@@ -620,6 +620,11 @@
     .ship-grid-head{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;font-weight:800;color:var(--purple-lt);margin-bottom:6px;text-align:center;}
     .ship-hint{font-size:11.5px;color:var(--text-4);font-weight:600;margin-bottom:14px;}
 
+  
+    .tossqr-send{width:100%;padding:16px;border-radius:14px;border:none;font-family:inherit;font-size:16px;font-weight:800;color:#fff;background:#3182F6;cursor:pointer;margin-bottom:14px;}
+    .tossqr-send:active{transform:scale(0.98);}
+    .tossqr-or{font-size:11px;color:#aaa;font-weight:600;margin-bottom:12px;}
+
   </style>
 </head>
 <body>
@@ -768,9 +773,11 @@
   <div class="tossqr-box" onclick="event.stopPropagation()">
     <button class="tossqr-x" onclick="closeTossQR()">✕</button>
     <div class="tossqr-title">💜 개발자 응원하기</div>
-    <div class="tossqr-sub">토스로 QR을 스캔해서<br>응원해주세요!</div>
+    <div class="tossqr-sub">슬랭이를 만든 개발자에게<br>커피 한 잔 보내주세요 ☕</div>
+    <button class="tossqr-send" onclick="goToss()">⚡ 토스로 바로 보내기</button>
+    <div class="tossqr-or">— 또는 PC로 보고 있다면 —</div>
     <img class="tossqr-img" src="toss-qr.jpg" alt="토스 송금 QR" />
-    <div class="tossqr-howto">토스 앱 → 송금 → QR 스캔<br>또는 카메라로 QR을 비춰주세요</div>
+    <div class="tossqr-howto">폰 카메라나 토스 앱으로<br>QR을 스캔해주세요</div>
   </div>
 </div>
 
@@ -3175,6 +3182,14 @@ function closeAd(){
 }
 
 
+
+
+function goToss(){
+  const bank=encodeURIComponent('\uCF00\uC774\uBC45\uD06C');
+  location.href='supertoss://send?bank='+bank+'&accountNo=100223641415&origin=qr';
+  // if toss not installed, nothing happens; show gentle hint
+  setTimeout(()=>{if(typeof quizToast==='function')quizToast('\uD1A0\uC2A4 \uC571\uC774 \uC5C6\uC73C\uba74 QR\uC744 \uC774\uC6A9\uD574\uC8FC\uC138\uC694 \u{1F4F1}');},1500);
+}
 
 function openTossQR(){document.getElementById('tossqrOverlay').classList.add('open');}
 function closeTossQR(){document.getElementById('tossqrOverlay').classList.remove('open');}
