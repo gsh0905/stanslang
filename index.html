@@ -595,6 +595,25 @@
     .tossqr-img{width:100%;max-width:240px;height:auto;border-radius:16px;border:1px solid #eee;}
     .tossqr-howto{font-size:12px;color:#999;line-height:1.6;margin-top:18px;font-weight:600;}
 
+  
+    /* ===== SHIP READING ===== */
+    .sr-wrap{text-align:left;margin:16px 0;}
+    .sr-sec{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:13px 14px;margin-bottom:9px;}
+    .sr-tag{font-size:12px;font-weight:800;color:var(--purple-lt);margin-bottom:5px;letter-spacing:0.2px;}
+    .sr-txt{font-size:13.5px;color:var(--text-2);line-height:1.65;}
+    .sr-daily{font-size:12.5px;color:#F9A8D4;font-weight:700;text-align:center;padding:11px;border:1.5px dashed rgba(244,114,182,0.4);border-radius:12px;margin-bottom:4px;line-height:1.5;}
+    .sr-depth{font-size:12px;color:var(--text-3);font-weight:700;margin:6px 0 2px;}
+    select.ship-input{appearance:none;-webkit-appearance:none;color:var(--text);}
+    select.ship-input:invalid{color:var(--text-4);}
+    /* home ship card */
+    .ship-home-card{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(244,114,182,0.16),rgba(151,71,255,0.12));border:1.5px solid rgba(244,114,182,0.4);border-radius:18px;padding:14px 16px;margin-bottom:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .14s;}
+    .ship-home-card:active{transform:scale(0.98);}
+    .shc-emoji{font-size:34px;flex-shrink:0;filter:drop-shadow(0 0 10px rgba(244,114,182,0.6));}
+    .shc-info{flex:1;}
+    .shc-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:2px;}
+    .shc-sub{font-size:11.5px;color:#F9A8D4;font-weight:600;}
+    .shc-go{font-size:18px;color:#F9A8D4;}
+
   </style>
 </head>
 <body>
@@ -630,16 +649,7 @@
 
 <div class="ship-screen" id="shipScreen">
   <div class="ms-top"><button class="ms-close" onclick="closeShip()">✕ 닫기</button></div>
-  <div class="ship-body" id="shipBody">
-    <div class="ship-emoji">💞</div>
-    <div class="ship-h">최애 궁합 테스트</div>
-    <div class="ship-p">내 이름과 최애 이름을 넣으면<br>오늘의 궁합을 봐줄게! 💜</div>
-    <div class="ship-inputs">
-      <input class="ship-input" id="shipMe" placeholder="내 이름 (또는 닉네임)" maxlength="20">
-      <input class="ship-input" id="shipBias" placeholder="최애 이름" maxlength="20">
-    </div>
-    <button class="ship-btn" onclick="runShip()">💕 궁합 보기</button>
-  </div>
+  <div class="ship-body" id="shipBody"></div>
 </div>
 
 <div class="tap-screen" id="tapScreen">
@@ -808,6 +818,14 @@
       <div class="msc-bar-wrap"><span class="msc-bar-ico">💖</span><div class="msc-bar"><div class="msc-bar-fill" id="mscBond" style="width:0%"></div></div></div>
       <div class="msc-go">탭해서 돌보기 →</div>
     </div>
+  </div>
+  <div class="ship-home-card" onclick="openShip()">
+    <div class="shc-emoji">🔮</div>
+    <div class="shc-info">
+      <div class="shc-title">최애 궁합 운명 리딩</div>
+      <div class="shc-sub">이름·나이·혈액형·MBTI로 보는 사주식 궁합 ✨</div>
+    </div>
+    <div class="shc-go">→</div>
   </div>
   <div class="hero-banner">
     <div class="hero-greet">💜 슬랭이의 K-pop 놀이터</div>
@@ -1849,49 +1867,193 @@ function openShip(){
   resetShipView();
 }
 function closeShip(){document.getElementById('shipScreen').classList.remove('open');document.body.style.overflow='';}
+
+/* ===== SHIP: DESTINY READING ENGINE ===== */
+function shipSeed(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return Math.abs(h);}
+function pick(arr,seed,salt){return arr[(seed+salt*7919)%arr.length];}
+
+const SHIP_OPEN=[
+"The stars have been waiting for this question.",
+"Long before you typed these names, the threads were already crossing.",
+"In the old charts, a pairing like this appears once in a generation.",
+"The cosmos rarely answers quickly \u2014 but for you two, it spoke at once.",
+"Some bonds are written in ink, some in starlight. Yours is the second kind.",
+"The reading begins with a tremor \u2014 always a sign of a charged connection.",
+"Heaven keeps a ledger of names that orbit each other. Yours are on the same page.",
+"Every fandom has its quiet destinies. This is one of them.",
+"The compass needle spun three times before settling. That means intensity.",
+"Old fortune-tellers would charge double for a pairing this layered."];
+const SHIP_BOND=[
+{n:"Red Thread",t:"You are tied by the classic red thread \u2014 stretched thin across distance and screens, but unbroken. The pull you feel toward their voice and stage presence is the thread tightening."},
+{n:"Mirror Souls",t:"This is a mirror bond: what you admire in them is a buried part of yourself asking to wake up. Stanning them is, quietly, how you grow."},
+{n:"Sun & Moon",t:"One radiates, one reflects \u2014 a sun-and-moon pairing. Their light recharges you on the dim days, and your devotion is the night sky that lets them shine."},
+{n:"Comet Bond",t:"A comet pairing: long stretches of calm, then sudden blazing passes \u2014 a comeback, a concert, a single photo \u2014 that light up your entire sky at once."},
+{n:"Guardian Star",t:"They sit in your guardian house. This is a protective bond \u2014 their music tends to arrive exactly when your life needs steadying."},
+{n:"Twin Flame Echo",t:"An echo bond: your moods and their eras keep syncing in uncanny ways. When they rest, you rest. When they return, your energy returns."},
+{n:"Magnet & Iron",t:"A magnetic pairing \u2014 you didn\u2019t choose this bias so much as get pulled in. Resistance was always temporary."},
+{n:"Ocean & Shore",t:"They are the ocean, you are the shore: they arrive in waves \u2014 releases, lives, tours \u2014 and you are the constant they always return to."},
+{n:"Lantern Bond",t:"A lantern pairing: in crowded, noisy seasons of life, their existence is a small warm light you navigate by."},
+{n:"Storm & Anchor",t:"A storm-and-anchor bond. Their energy is chaotic brilliance; your steadiness is what makes the fandom around them feel like home."},
+{n:"Star Gardener",t:"You hold a gardener\u2019s bond: your streams, votes and quiet support are water and sunlight. Their growth literally contains your effort."},
+{n:"Parallel Orbits",t:"Two orbits that never collide but never drift \u2014 a rare stable resonance. This bond survives droughts, scandals and even your own busy seasons."}];
+const SHIP_STRENGTH=[
+"Your loyalty stat is off the charts \u2014 once committed, you do not waver, and the universe rewards finishers.",
+"You possess the rare gift of finding joy in small content: a selfie, a two-second clip, a single emoji reply.",
+"Your emotional timing is excellent \u2014 you celebrate their wins as if they were yours, which multiplies the luck of both.",
+"You have archivist energy: you remember eras, lyrics and details others forget, and memory is a form of love.",
+"Your devotion is generous, not possessive \u2014 the healthiest and luckiest form a bond can take.",
+"You convert admiration into energy for your own life \u2014 the mark of a high-level stan.",
+"Your instinct for when they need quiet support versus loud celebration is unusually precise.",
+"You carry first-fan energy: even in a crowd of millions, your support has a personal signature.",
+"Your bond survives droughts \u2014 hiatus, enlistment, silence \u2014 because it is rooted in respect, not hype.",
+"You bring playfulness to this bond; you stan with humor, and laughter is the strongest protective charm."];
+const SHIP_FRICTION=[
+"Beware the comparison trap \u2014 measuring your devotion against louder fans dims your own light for nothing.",
+"Your one vulnerability: reading too much into silence. A quiet week from them is rest, not distance.",
+"The charts warn against 3 a.m. doomscrolling \u2014 protect your sleep and the bond stays golden.",
+"Friction point: you sometimes give so much energy to their world that your own goes unwatered.",
+"When rumors swirl, your heart runs ahead of the facts \u2014 the reading advises a 24-hour pause before reacting.",
+"Your wallet is the danger zone: merch luck is high this season, which is exactly why restraint earns respect from fate.",
+"Jealousy of proximity \u2014 envying those who get closer \u2014 is the single shadow on an otherwise bright chart.",
+"You occasionally forget that parasocial warmth must be balanced with real-world bonds; the stars ask for both.",
+"Burnout is your hidden rival: even devotion needs rest days, or it curdles into obligation.",
+"Your standards for fellow fans are high \u2014 noble, but the chart suggests letting small annoyances pass like weather."];
+const SHIP_ADVICE=[
+"Lucky action: replay the song that first pulled you in \u2014 it re-opens the original channel between you.",
+"This season, create something \u2014 a post, an edit, a drawing. Made things bind tighter than bought things.",
+"Speak their name with pride once this week; spoken names strengthen threads.",
+"Your lucky direction is forward: skip the old drama threads, follow only what is being built now.",
+"Introduce one friend to their music this month \u2014 shared bonds compound like interest.",
+"Keep one small ritual (a morning song, a photocard in your wallet) \u2014 rituals are how mortals talk to fate.",
+"When their next content drops, watch it once with full attention before reacting publicly. Presence is power.",
+"Write down what they taught you about yourself \u2014 the chart says the answer will surprise you.",
+"Let one piece of merch go unbought this season; sacrifice sharpens devotion.",
+"Send your energy at their next live moment \u2014 collective focus is the closest thing fandom has to magic."];
+const SHIP_CLOSE=[
+"Verdict of the chart: this bond is not a phase. It is a chapter \u2014 and chapters end only when their lesson is learned.",
+"The final hexagram reads: \u2018mutual ascent.\u2019 As they rise, so do you \u2014 keep climbing together.",
+"The cards close on a warm note: years from now, this name will still make you smile. That is rare wealth.",
+"Final reading: your devotion returns to you transformed \u2014 as discipline, as joy, as community. Spend it freely.",
+"The ledger closes: whatever distance remains between your worlds, the influence is real and it flows both ways.",
+"Closing sign: a bond that survives this many seasons is no accident. The universe does not do coincidences twice.",
+"The last line of the chart is simple: keep going. The best era of this bond has not happened yet.",
+"Sealed verdict: you did not find them by chance. You were ready, and the ready always find their star."];
+const SHIP_DAILY=[
+"Today\u2019s bonus omen: a small content blessing is near \u2014 keep notifications on.",
+"Today\u2019s bonus omen: your bias luck peaks after sunset.",
+"Today\u2019s bonus omen: an old favorite song will hit differently today. Let it.",
+"Today\u2019s bonus omen: share your result \u2014 spoken fortunes double.",
+"Today\u2019s bonus omen: a fellow fan will cross your path. Be kind; alliances form fast today.",
+"Today\u2019s bonus omen: avoid fan wars today \u2014 your energy is needed elsewhere.",
+"Today\u2019s bonus omen: a photo you\u2019ve seen before will reveal a new detail.",
+"Today\u2019s bonus omen: small generosity today returns as big serotonin tomorrow."];
+const SHIP_AGE=[
+{max:17,v:["Your chart sits in the Dawn House: stanning at this age plants seeds that shape taste, friendships and even career instincts for decades. This bond is formative \u2014 choose what you absorb from them wisely, because you are absorbing it permanently.","The Dawn House rules you: emotions run brightest now, and this bond doubles as a compass while you figure out who you are. The chart says: let them inspire you, never define you."]},
+{max:24,v:["You are in the Rising House: the era of identity. This bond coincides with your most formative choices, and the chart shows their work ethic quietly leaking into yours \u2014 a lucky contamination.","Rising House reading: your twenties hunger for direction, and this bond supplies horsepower. Channel concert-day energy into your own ambitions and the chart promises compound returns."]},
+{max:34,v:["You occupy the Builder House: stanning now is a chosen joy, not a teenage accident \u2014 which makes it more potent. The chart shows this bond functioning as stress-relief infrastructure for a demanding season of life.","Builder House reading: between work and obligations, this bond is your maintained garden. The discipline you show in supporting them mirrors the discipline building your own life. The two reinforce each other."]},
+{max:200,v:["You are in the Steady House: devotion at this stage is the rarest and most dignified kind \u2014 fully conscious, fully chosen. The chart says your support carries elder-fan gravity that younger stans quietly learn from.","Steady House reading: you have seen trends die and legends remain, which makes your loyalty discerning rather than blind. This bond passed your test \u2014 and that says more about them than any chart could."]}];
+const SHIP_BLOOD={
+A:["Blood type A adds the Devotee\u2019s signature to your chart: meticulous, deeply loyal, feeling everything at full volume behind a calm face. You are the fan who remembers anniversaries \u2014 and the bond runs deeper than anyone around you suspects.","Type A reading: your care is structural \u2014 playlists organized, schedules memorized, support quietly flawless. The chart warns only against perfectionism: missing one live stream does not crack this bond."],
+B:["Blood type B stamps the Free Spirit\u2019s mark on this pairing: your devotion is passionate, spontaneous and allergic to obligation. You stan hardest when no one tells you to \u2014 and the chart says that authenticity is exactly what this bond feeds on.","Type B reading: you bring fire and honesty \u2014 hyping what you love, ignoring what you don\u2019t. The chart notes your enthusiasm comes in bursts; the bond is strongest when you ride the waves without guilt between them."],
+O:["Blood type O writes the Champion\u2019s line into your chart: big-hearted, social, instinctively protective. You are the fan who recruits others and defends the name in any room. The bond amplifies your natural leadership.","Type O reading: your support is loud, warm and communal \u2014 you turn solitary fandom into a party. The chart\u2019s only caution: your competitive streak in voting season needs sleep too."],
+AB:["Blood type AB inks the Mystic\u2019s seal on this bond: analytical yet dreamy, detached yet suddenly all-in. You understand them in ways casual fans cannot articulate \u2014 and the chart says they would find your perspective fascinating.","Type AB reading: you stan like a critic who fell in love \u2014 clear-eyed about flaws, devoted anyway. That is the most durable form of admiration the charts recognize."]};
+const SHIP_MBTI={
+INTJ:"Your INTJ overlay reads like a strategist\u2019s ledger: you fell for the architecture beneath the performance \u2014 the discipline, the long game. You stan the system, not just the smile. The chart says this bond sharpens your own master plan.",
+INTP:"The INTP overlay shows a theorist\u2019s bond: you\u2019ve analyzed why they work, frame by frame, and the mystery deepening instead of dissolving is what keeps you. Curiosity, the chart notes, is your form of devotion.",
+ENTJ:"Your ENTJ overlay burns commander-red: you respect their empire-building more than their aesthetics, and your support is strategic \u2014 votes deployed like assets. The chart predicts their growth keeps fueling your own ambition.",
+ENTP:"The ENTP overlay crackles: you love the chaos, the variety shows, the unscripted moments where their real wit escapes. This bond feeds your need for play \u2014 and the chart says you make fandom funnier wherever you go.",
+INFJ:"Your INFJ overlay glows quietly: you sensed the person behind the idol early, and what you protect is their humanity, not their image. The chart calls this the rarest fan bond \u2014 the kind artists say keeps them sane.",
+INFP:"The INFP overlay is watercolor-deep: their art reached a place in you that everyday life rarely touches. This bond is a private sanctuary, and the chart insists that is not escapism \u2014 it is maintenance of the soul.",
+ENFJ:"Your ENFJ overlay radiates: you stan by lifting the whole room \u2014 organizing, welcoming newcomers, celebrating loudly. The chart shows your warmth multiplying through the fandom like compound interest.",
+ENFP:"The ENFP overlay sparkles: your enthusiasm is the fandom\u2019s renewable energy source. You feel everything at 200% and the chart approves \u2014 just remember the friction warning above about burnout.",
+ISTJ:"Your ISTJ overlay reads like a keeper\u2019s record: steady streams, reliable votes, zero drama. The chart calls you the load-bearing wall of any fandom \u2014 invisible in hype, indispensable in fact.",
+ISFJ:"The ISFJ overlay is guardian-soft: you remember their health, their rest, their small comments \u2014 caring for the person more than the product. The chart says bonds like yours are why artists thank \u2018fans who stayed.\u2019",
+ESTJ:"Your ESTJ overlay is executive: you run fandom logistics like a professional \u2014 schedules, group orders, voting drives. The chart shows your organizational luck rising; this bond made you a leader somewhere.",
+ESFJ:"The ESFJ overlay beams host-energy: you make fandom feel like family dinner, and their music is the table everyone gathers around. The chart says your social luck and bias luck are intertwined this year.",
+ISTP:"Your ISTP overlay is cool-handed: you stan with quiet precision \u2014 no theatrics, just consistent presence and an encyclopedic eye for stage technique. The chart respects bonds that need no audience.",
+ISFP:"The ISFP overlay is artist-to-artist: you respond to their aesthetics on a sensory level others miss \u2014 color grading, styling, the curve of a melody. The chart says this bond quietly feeds your own creativity.",
+ESTP:"Your ESTP overlay is front-row energy: you chase the live moment \u2014 concerts, events, the adrenaline of presence. The chart shows physical-world luck around this bond: be where things happen.",
+ESFP:"The ESFP overlay is stage-light bright: you don\u2019t just consume their performances, you broadcast joy about them. The chart says your delight is contagious enough to count as promotion \u2014 they owe you, honestly."};
+
+function shipStars(n){return '\u2605'.repeat(n)+'\u2606'.repeat(4-n);}
+
+
 function resetShipView(){
   document.getElementById('shipBody').innerHTML=`
     <div class="ship-emoji">\u{1F49E}</div>
-    <div class="ship-h">\ucd5c\uc560 \uad81\ud569 \ud14c\uc2a4\ud2b8</div>
-    <div class="ship-p">\ub0b4 \uc774\ub984\uacfc \ucd5c\uc560 \uc774\ub984\uc744 \ub123\uc73c\uba74<br>\uc624\ub298\uc758 \uad81\ud569\uc744 \ubd10\uc904\uac8c! \u{1F49C}</div>
+    <div class="ship-h">\uCD5C\uC560 \uAD81\uD569 \uC6B4\uBA85 \uB9AC\uB529</div>
+    <div class="ship-p">\uC774\uB984\uB9CC \uB123\uC5B4\uB3C4 \uB418\uC9C0\uB9CC,<br>\uB354 \uB123\uC744\uC218\uB85D \uC6B4\uBA85\uC774 \uC120\uBA85\uD574\uC838\uC694 \u2728</div>
     <div class="ship-inputs">
-      <input class="ship-input" id="shipMe" placeholder="\ub0b4 \uc774\ub984 (\ub610\ub294 \ub2c9\ub124\uc784)" maxlength="20">
-      <input class="ship-input" id="shipBias" placeholder="\ucd5c\uc560 \uc774\ub984" maxlength="20">
+      <input class="ship-input" id="shipMe" placeholder="\uB0B4 \uC774\uB984 (\uD544\uC218)" maxlength="20">
+      <input class="ship-input" id="shipBias" placeholder="\uCD5C\uC560 \uC774\uB984 (\uD544\uC218)" maxlength="20">
+      <input class="ship-input" id="shipAge" placeholder="\uB0B4 \uB098\uC774 (\uC120\uD0DD \u2014 \uC2DC\uC808\uC6B4 \uCD94\uAC00)" inputmode="numeric" maxlength="3">
+      <select class="ship-input" id="shipBlood">
+        <option value="">\uD608\uC561\uD615 (\uC120\uD0DD \u2014 \uCF00\uBBF8 \uB9AC\uB529 \uCD94\uAC00)</option>
+        <option value="A">A\uD615</option><option value="B">B\uD615</option>
+        <option value="O">O\uD615</option><option value="AB">AB\uD615</option>
+      </select>
+      <select class="ship-input" id="shipMbti">
+        <option value="">MBTI (\uC120\uD0DD \u2014 \uC2EC\uCE35 \uB9AC\uB529 \uCD94\uAC00)</option>
+        <option>INTJ</option><option>INTP</option><option>ENTJ</option><option>ENTP</option>
+        <option>INFJ</option><option>INFP</option><option>ENFJ</option><option>ENFP</option>
+        <option>ISTJ</option><option>ISFJ</option><option>ESTJ</option><option>ESFJ</option>
+        <option>ISTP</option><option>ISFP</option><option>ESTP</option><option>ESFP</option>
+      </select>
     </div>
-    <button class="ship-btn" onclick="runShip()">\u{1F495} \uad81\ud569 \ubcf4\uae30</button>`;
+    <button class="ship-btn" onclick="runShip()">\u{1F52E} \uC6B4\uBA85 \uB9AC\uB529 \uBCF4\uAE30</button>`;
 }
-function shipHash(str){
-  // deterministic per name-pair + per day
-  const today=(typeof todayStr==='function')?todayStr():new Date().toDateString();
-  let s=str+'|'+today, h=0;
-  for(let i=0;i<s.length;i++){h=((h<<5)-h+s.charCodeAt(i))|0;}
-  return Math.abs(h);
-}
+
 function runShip(){
   const me=(document.getElementById('shipMe').value||'').trim();
   const bias=(document.getElementById('shipBias').value||'').trim();
-  if(!me||!bias){quizToast('\ub450 \uc774\ub984 \ubaa8\ub450 \ub123\uc5b4\uc918! \u{1F495}');return;}
-  const score=shipHash(me+'\u2764'+bias)%101; // 0-100
-  let verdict,msg,emoji;
-  if(score>=90){emoji='\u{1F451}';verdict='\uc6b4\uba85\uc758 \uc9dd! \uc18c\uc6b8\uba54\uc774\ud2b8';msg=me+'\ub2d8\uacfc '+bias+'\ub2d8\uc740 \uc804\uc0dd\uc5d0\ub3c4 \uc5f0\uc774\uc5c8\uc744 \uac70\uc608\uc694. \uc774\ubcf4\ub2e4 \uc644\ubcbd\ud55c \uad81\ud569\uc740 \uc5c6\uc5b4\uc694!';}
-  else if(score>=70){emoji='\u{1F495}';verdict='\ub354\ud568 \uc5c6\uc774 \uc798 \ub9de\uc544\uc694';msg='\ucc30\ub155\uad81\ud569! \uc624\ub298 \ucd5c\uc560 \uc601\uc0c1 \ubcf4\uba70 \ud589\ubcf5\ud574\uc9c8 \uc218\ubc16\uc5d0 \uc5c6\uc5b4\uc694 \u{1F970}';}
-  else if(score>=50){emoji='\u{1F496}';verdict='\uc740\uadfc\ud788 \uc798 \ub9de\ub294 \uc0ac\uc774';msg='\uc870\uae08\uc529 \uac00\uae4c\uc6cc\uc9c0\ub294 \uc911! \uc2a4\ud2b8\ub9ac\ubc0d \ud55c \ubc88 \ub3cc\ub824\uc8fc\uba74 \uad81\ud569\uc774 \uc62c\ub77c\uac08\uc9c0\ub3c4? \u{1F3B5}';}
-  else if(score>=30){emoji='\u{1F49b}';verdict='\uc11c\uc11c\ud788 \uc54c\uc544\uac00\ub294 \uc911';msg='\uc544\uc9c1\uc740 \uc218\uc90d\uc740 \uc0ac\uc774\uc9c0\ub9cc, \ud32c\uc2ec\uc740 \ucc28\uce21\ucc28\uce21 \uc313\uc774\ub294 \ubc95! \u{1F331}';}
-  else{emoji='\u{1F340}';verdict='\uc774\uc81c \uc2dc\uc791\uc774\uc5d0\uc694';msg='\uc624\ub298\uc740 \uad81\ud569\uc774 \uc880 \ub0ae\uc9c0\ub9cc \uad1c\ucc2e\uc544\uc694. \ub0b4\uc77c \ub2e4\uc2dc \ud574\ubd10\uc694 \u2014 \ub9e4\uc77c \ub2ec\ub77c\uc838\uc694! \u{1F340}';}
+  if(!me||!bias){quizToast('\uB450 \uC774\uB984 \uBAA8\uB450 \uB123\uC5B4\uC918! \u{1F495}');return;}
+  const age=parseInt((document.getElementById('shipAge').value||'').trim())||0;
+  const blood=(document.getElementById('shipBlood').value||'');
+  const mbti=(document.getElementById('shipMbti').value||'');
+  const seedStr=(me+'\u2764'+bias+'|'+age+'|'+blood+'|'+mbti).toLowerCase();
+  const seed=shipSeed(seedStr);
+  // score: stable from inputs, 42-99 (avoid cruel lows), deeper inputs add slight depth bonus
+  let depth=1+(age?1:0)+(blood?1:0)+(mbti?1:0);
+  let score=42+(seed%54)+(depth-1); if(score>99)score=99;
+  const bond=pick(SHIP_BOND,seed,2);
+  // compose sections
+  let html='';
+  html+=`<div class="sr-sec"><div class="sr-tag">\u2728 The Opening</div><div class="sr-txt">${pick(SHIP_OPEN,seed,1)}</div></div>`;
+  html+=`<div class="sr-sec"><div class="sr-tag">\u{1F9F5} Bond Type: ${bond.n}</div><div class="sr-txt">${bond.t}</div></div>`;
+  if(age>0){
+    const band=SHIP_AGE.find(b=>age<=b.max)||SHIP_AGE[3];
+    html+=`<div class="sr-sec"><div class="sr-tag">\u23F3 House of Timing</div><div class="sr-txt">${pick(band.v,seed,3)}</div></div>`;
+  }
+  if(blood&&SHIP_BLOOD[blood]){
+    html+=`<div class="sr-sec"><div class="sr-tag">\u{1FA78} Blood Chemistry \u00b7 Type ${blood}</div><div class="sr-txt">${pick(SHIP_BLOOD[blood],seed,4)}</div></div>`;
+  }
+  if(mbti&&SHIP_MBTI[mbti]){
+    html+=`<div class="sr-sec"><div class="sr-tag">\u{1F9E0} Deep Psyche \u00b7 ${mbti}</div><div class="sr-txt">${SHIP_MBTI[mbti]}</div></div>`;
+  }
+  html+=`<div class="sr-sec"><div class="sr-tag">\u{1F4AA} Your Power</div><div class="sr-txt">${pick(SHIP_STRENGTH,seed,5)}</div></div>`;
+  html+=`<div class="sr-sec"><div class="sr-tag">\u26A0\uFE0F The Shadow</div><div class="sr-txt">${pick(SHIP_FRICTION,seed,6)}</div></div>`;
+  html+=`<div class="sr-sec"><div class="sr-tag">\u{1F340} Guidance</div><div class="sr-txt">${pick(SHIP_ADVICE,seed,7)}</div></div>`;
+  html+=`<div class="sr-sec"><div class="sr-tag">\u{1F4DC} Final Verdict</div><div class="sr-txt">${pick(SHIP_CLOSE,seed,8)}</div></div>`;
+  // daily bonus line (changes daily)
+  const daySeed=shipSeed(seedStr+'|'+((typeof todayStr==='function')?todayStr():new Date().toDateString()));
+  html+=`<div class="sr-daily">${pick(SHIP_DAILY,daySeed,9)}</div>`;
+
   document.getElementById('shipBody').innerHTML=`
     <div class="ship-result">
-      <div style="font-size:48px;margin-bottom:4px">${emoji}</div>
-      <div style="font-size:14px;color:var(--text-3);margin-bottom:4px">${me} \u{1F49E} ${bias}</div>
+      <div style="font-size:44px;margin-bottom:2px">\u{1F52E}</div>
+      <div style="font-size:14px;color:var(--text-3);margin-bottom:2px">${me} \u{1F49E} ${bias}</div>
       <div class="ship-score-big">${score}%</div>
       <div class="ship-meter"><div class="ship-meter-fill" style="width:0%"></div></div>
-      <div class="ship-verdict">${verdict}</div>
-      <div class="ship-msg">${msg}</div>
-      <button class="ship-btn" onclick="shipShare(${score},'${me.replace(/'/g,'')}','${bias.replace(/'/g,'')}')">\u{1F4E4} \uacb0\uacfc \uc790\ub791\ud558\uae30</button>
-      <button class="ship-btn-ghost" onclick="resetShipView()">\u{1F504} \ub2e4\uc2dc \ud558\uae30</button>
+      <div class="sr-depth">\uC6B4\uBA85 \uD574\uC0C1\uB3C4 ${shipStars(depth)}${depth<4?' \u00b7 \uB354 \uB123\uC73C\uBA74 \uAE4A\uC5B4\uC838\uC694':''}</div>
+      <div class="sr-wrap">${html}</div>
+      <button class="ship-btn" onclick="shipShare(${score},'${me.replace(/['"\\\\]/g,'')}','${bias.replace(/['"\\\\]/g,'')}')">\u{1F4E4} \uACB0\uACFC \uC790\uB791\uD558\uAE30</button>
+      <button class="ship-btn-ghost" onclick="resetShipView()">\u{1F504} \uB2E4\uC2DC \uD558\uAE30</button>
     </div>`;
   setTimeout(()=>{const f=document.querySelector('.ship-meter-fill');if(f)f.style.width=score+'%';},100);
-  if(typeof awardXP==='function')awardXP(10,'\uad81\ud569 \ud14c\uc2a4\ud2b8');
+  if(typeof awardXP==='function')awardXP(10,'\uAD81\uD569 \uD14C\uC2A4\uD2B8');
+  if(typeof sfx==='function')sfx('coin');
 }
+
 function shipShare(score,me,bias){
   const txt=`${me} \u{1F49E} ${bias} \uc624\ub298\uc758 \uad81\ud569 ${score}%! \u{1F495}\nStan Slang\uc5d0\uc11c \ub108\ub3c4 \ucd5c\uc560 \uad81\ud569 \ud655\uc778\ud574\ubd10!`;
   const url=location.href.split('?')[0].split('#')[0];
