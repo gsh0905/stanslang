@@ -614,6 +614,12 @@
     .shc-sub{font-size:11.5px;color:#F9A8D4;font-weight:600;}
     .shc-go{font-size:18px;color:#F9A8D4;}
 
+  
+    .ship-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px;}
+    .ship-grid .ship-input{margin:0;}
+    .ship-grid-head{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;font-weight:800;color:var(--purple-lt);margin-bottom:6px;text-align:center;}
+    .ship-hint{font-size:11.5px;color:var(--text-4);font-weight:600;margin-bottom:14px;}
+
   </style>
 </head>
 <body>
@@ -1978,28 +1984,83 @@ ESFP:"The ESFP overlay is stage-light bright: you don\u2019t just consume their 
 function shipStars(n){return '\u2605'.repeat(n)+'\u2606'.repeat(4-n);}
 
 
+
+/* ===== PAIR READING POOLS ===== */
+const SHIP_AGEGAP={
+same:["You share the same count of years \u2014 the charts call this \u2018parallel seasons.\u2019 You grew through the same eras, the same world events, the same songs on the radio. When they speak of their generation, they are speaking of yours. This synchrony makes their lyrics land closer to the bone.","Same-age bonds carry peer gravity: you don\u2019t look up or down at them \u2014 you look across. The chart says this makes your admiration unusually honest; you celebrate them as one of your own who made it."],
+iOlder:["You carry more years than your star \u2014 the \u2018elder guardian\u2019 configuration. Your support has a protective warmth: part fan, part someone who knows how hard the road really is. The chart says they are lucky to be watched over by eyes that understand cost.","The chart shows you in the senior seat: you\u2019ve lived chapters they haven\u2019t reached yet. This gives your devotion patience \u2014 you don\u2019t panic at slumps, because you know seasons turn. That steadiness is rare currency in fandom."],
+bOlder:["They walk ahead of you in years \u2014 the \u2018lighthouse\u2019 configuration. Part of what pulls you is watching someone navigate waters you haven\u2019t entered yet. The chart says you are quietly taking notes for your own future, and that is the healthiest form of admiration.","With your star senior to you, the bond carries mentor light: their interviews read like advice, their endurance like proof. The chart notes you absorb their work ethic without realizing \u2014 a gift that compounds."],
+far:["The gap between your years is wide \u2014 a \u2018bridge bond.\u2019 The charts love these: admiration that crosses generations is purer, chosen entirely on merit rather than relatability. What connects you isn\u2019t shared age but shared frequency."]};
+const SHIP_BLOODPAIR={
+"A-A":"Two type-A signatures: a double-devotion chart. Both careful, both deep-feeling, both perfectionist. The reading says you understand their meticulous side \u2014 the practice-room hours \u2014 better than most, because it mirrors your own wiring.",
+"B-B":"Two type-B flames: a freedom-freedom chart. Their unpredictable charm doesn\u2019t confuse you \u2014 it\u2019s your native language. The reading warns only that two free spirits both forget schedules; set an alarm for the comeback.",
+"O-O":"Double type-O: the champion pairing. Big energy meets big energy \u2014 you don\u2019t just enjoy their stage presence, you match it from the audience. The chart shows mutual amplification: crowds feel it when you\u2019re in them.",
+"AB-AB":"Two AB signatures: the rarest pairing on the board. Mystic recognizes mystic \u2014 you read their duality (goofy one moment, untouchable the next) as coherence, not contradiction. Few fans decode them like you do.",
+"A-B":"Type A meets type B: structure meets storm. Their freedom fascinates the planner in you; your steadiness would fascinate the wanderer in them. The chart calls this a \u2018complementary axis\u2019 \u2014 opposite poles that generate current.",
+"A-O":"Type A meets type O: the strategist and the champion. Their bold warmth thaws your careful reserve; your precision gives their energy a direction to point at. A classic supportive geometry, says the chart.",
+"A-AB":"Type A meets type AB: the devotee and the mystic. You bring earnest order; they bring elegant unpredictability. The chart says you\u2019re one of the few who senses the logic underneath their strangeness.",
+"B-O":"Type B meets type O: firework and bonfire. Both warm, both vivid \u2014 your spontaneous bursts of fandom match their crowd-igniting instincts. The chart marks this pairing \u2018high heat, low friction.\u2019",
+"B-AB":"Type B meets type AB: two unconventional minds. You skip the mainstream takes and love what others overlook about them \u2014 and the chart says that\u2019s exactly the kind of fan their AB side performs for.",
+"O-AB":"Type O meets type AB: the champion and the enigma. Your open warmth meets their layered cool \u2014 you pull them toward the crowd, they pull you toward depth. The chart calls it a \u2018tide bond\u2019: constant exchange."};
+const SHIP_MBTI_AXIS={
+E_same:"Twin social batteries (E\u00d7E): you both charge in crowds \u2014 their stage hunger and your concert energy are the same electricity.",
+I_same:"Twin quiet cores (I\u00d7I): you sense the introvert behind their performer mask, because you wear one too. Recharge is sacred for you both.",
+EI_diff:"One battery social, one battery solitary: you balance each other across the screen \u2014 their public blaze warms your private world, or vice versa.",
+N_same:"Matched intuition (N\u00d7N): you both live half in imagination \u2014 their concept films and lyric metaphors land on you exactly as designed.",
+S_same:"Matched groundedness (S\u00d7S): you love the tangible \u2014 choreography precision, live vocals, real moments over lore. So do they.",
+NS_diff:"Dreamer meets realist: one of you reads the symbolism, one feels the stage \u2014 together the full performance is covered.",
+T_same:"Twin analysts (T\u00d7T): you respect craft over hype \u2014 you\u2019d both rather discuss technique than drama, and it shows in how you stan.",
+F_same:"Twin hearts (F\u00d7F): emotion is the bridge \u2014 their ballads aren\u2019t songs to you, they\u2019re correspondence.",
+TF_diff:"Head meets heart: one analyzes, one feels \u2014 the chart calls this \u2018full-spectrum reception\u2019; nothing they make is wasted on you.",
+J_same:"Twin planners (J\u00d7J): comeback day is in your calendar before it\u2019s announced. Their discipline is your love language.",
+P_same:"Twin improvisers (P\u00d7P): you both thrive on the unscripted \u2014 lives, bloopers, sudden updates. Spontaneity is the bond\u2019s oxygen.",
+JP_diff:"Order meets flow: one builds the schedule, one breaks it beautifully \u2014 friction on paper, fascination in practice."};
+const SHIP_MBTI_SYNC=[
+"Synchro 0/4 \u2014 the \u2018total eclipse\u2019 pairing: zero matching letters, maximum fascination. The charts insist opposite minds make the most devoted fans, because everything they do surprises you.",
+"Synchro 1/4 \u2014 a \u2018spark gap\u2019 pairing: mostly different wiring with one shared thread. That single overlap is the door; the differences are why you keep walking through it.",
+"Synchro 2/4 \u2014 the \u2018half-mirror\u2019: enough sameness to understand them, enough difference to stay curious. The charts rate this the most sustainable fan geometry.",
+"Synchro 3/4 \u2014 a \u2018near-twin\u2019 pairing: you process the world almost the same way. Their choices feel intuitive to you \u2014 dangerous only because you may forget they\u2019re still full of surprises.",
+"Synchro 4/4 \u2014 the \u2018same soul\u2019 configuration: all four letters aligned. The charts say you don\u2019t just stan them; you recognize them. Rare, slightly eerie, deeply comforting."];
+function mbtiPairRead(m1,m2,seed){
+  let out=[],same=0;
+  const pairs=[[0,'E','I'],[1,'N','S'],[2,'T','F'],[3,'J','P']];
+  for(const [i,x,y] of pairs){
+    const a=m1[i],b=m2[i];
+    if(a===b){same++;out.push(SHIP_MBTI_AXIS[a+'_same']||SHIP_MBTI_AXIS[x+'_same']);}
+    else{out.push(SHIP_MBTI_AXIS[x+y+'_diff']);}
+  }
+  // pick 2 axis lines to keep it tight
+  const lines=[out[(seed)%4],out[(seed+1)%4]].filter((v,i,a)=>a.indexOf(v)===i);
+  return {sync:SHIP_MBTI_SYNC[same],axes:lines.join(' ')};
+}
+function bloodPairRead(b1,b2){
+  const key1=b1+'-'+b2, key2=b2+'-'+b1;
+  return SHIP_BLOODPAIR[key1]||SHIP_BLOODPAIR[key2]||null;
+}
+function ageGapRead(a1,a2,seed){
+  const gap=a1-a2;
+  if(Math.abs(gap)>=15)return pick(SHIP_AGEGAP.far,seed,11);
+  if(gap===0)return pick(SHIP_AGEGAP.same,seed,11);
+  return gap>0?pick(SHIP_AGEGAP.iOlder,seed,11):pick(SHIP_AGEGAP.bOlder,seed,11);
+}
+
 function resetShipView(){
   document.getElementById('shipBody').innerHTML=`
     <div class="ship-emoji">\u{1F49E}</div>
     <div class="ship-h">\uCD5C\uC560 \uAD81\uD569 \uC6B4\uBA85 \uB9AC\uB529</div>
     <div class="ship-p">\uC774\uB984\uB9CC \uB123\uC5B4\uB3C4 \uB418\uC9C0\uB9CC,<br>\uB354 \uB123\uC744\uC218\uB85D \uC6B4\uBA85\uC774 \uC120\uBA85\uD574\uC838\uC694 \u2728</div>
-    <div class="ship-inputs">
-      <input class="ship-input" id="shipMe" placeholder="\uB0B4 \uC774\uB984 (\uD544\uC218)" maxlength="20">
-      <input class="ship-input" id="shipBias" placeholder="\uCD5C\uC560 \uC774\uB984 (\uD544\uC218)" maxlength="20">
-      <input class="ship-input" id="shipAge" placeholder="\uB0B4 \uB098\uC774 (\uC120\uD0DD \u2014 \uC2DC\uC808\uC6B4 \uCD94\uAC00)" inputmode="numeric" maxlength="3">
-      <select class="ship-input" id="shipBlood">
-        <option value="">\uD608\uC561\uD615 (\uC120\uD0DD \u2014 \uCF00\uBBF8 \uB9AC\uB529 \uCD94\uAC00)</option>
-        <option value="A">A\uD615</option><option value="B">B\uD615</option>
-        <option value="O">O\uD615</option><option value="AB">AB\uD615</option>
-      </select>
-      <select class="ship-input" id="shipMbti">
-        <option value="">MBTI (\uC120\uD0DD \u2014 \uC2EC\uCE35 \uB9AC\uB529 \uCD94\uAC00)</option>
-        <option>INTJ</option><option>INTP</option><option>ENTJ</option><option>ENTP</option>
-        <option>INFJ</option><option>INFP</option><option>ENFJ</option><option>ENFP</option>
-        <option>ISTJ</option><option>ISFJ</option><option>ESTJ</option><option>ESFJ</option>
-        <option>ISTP</option><option>ISFP</option><option>ESTP</option><option>ESFP</option>
-      </select>
+    <div class="ship-grid-head"><span>\uB098</span><span>\uCD5C\uC560</span></div>
+    <div class="ship-grid">
+      <input class="ship-input" id="shipMe" placeholder="\uB0B4 \uC774\uB984 \uD544\uC218" maxlength="20">
+      <input class="ship-input" id="shipBias" placeholder="\uCD5C\uC560 \uC774\uB984 \uD544\uC218" maxlength="20">
+      <input class="ship-input" id="shipAge" placeholder="\uB0B4 \uB098\uC774" inputmode="numeric" maxlength="3">
+      <input class="ship-input" id="shipAge2" placeholder="\uCD5C\uC560 \uB098\uC774" inputmode="numeric" maxlength="3">
+      <select class="ship-input" id="shipBlood"><option value="">\uB0B4 \uD608\uC561\uD615</option><option value="A">A\uD615</option><option value="B">B\uD615</option><option value="O">O\uD615</option><option value="AB">AB\uD615</option></select>
+      <select class="ship-input" id="shipBlood2"><option value="">\uCD5C\uC560 \uD608\uC561\uD615</option><option value="A">A\uD615</option><option value="B">B\uD615</option><option value="O">O\uD615</option><option value="AB">AB\uD615</option></select>
+      <select class="ship-input" id="shipMbti"><option value="">\uB0B4 MBTI</option><option>INTJ</option><option>INTP</option><option>ENTJ</option><option>ENTP</option><option>INFJ</option><option>INFP</option><option>ENFJ</option><option>ENFP</option><option>ISTJ</option><option>ISFJ</option><option>ESTJ</option><option>ESFJ</option><option>ISTP</option><option>ISFP</option><option>ESTP</option><option>ESFP</option></select>
+      <select class="ship-input" id="shipMbti2"><option value="">\uCD5C\uC560 MBTI</option><option>INTJ</option><option>INTP</option><option>ENTJ</option><option>ENTP</option><option>INFJ</option><option>INFP</option><option>ENFJ</option><option>ENFP</option><option>ISTJ</option><option>ISFJ</option><option>ESTJ</option><option>ESFJ</option><option>ISTP</option><option>ISFP</option><option>ESTP</option><option>ESFP</option></select>
     </div>
+    <div class="ship-hint">\uC120\uD0DD \uD56D\uBAA9\uC744 \uCC44\uC6B8\uC218\uB85D \uC6B4\uBA85\uC774 \uAE4A\uC5B4\uC838\uC694 \u2728</div>
     <button class="ship-btn" onclick="runShip()">\u{1F52E} \uC6B4\uBA85 \uB9AC\uB529 \uBCF4\uAE30</button>`;
 }
 
@@ -2008,26 +2069,38 @@ function runShip(){
   const bias=(document.getElementById('shipBias').value||'').trim();
   if(!me||!bias){quizToast('\uB450 \uC774\uB984 \uBAA8\uB450 \uB123\uC5B4\uC918! \u{1F495}');return;}
   const age=parseInt((document.getElementById('shipAge').value||'').trim())||0;
+  const age2=parseInt((document.getElementById('shipAge2').value||'').trim())||0;
   const blood=(document.getElementById('shipBlood').value||'');
+  const blood2=(document.getElementById('shipBlood2').value||'');
   const mbti=(document.getElementById('shipMbti').value||'');
-  const seedStr=(me+'\u2764'+bias+'|'+age+'|'+blood+'|'+mbti).toLowerCase();
+  const mbti2=(document.getElementById('shipMbti2').value||'');
+  const seedStr=(me+'\u2764'+bias+'|'+age+'.'+age2+'|'+blood+'.'+blood2+'|'+mbti+'.'+mbti2).toLowerCase();
   const seed=shipSeed(seedStr);
   // score: stable from inputs, 42-99 (avoid cruel lows), deeper inputs add slight depth bonus
-  let depth=1+(age?1:0)+(blood?1:0)+(mbti?1:0);
+  let depth=1+((age&&age2)?1:(age?0.5:0))+((blood&&blood2)?1:(blood?0.5:0))+((mbti&&mbti2)?1:(mbti?0.5:0));
+  depth=Math.min(4,Math.round(depth));if(depth<1)depth=1;
   let score=42+(seed%54)+(depth-1); if(score>99)score=99;
   const bond=pick(SHIP_BOND,seed,2);
   // compose sections
   let html='';
   html+=`<div class="sr-sec"><div class="sr-tag">\u2728 The Opening</div><div class="sr-txt">${pick(SHIP_OPEN,seed,1)}</div></div>`;
   html+=`<div class="sr-sec"><div class="sr-tag">\u{1F9F5} Bond Type: ${bond.n}</div><div class="sr-txt">${bond.t}</div></div>`;
-  if(age>0){
+  if(age>0&&age2>0){
+    html+=`<div class="sr-sec"><div class="sr-tag">\u23F3 House of Timing \u00b7 ${age}\u2194${age2}</div><div class="sr-txt">${ageGapRead(age,age2,seed)}</div></div>`;
+  }else if(age>0){
     const band=SHIP_AGE.find(b=>age<=b.max)||SHIP_AGE[3];
     html+=`<div class="sr-sec"><div class="sr-tag">\u23F3 House of Timing</div><div class="sr-txt">${pick(band.v,seed,3)}</div></div>`;
   }
-  if(blood&&SHIP_BLOOD[blood]){
+  if(blood&&blood2){
+    const bp=bloodPairRead(blood,blood2);
+    if(bp)html+=`<div class="sr-sec"><div class="sr-tag">\u{1FA78} Blood Chemistry \u00b7 ${blood}\u00d7${blood2}</div><div class="sr-txt">${bp}</div></div>`;
+  }else if(blood&&SHIP_BLOOD[blood]){
     html+=`<div class="sr-sec"><div class="sr-tag">\u{1FA78} Blood Chemistry \u00b7 Type ${blood}</div><div class="sr-txt">${pick(SHIP_BLOOD[blood],seed,4)}</div></div>`;
   }
-  if(mbti&&SHIP_MBTI[mbti]){
+  if(mbti&&mbti2){
+    const mp=mbtiPairRead(mbti,mbti2,seed);
+    html+=`<div class="sr-sec"><div class="sr-tag">\u{1F9E0} Mind Synchro \u00b7 ${mbti}\u00d7${mbti2}</div><div class="sr-txt">${mp.sync} ${mp.axes}</div></div>`;
+  }else if(mbti&&SHIP_MBTI[mbti]){
     html+=`<div class="sr-sec"><div class="sr-tag">\u{1F9E0} Deep Psyche \u00b7 ${mbti}</div><div class="sr-txt">${SHIP_MBTI[mbti]}</div></div>`;
   }
   html+=`<div class="sr-sec"><div class="sr-tag">\u{1F4AA} Your Power</div><div class="sr-txt">${pick(SHIP_STRENGTH,seed,5)}</div></div>`;
